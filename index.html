@@ -1,1 +1,846 @@
+bash
 
+head -c 50000 /mnt/user-data/outputs/polizzehub-platform.htmlOutput
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PolizzeHub Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c14;--surface:#0e1420;--surface2:#141c2e;--surface3:#1a2438;
+  --border:#1e2d47;--border2:#253450;
+  --gold:#c9a84c;--gold2:#e8c97a;
+  --blue:#3b82f6;--blue2:#60a5fa;
+  --green:#22c55e;--red:#ef4444;--orange:#f97316;--purple:#a855f7;
+  --text:#e2e8f4;--text2:#7a8ba8;--text3:#3d5070;
+  --shadow:0 8px 32px rgba(0,0,0,0.5);--radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 20% 50%,rgba(59,130,246,.08) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.06) 0%,transparent 50%),var(--bg);position:relative;}
+#login-screen::before{content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(30,45,71,.3) 60px,rgba(30,45,71,.3) 61px),
+                   repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(30,45,71,.3) 60px,rgba(30,45,71,.3) 61px);pointer-events:none;}
+.login-box{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:48px;width:100%;max-width:440px;
+  position:relative;box-shadow:var(--shadow);animation:fadeUp .4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.login-logo{text-align:center;margin-bottom:32px;}
+.login-logo-mark{width:64px;height:64px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:16px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:14px;box-shadow:0 8px 24px rgba(201,168,76,.3);}
+.login-logo h1{font-family:'Playfair Display',serif;font-size:26px;color:var(--text);}
+.login-logo p{font-size:13px;color:var(--text2);margin-top:4px;}
+.login-tabs{display:flex;background:var(--surface2);border-radius:10px;padding:4px;margin-bottom:26px;}
+.login-tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all .2s;}
+.login-tab.active{background:var(--surface3);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.demo-accounts{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);}
+.demo-accounts p{font-size:12px;color:var(--text3);margin-bottom:10px;text-align:center;}
+.demo-btns{display:flex;gap:8px;}
+.demo-btn{flex:1;padding:8px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;
+  text-align:center;font-size:11px;color:var(--text2);transition:all .15s;font-family:'Outfit',sans-serif;}
+.demo-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* FORM */
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:10px;padding:11px 14px;color:var(--text);font-size:13px;font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group select option{background:var(--surface2);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-full{grid-column:1/-1;}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:18px;border-top:1px solid var(--border);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 22px;border-radius:10px;
+  font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'Outfit',sans-serif;transition:all .2s;letter-spacing:.2px;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1000;width:100%;margin-top:6px;}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.4);}
+.btn-primary{background:var(--blue);color:white;}
+.btn-primary:hover{background:#2563eb;transform:translateY(-1px);}
+.btn-surface{background:var(--surface3);color:var(--text);border:1px solid var(--border2);}
+.btn-surface:hover{border-color:var(--blue2);color:var(--blue2);}
+.btn-danger{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.btn-success{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+.btn-sm{padding:7px 14px;font-size:12px;}
+.btn-xs{padding:5px 10px;font-size:11px;}
+
+/* APP LAYOUT */
+#app{display:none;min-height:100vh;}
+.app-layout{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:255px;min-height:100vh;background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;}
+.sidebar-header{padding:22px 18px 18px;border-bottom:1px solid var(--border);}
+.brand{display:flex;align-items:center;gap:11px;}
+.brand-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 4px 12px rgba(201,168,76,.3);}
+.brand-text h2{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold2);}
+.brand-text span{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;}
+.sidebar-user{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;}
+.user-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;flex-shrink:0;}
+.avatar-broker{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:white;}
+.avatar-client{background:linear-gradient(135deg,#166534,#22c55e);color:white;}
+.user-info .uname{font-size:12px;font-weight:600;}
+.user-info .urole{font-size:10px;color:var(--text3);}
+.nav-section{padding:14px 14px 6px;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 14px;margin:1px 6px;border-radius:8px;cursor:pointer;
+  color:var(--text2);font-size:12px;font-weight:500;transition:all .15s;position:relative;}
+.nav-item:hover{background:var(--surface2);color:var(--text);}
+.nav-item.active{background:rgba(59,130,246,.12);color:var(--blue2);}
+.nav-item.active::before{content:'';position:absolute;left:-6px;top:50%;transform:translateY(-50%);
+  width:3px;height:18px;background:var(--blue2);border-radius:0 2px 2px 0;}
+.nav-icon{font-size:14px;width:18px;text-align:center;}
+.nav-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;
+  padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;}
+.nav-badge.gold{background:var(--gold);color:#1a1000;}
+.nav-badge.green{background:var(--green);color:#000;}
+.sidebar-footer{margin-top:auto;padding:14px 8px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:2px;}
+
+/* MAIN */
+.main-content{margin-left:255px;flex:1;padding:26px 30px;min-height:100vh;}
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
+.page-title{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:-.5px;line-height:1.2;}
+.page-subtitle{font-size:12px;color:var(--text2);margin-top:4px;}
+.page-actions{display:flex;gap:9px;}
+.view{display:none;}
+.view.active{display:block;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;
+  transition:border-color .2s,transform .2s;}
+.stat-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.stat-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:11px;}
+.stat-icon.blue{background:rgba(59,130,246,.15);}
+.stat-icon.gold{background:rgba(201,168,76,.15);}
+.stat-icon.red{background:rgba(239,68,68,.15);}
+.stat-icon.green{background:rgba(34,197,94,.15);}
+.stat-value{font-family:'Playfair Display',serif;font-size:28px;line-height:1;margin-bottom:4px;}
+.stat-value.blue{color:var(--blue2);}.stat-value.gold{color:var(--gold2);}
+.stat-value.red{color:var(--red);}.stat-value.green{color:var(--green);}
+.stat-label{font-size:11px;color:var(--text2);font-weight:500;}
+.stat-trend{font-size:11px;color:var(--text3);margin-top:3px;}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.card-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:13px;font-weight:600;}
+.card-body{padding:18px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+/* TABLE */
+.table-toolbar{padding:12px 16px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.search-input{flex:1;min-width:180px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;
+  padding:7px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;}
+.search-input:focus{border-color:var(--blue);}
+.search-input::placeholder{color:var(--text3);}
+.filter-select{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;
+  color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;cursor:pointer;}
+table{width:100%;border-collapse:collapse;}
+th{padding:10px 16px;text-align:left;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;
+  font-weight:600;background:var(--surface2);border-bottom:1px solid var(--border);}
+td{padding:12px 16px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:rgba(255,255,255,.015);}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap;}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--blue2);}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green);}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red);}
+.badge-orange{background:rgba(249,115,22,.15);color:var(--orange);}
+.badge-gold{background:rgba(201,168,76,.15);color:var(--gold2);}
+.badge-purple{background:rgba(168,85,247,.15);color:var(--purple);}
+.badge-gray{background:rgba(122,139,168,.15);color:var(--text2);}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:9px;}
+.tl-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;
+  display:flex;align-items:center;gap:12px;transition:all .15s;cursor:pointer;}
+.tl-item:hover{border-color:var(--border2);transform:translateX(4px);}
+.tl-item.urgent{border-left:3px solid var(--red);}
+.tl-item.warning{border-left:3px solid var(--orange);}
+.tl-item.ok{border-left:3px solid var(--green);}
+.tl-date{text-align:center;min-width:44px;}
+.tl-day{font-family:'Playfair Display',serif;font-size:22px;line-height:1;}
+.tl-month{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+.tl-sep{width:1px;height:32px;background:var(--border);flex-shrink:0;}
+.tl-main{flex:1;}
+.tl-client{font-weight:600;font-size:12px;}
+.tl-detail{font-size:11px;color:var(--text2);margin-top:2px;}
+.tl-right{text-align:right;}
+.tl-days{font-size:12px;font-weight:700;}
+.tl-days.urgent{color:var(--red);}.tl-days.warning{color:var(--orange);}.tl-days.ok{color:var(--green);}
+.tl-premio{font-size:10px;color:var(--text3);margin-top:2px;}
+
+/* CHAT */
+.chat-layout{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 150px);background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.chat-list{border-right:1px solid var(--border);overflow-y:auto;}
+.chat-list-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:13px;
+  display:flex;align-items:center;justify-content:space-between;}
+.chat-conv{padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;position:relative;}
+.chat-conv:hover{background:var(--surface2);}
+.chat-conv.active{background:rgba(59,130,246,.08);border-left:3px solid var(--blue);}
+.chat-conv-name{font-size:12px;font-weight:600;margin-bottom:3px;}
+.chat-conv-preview{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+.chat-conv-time{font-size:10px;color:var(--text3);position:absolute;top:12px;right:12px;}
+.unread-dot{width:7px;height:7px;background:var(--blue);border-radius:50%;position:absolute;bottom:12px;right:12px;}
+.chat-main{display:flex;flex-direction:column;}
+.chat-header{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.chat-header-name{font-weight:600;font-size:13px;}
+.chat-header-sub{font-size:11px;color:var(--text2);}
+.chat-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;}
+.msg{max-width:70%;padding:9px 13px;border-radius:13px;font-size:12px;line-height:1.5;}
+.msg.sent{align-self:flex-end;background:var(--blue);color:white;border-bottom-right-radius:4px;}
+.msg.received{align-self:flex-start;background:var(--surface2);border:1px solid var(--border);border-bottom-left-radius:4px;}
+.msg-time{font-size:9px;opacity:.6;margin-top:3px;}
+.msg.sent .msg-time{text-align:right;}
+.msg-request{align-self:flex-start;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);
+  border-radius:11px;padding:11px 14px;max-width:78%;}
+.msg-request-type{font-size:10px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
+.chat-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:9px;}
+.chat-quick-actions{display:flex;gap:7px;flex-wrap:wrap;}
+.quick-action{padding:4px 11px;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;
+  font-size:10px;color:var(--text2);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
+.quick-action:hover{border-color:var(--blue);color:var(--blue2);}
+.chat-input-row{display:flex;gap:9px;align-items:flex-end;}
+.chat-input-row textarea{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;
+  padding:9px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;resize:none;min-height:40px;max-height:100px;}
+.chat-input-row textarea:focus{border-color:var(--blue);}
+.send-btn{width:40px;height:40px;background:var(--blue);border:none;border-radius:9px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:16px;color:white;transition:all .15s;flex-shrink:0;}
+.send-btn:hover{background:#2563eb;}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;
+  align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:30px;
+  width:100%;max-width:540px;max-height:90vh;overflow-y:auto;animation:fadeUp .2s ease;}
+.modal-lg{max-width:680px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:22px;}
+
+/* DETAIL PANEL */
+.detail-panel{position:fixed;top:0;right:0;bottom:0;width:440px;background:var(--surface);
+  border-left:1px solid var(--border);z-index:300;transform:translateX(100%);transition:transform .25s;overflow-y:auto;padding:26px;}
+.detail-panel.open{transform:translateX(0);}
+.detail-close{position:sticky;top:0;float:right;background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:5px 11px;cursor:pointer;color:var(--text2);font-size:12px;
+  transition:all .15s;font-family:'Outfit',sans-serif;z-index:10;}
+.detail-close:hover{color:var(--text);}
+.detail-section{margin-top:20px;}
+.detail-section-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;
+  font-weight:600;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;
+  font-size:12px;border-bottom:1px solid rgba(30,45,71,.5);}
+.info-row:last-child{border-bottom:none;}
+.info-row .label{color:var(--text2);}
+.info-row .value{font-weight:500;text-align:right;max-width:58%;}
+.polizza-mini{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:12px;margin-bottom:9px;}
+.polizza-mini-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+
+/* RICHIESTE */
+.richiesta-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;margin-bottom:9px;transition:border-color .15s;}
+.richiesta-card:hover{border-color:var(--border2);}
+.richiesta-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
+
+/* NOTIFICHE */
+.notif-panel{position:fixed;top:0;right:0;bottom:0;width:360px;background:var(--surface);
+  border-left:1px solid var(--border);z-index:400;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;}
+.notif-panel.open{transform:translateX(0);}
+.notif-header{padding:18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.notif-list{overflow-y:auto;flex:1;}
+.notif-item{padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.notif-item:hover{background:var(--surface2);}
+.notif-item.unread{border-left:3px solid var(--blue);}
+.notif-item-title{font-size:12px;font-weight:600;margin-bottom:3px;}
+.notif-item-time{font-size:10px;color:var(--text3);margin-top:3px;}
+
+/* NOTIFICHE CANALI */
+.notif-channels{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0;}
+.channel-btn{flex:1;min-width:100px;padding:12px;background:var(--surface2);border:2px solid var(--border);
+  border-radius:10px;cursor:pointer;text-align:center;transition:all .15s;font-family:'Outfit',sans-serif;}
+.channel-btn.selected{border-color:var(--blue);background:rgba(59,130,246,.08);}
+.channel-icon{font-size:22px;margin-bottom:5px;}
+.channel-name{font-size:11px;font-weight:600;}
+
+/* CLIENT PORTAL */
+.polizza-card-client{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px;margin-bottom:13px;transition:all .2s;}
+.polizza-card-client:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.pol-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.pol-card-ramo{font-family:'Playfair Display',serif;font-size:17px;}
+.pol-card-company{font-size:11px;color:var(--text2);margin-top:2px;}
+.pol-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.pol-info-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;}
+.pol-info-value{font-size:13px;font-weight:600;margin-top:2px;}
+.pol-card-actions{display:flex;gap:7px;flex-wrap:wrap;}
+
+/* URGENCY BAR */
+.urgency-bar{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;
+  padding:12px 16px;display:flex;align-items:center;gap:11px;margin-bottom:18px;
+  animation:urgPulse 3s infinite;}
+@keyframes urgPulse{0%,100%{border-color:rgba(239,68,68,.25);}50%{border-color:rgba(239,68,68,.5);}}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--border2);
+  border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:9px;font-size:12px;font-weight:500;
+  z-index:9999;transform:translateY(70px);opacity:0;transition:all .3s;box-shadow:var(--shadow);max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.t-success{border-color:rgba(34,197,94,.4);}
+.toast.t-error{border-color:rgba(239,68,68,.4);}
+.toast.t-info{border-color:rgba(59,130,246,.4);}
+
+/* SINISTRI LOG */
+.notif-log-entry{font-size:11px;padding:8px 0;border-bottom:1px solid var(--border);color:var(--text2);}
+
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+@media(max-width:1100px){.stats-row{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
+@media(max-width:768px){
+  .sidebar{width:56px;}.sidebar .brand-text,.sidebar .nav-item span:not(.nav-icon),
+  .sidebar .user-info,.sidebar .nav-section{display:none;}
+  .main-content{margin-left:56px;padding:14px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .chat-layout{grid-template-columns:1fr;}
+  .detail-panel{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-mark">🛡️</div>
+      <h1>PolizzeHub Pro</h1>
+      <p>Piattaforma assicurativa Svizzera</p>
+    </div>
+    <div class="login-tabs">
+      <div class="login-tab active" onclick="setLoginTab('broker')">🏢 Broker / Agente</div>
+      <div class="login-tab" onclick="setLoginTab('client')">👤 Cliente</div>
+    </div>
+    <div id="login-broker">
+      <div class="form-group"><label>Email agente</label>
+        <input id="b-email" value="agente@polizzehub.ch"></div>
+      <div class="form-group"><label>Password</label>
+        <input type="password" id="b-pass" value="demo1234"></div>
+      <button class="btn btn-gold" onclick="loginBroker()">Accedi come Broker →</button>
+    </div>
+    <div id="login-client" style="display:none">
+      <div class="form-group"><label>Codice cliente o email</label>
+        <input id="c-code" value="C006" placeholder="Es: C006"></div>
+      <div class="form-group"><label>Password</label>
+        <input type="password" id="c-pass" value="demo1234"></div>
+      <button class="btn btn-gold" onclick="loginClient()">Accedi al mio portale →</button>
+    </div>
+    <div class="demo-accounts">
+      <p>⚡ Accesso rapido demo</p>
+      <div class="demo-btns">
+        <div class="demo-btn" onclick="quickLogin('broker')">🏢 Broker</div>
+        <div class="demo-btn" onclick="quickLogin('simona')">👤 Simona B.</div>
+        <div class="demo-btn" onclick="quickLogin('marco')">👤 Marco F.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+ <div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-mark">🛡️</div>
+        <div class="brand-text">
+          <h2>PolizzeHub</h2>
+          <span id="sb-role-label">Pro Platform</span>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sb-avatar">AG</div>
+      <div class="user-info">
+        <div class="uname" id="sb-name">Agente</div>
+        <div class="urole" id="sb-role">Broker</div>
+      </div>
+    </div>
+
+    <!-- BROKER NAV -->
+    <div id="nav-broker">
+      <div class="nav-section">Principale</div>
+      <div class="nav-item active" onclick="showView('dashboard')"><span class="nav-icon">📊</span><span>Dashboard</span></div>
+      <div class="nav-item" onclick="showView('clienti')"><span class="nav-icon">👥</span><span>Clienti</span><span class="nav-badge" id="nb-clienti">0</span></div>
+      <div class="nav-item" onclick="showView('polizze')"><span class="nav-icon">📋</span><span>Polizze</span></div>
+      <div class="nav-section">Monitoraggio</div>
+      <div class="nav-item" onclick="showView('scadenze')"><span class="nav-icon">⏰</span><span>Scadenze</span><span class="nav-badge" id="nb-scadenze" style="display:none">0</span></div>
+      <div class="nav-item" onclick="showView('notifiche-send')"><span class="nav-icon">📨</span><span>Invia Notifiche</span></div>
+      <div class="nav-item" onclick="showView('richieste')"><span class="nav-icon">📝</span><span>Richieste</span><span class="nav-badge" id="nb-richieste" style="display:none">0</span></div>
+      <div class="nav-section">Comunicazione</div>
+      <div class="nav-item" onclick="showView('chat')"><span class="nav-icon">💬</span><span>Messaggi</span><span class="nav-badge" id="nb-chat" style="display:none">0</span></div>
+      <div class="nav-item" onclick="showView('fatture')"><span class="nav-icon">💶</span><span>Fatture & Premi</span></div>
+    </div>
+
+    <!-- CLIENT NAV -->
+    <div id="nav-client" style="display:none">
+      <div class="nav-section">Il mio portale</div>
+      <div class="nav-item active" onclick="showView('c-home')"><span class="nav-icon">🏠</span><span>Le mie polizze</span></div>
+      <div class="nav-item" onclick="showView('c-docs')"><span class="nav-icon">📄</span><span>Documenti</span></div>
+      <div class="nav-item" onclick="showView('c-richieste')"><span class="nav-icon">📝</span><span>Le mie richieste</span><span class="nav-badge green" id="nb-c-rich" style="display:none">0</span></div>
+      <div class="nav-item" onclick="showView('c-chat')"><span class="nav-icon">💬</span><span>Chat con broker</span><span class="nav-badge" id="nb-c-chat" style="display:none">0</span></div>
+      <div class="nav-item" onclick="showView('c-sinistri')"><span class="nav-icon">🚨</span><span>Segnala sinistro</span></div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="nav-item" onclick="toggleNotif()"><span class="nav-icon">🔔</span><span>Notifiche</span><span class="nav-badge" id="nb-notif" style="display:none">0</span></div>
+      <div class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span><span>Esci</span></div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main-content" id="main-content">
+
+   <!-- DASHBOARD -->
+   <div class="view active" id="view-dashboard">
+    <div class="page-header">
+      <div><div class="page-title" id="d-greeting">Dashboard</div><div class="page-subtitle" id="d-date"></div></div>
+      <div class="page-actions">
+        <button class="btn btn-surface btn-sm" onclick="openModal('m-cliente')">＋ Cliente</button>
+        <button class="btn btn-primary btn-sm" onclick="openModal('m-polizza')">＋ Polizza</button>
+      </div>
+    </div>
+    <div id="urgent-bar" style="display:none" class="urgency-bar">
+      <span style="font-size:18px">🔴</span>
+      <div><strong id="urg-count">0</strong> polizze scadono entro 30 giorni — <span id="urg-names"></span></div>
+      <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="showView('scadenze')">Vedi →</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-icon blue">👥</div><div class="stat-value blue" id="s-clienti">0</div><div class="stat-label">Clienti attivi</div><div class="stat-trend" id="s-clienti2"></div></div>
+      <div class="stat-card"><div class="stat-icon gold">📋</div><div class="stat-value gold" id="s-polizze">0</div><div class="stat-label">Polizze gestite</div><div class="stat-trend" id="s-polizze2"></div></div>
+      <div class="stat-card"><div class="stat-icon red">⏰</div><div class="stat-value red" id="s-scad">0</div><div class="stat-label">Scadenze 30gg</div><div class="stat-trend">da rinnovare</div></div>
+      <div class="stat-card"><div class="stat-icon green">💶</div><div class="stat-value green" id="s-premio"></div><div class="stat-label">Premio annuo totale</div><div class="stat-trend">portafoglio CHF</div></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:18px">
+      <div class="card">
+        <div class="card-header"><span class="card-title">⏰ Scadenze urgenti</span><button class="btn btn-surface btn-xs" onclick="showView('scadenze')">Vedi tutte</button></div>
+        <div style="padding:14px"><div class="timeline" id="d-scadenze"></div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">📝 Richieste aperte</span><button class="btn btn-surface btn-xs" onclick="showView('richieste')">Vedi tutte</button></div>
+        <div id="d-richieste" style="padding:14px"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">💬 Messaggi non letti</span><button class="btn btn-surface btn-xs" onclick="showView('chat')">Apri chat</button></div>
+      <div id="d-messaggi" style="padding:14px"></div>
+    </div>
+   </div>
+
+   <!-- CLIENTI -->
+   <div class="view" id="view-clienti">
+    <div class="page-header">
+      <div><div class="page-title">Clienti</div><div class="page-subtitle">Gestione anagrafica completa</div></div>
+      <button class="btn btn-primary" onclick="openModal('m-cliente')">＋ Nuovo cliente</button>
+    </div>
+    <div class="card">
+      <div class="table-toolbar">
+        <input class="search-input" placeholder="🔍 Cerca nome, email, codice..." id="srch-c" oninput="renderClienti()">
+        <select class="filter-select" id="flt-c-tipo" onchange="renderClienti()">
+          <option value="">Tutti</option><option>Privato</option><option>Azienda</option>
+        </select>
+      </div>
+      <table><thead><tr><th>Cliente</th><th>Contatti</th><th>Polizze</th><th>Prossima scadenza</th><th>Premio totale</th><th>Richieste</th><th>Azioni</th></tr></thead>
+      <tbody id="tb-clienti"></tbody></table>
+    </div>
+   </div>
+
+   <!-- POLIZZE -->
+   <div class="view" id="view-polizze">
+    <div class="page-header">
+      <div><div class="page-title">Polizze</div><div class="page-subtitle">Tutto il portafoglio</div></div>
+      <button class="btn btn-primary" onclick="openModal('m-polizza')">＋ Nuova polizza</button>
+    </div>
+    <div class="card">
+      <div class="table-toolbar">
+        <input class="search-input" placeholder="🔍 Cerca polizza, cliente, compagnia..." id="srch-p" oninput="renderPolizze()">
+        <select class="filter-select" id="flt-p-ramo" onchange="renderPolizze()">
+          <option value="">Tutti i rami</option>
+          <option>Auto/Veicoli</option><option>Casa/Immobili</option><option>Vita</option>
+          <option>Salute</option><option>Azienda/RC</option><option>Infortuni</option><option>Viaggi</option>
+        </select>
+        <select class="filter-select" id="flt-p-stato" onchange="renderPolizze()">
+          <option value="">Tutti gli stati</option><option value="attiva">Attive</option>
+          <option value="offerta">Offerte</option><option value="scaduta">Scadute</option>
+        </select>
+      </div>
+      <table><thead><tr><th>N° Polizza</th><th>Cliente</th><th>Ramo</th><th>Compagnia</th><th>Scadenza</th><th>Premio</th><th>Stato</th><th>Azioni</th></tr></thead>
+      <tbody id="tb-polizze"></tbody></table>
+    </div>
+   </div>
+
+   <!-- SCADENZE -->
+   <div class="view" id="view-scadenze">
+    <div class="page-header">
+      <div><div class="page-title">Scadenze</div><div class="page-subtitle">Rinnovi e interventi urgenti</div></div>
+      <div class="page-actions">
+        <select class="filter-select" id="flt-scad" onchange="renderScadenze()">
+          <option value="30">30 giorni</option><option value="60">60 giorni</option>
+          <option value="90">90 giorni</option><option value="365">Tutto l'anno</option>
+        </select>
+        <button class="btn btn-primary btn-sm" onclick="prepNotifAll()">📨 Notifica tutti</button>
+      </div>
+    </div>
+    <div class="timeline" id="tl-scadenze"></div>
+   </div>
+
+   <!-- INVIA NOTIFICHE -->
+   <div class="view" id="view-notifiche-send">
+    <div class="page-header">
+      <div><div class="page-title">Centro Notifiche</div><div class="page-subtitle">Invia comunicazioni automatiche</div></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:18px">
+      <div class="card">
+        <div class="card-header"><span class="card-title">📨 Invia notifica</span></div>
+        <div class="card-body">
+          <div class="form-group"><label>Destinatari</label>
+            <select id="n-dest" onchange="toggleClienteRow()">
+              <option value="scadenza30">Scadenza entro 30 giorni</option>
+              <option value="scadenza60">Scadenza entro 60 giorni</option>
+              <option value="tutti">Tutti i clienti</option>
+              <option value="singolo">Cliente specifico</option>
+            </select>
+          </div>
+          <div class="form-group" id="n-c-row" style="display:none"><label>Seleziona cliente</label>
+            <select id="n-c-sel"></select>
+          </div>
+          <div class="form-group"><label>Tipo messaggio</label>
+            <select id="n-tipo">
+              <option value="scadenza">⏰ Avviso scadenza</option>
+              <option value="rinnovo">🔄 Proposta rinnovo</option>
+              <option value="documento">📄 Documento disponibile</option>
+              <option value="personalizzato">✏️ Messaggio libero</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Canali di invio</label>
+            <div class="notif-channels">
+              <div class="channel-btn selected" data-ch="app" onclick="toggleCh(this)"><div class="channel-icon">📱</div><div class="channel-name">App</div></div>
+              <div class="channel-btn selected" data-ch="email" onclick="toggleCh(this)"><div class="channel-icon">📧</div><div class="channel-name">Email</div></div>
+              <div class="channel-btn selected" data-ch="whatsapp" onclick="toggleCh(this)"><div class="channel-icon">💬</div><div class="channel-name">WhatsApp</div></div>
+              <div class="channel-btn" data-ch="sms" onclick="toggleCh(this)"><div class="channel-icon">📲</div><div class="channel-name">SMS</div></div>
+            </div>
+          </div>
+          <div class="form-group"><label>Testo personalizzato (opzionale)</label>
+            <textarea id="n-testo" placeholder="Gentile [NOME], la polizza [N°] scade il [DATA]..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%" onclick="inviaNotifica()">🚀 Invia notifica</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">📊 Statistiche portafoglio</span></div>
+        <div class="card-body" id="n-stats"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">📋 Storico invii</span></div>
+      <table><thead><tr><th>Data/Ora</th><th>Destinatario</th><th>Tipo</th><th>Canali</th><th>Stato</th></tr></thead>
+      <tbody id="tb-notif-log"></tbody></table>
+    </div>
+   </div>
+
+   <!-- RICHIESTE -->
+   <div class="view" id="view-richieste">
+    <div class="page-header">
+      <div><div class="page-title">Richieste clienti</div><div class="page-subtitle">Gestisci modifiche, disdette, sinistri</div></div>
+    </div>
+    <div class="table-toolbar" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border-bottom:none">
+      <select class="filter-select" id="flt-r-stato" onchange="renderRichieste()">
+        <option value="">Tutte</option><option value="aperta">Aperte</option>
+        <option value="in_lavorazione">In lavorazione</option><option value="completata">Completate</option>
+      </select>
+      <select class="filter-select" id="flt-r-tipo" onchange="renderRichieste()">
+        <option value="">Tutti i tipi</option><option value="modifica">Modifica</option>
+        <option value="disdetta">Disdetta</option><option value="sinistro">Sinistro</option>
+        <option value="preventivo">Preventivo</option><option value="rinnovo">Rinnovo</option>
+      </select>
+    </div>
+    <div id="rich-list"></div>
+   </div>
+
+   <!-- CHAT BROKER -->
+   <div class="view" id="view-chat">
+    <div class="page-header">
+      <div><div class="page-title">Messaggi</div><div class="page-subtitle">Chat diretta con i clienti</div></div>
+    </div>
+    <div class="chat-layout">
+      <div class="chat-list">
+        <div class="chat-list-header">Conversazioni <span class="badge badge-blue" id="chat-unread"></span></div>
+        <div id="conv-list"></div>
+      </div>
+      <div class="chat-main">
+        <div class="chat-header">
+          <div><div class="chat-header-name" id="chat-name">Seleziona una conversazione</div><div class="chat-header-sub" id="chat-sub"></div></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-surface btn-xs" id="chat-profilo-btn" style="display:none" onclick="openDetailCurrent()">👁 Profilo</button>
+          </div>
+        </div>
+        <div class="chat-messages" id="broker-msgs"></div>
+        <div class="chat-input-area">
+          <div class="chat-quick-actions">
+            <div class="quick-action" onclick="qi('✅ Polizza aggiornata!')">✅ Aggiornato</div>
+            <div class="quick-action" onclick="qi('La sua polizza scade tra ')">⏰ Scadenza</div>
+            <div class="quick-action" onclick="qi('Allego il documento richiesto.')">📄 Documento</div>
+            <div class="quick-action" onclick="qi('La richiesta è in lavorazione.')">🔄 In carico</div>
+          </div>
+          <div class="chat-input-row">
+            <textarea id="broker-input" placeholder="Scrivi un messaggio..." rows="1"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendBMsg();}"></textarea>
+            <button class="send-btn" onclick="sendBMsg()">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+
+   <!-- FATTURE -->
+   <div class="view" id="view-fatture">
+    <div class="page-header">
+      <div><div class="page-title">Fatture & Premi</div><div class="page-subtitle">Gestione pagamenti</div></div>
+    </div>
+    <div class="card">
+      <div class="table-toolbar">
+        <input class="search-input" placeholder="🔍 Cerca..." id="srch-f" oninput="renderFatture()">
+        <select class="filter-select" id="flt-f-stato" onchange="renderFatture()">
+          <option value="">Tutti</option><option value="attesa">In attesa</option>
+          <option value="pagato">Pagato</option><option value="scaduto">Scaduto</option>
+        </select>
+      </div>
+      <table><thead><tr><th>ID</th><th>Cliente</th><th>Polizza</th><th>Importo</th><th>Scadenza pag.</th><th>Stato</th><th>Azioni</th></tr></thead>
+      <tbody id="tb-fatture"></tbody></table>
+    </div>
+   </div>
+
+   <!-- CLIENT HOME -->
+   <div class="view" id="view-c-home">
+    <div class="page-header">
+      <div><div class="page-title" id="c-greeting">Benvenuto</div><div class="page-subtitle">Il tuo portafoglio assicurativo</div></div>
+      <button class="btn btn-primary btn-sm" onclick="openModal('m-richiesta')">＋ Nuova richiesta</button>
+    </div>
+    <div id="c-urg-bar" style="display:none" class="urgency-bar">
+      <span style="font-size:18px">🔴</span>
+      <div id="c-urg-text"></div>
+      <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="openModal('m-richiesta')">Richiedi rinnovo →</button>
+    </div>
+    <div class="stats-row" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-value blue" id="cs-pol">0</div><div class="stat-label">Polizze attive</div></div>
+      <div class="stat-card"><div class="stat-icon gold">💶</div><div class="stat-value gold" id="cs-prem"></div><div class="stat-label">Premio annuo</div></div>
+      <div class="stat-card"><div class="stat-icon red">⏰</div><div class="stat-value red" id="cs-scad">0</div><div class="stat-label">Scadenze prossime</div></div>
+    </div>
+    <div id="c-pol-list"></div>
+   </div>
+
+   <!-- CLIENT RICHIESTE -->
+   <div class="view" id="view-c-richieste">
+    <div class="page-header">
+      <div><div class="page-title">Le mie richieste</div><div class="page-subtitle">Stato delle tue pratiche</div></div>
+      <button class="btn btn-primary" onclick="openModal('m-richiesta')">＋ Nuova richiesta</button>
+    </div>
+    <div id="c-rich-list"></div>
+   </div>
+
+   <!-- CLIENT CHAT -->
+   <div class="view" id="view-c-chat">
+    <div class="page-header">
+      <div><div class="page-title">Chat con il broker</div><div class="page-subtitle">Comunicazione diretta e sicura</div></div>
+    </div>
+    <div class="chat-layout" style="grid-template-columns:1fr">
+      <div class="chat-main">
+        <div class="chat-header">
+          <div><div class="chat-header-name">Broker — PolizzeHub</div><div class="chat-header-sub">🟢 Disponibile</div></div>
+        </div>
+        <div class="chat-messages" id="client-msgs"></div>
+        <div class="chat-input-area">
+          <div class="chat-quick-actions">
+            <div class="quick-action" onclick="cqi('Vorrei rinnovare la polizza ')">🔄 Rinnovo</div>
+            <div class="quick-action" onclick="openModal('m-richiesta')">📝 Richiesta formale</div>
+            <div class="quick-action" onclick="cqi('Ho bisogno di informazioni su ')">ℹ️ Informazioni</div>
+            <div class="quick-action" onclick="cqi('Ho avuto un sinistro: ')">🚨 Sinistro</div>
+          </div>
+          <div class="chat-input-row">
+            <textarea id="client-input" placeholder="Scrivi al tuo broker..." rows="1"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCMsg();}"></textarea>
+            <button class="send-btn" onclick="sendCMsg()">➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+
+   <!-- CLIENT SINISTRI -->
+   <div class="view" id="view-c-sinistri">
+    <div class="page-header">
+      <div><div class="page-title">Segnala sinistro</div><div class="page-subtitle">Avvia la pratica di sinistro</div></div>
+    </div>
+    <div class="card" style="max-width:580px">
+      <div class="card-body">
+        <div class="form-group"><label>Polizza coinvolta</label><select id="sin-pol"></select></div>
+        <div class="form-row">
+          <div class="form-group"><label>Data sinistro</label><input type="date" id="sin-data"></div>
+          <div class="form-group"><label>Tipo sinistro</label>
+            <select id="sin-tipo">
+              <option>Incidente stradale</option><option>Furto / Tentato furto</option>
+              <option>Danni da parcheggio</option><option>Rottura vetri</option>
+              <option>Danni da maltempo</option><option>Incendio</option><option>Altro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Descrizione dell'accaduto *</label>
+          <textarea id="sin-desc" placeholder="Descrivi cosa è successo, dove e quando..."></textarea>
+        </div>
+        <div class="form-group"><label>Controparte (se presente)</label>
+          <input id="sin-ctrl" placeholder="Nome, targa veicolo..."></div>
+        <button class="btn btn-primary" style="width:100%" onclick="segnalaSinistro()">🚨 Segnala al broker</button>
+      </div>
+    </div>
+   </div>
+
+   <!-- CLIENT DOCS -->
+   <div class="view" id="view-c-docs">
+    <div class="page-header">
+      <div><div class="page-title">I miei documenti</div><div class="page-subtitle">Polizze, attestati e comunicazioni</div></div>
+    </div>
+    <div id="c-docs-list"></div>
+   </div>
+
+  </main>
+ </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="m-cliente">
+  <div class="modal">
+    <div class="modal-title">👤 Nuovo cliente</div>
+    <div class="form-row">
+      <div class="form-group"><label>Nome *</label><input id="nc-n" placeholder="Mario"></div>
+      <div class="form-group"><label>Cognome *</label><input id="nc-cg" placeholder="Rossi"></div>
+      <div class="form-group"><label>Tipo</label><select id="nc-t"><option>Privato</option><option>Azienda</option></select></div>
+      <div class="form-group"><label>Telefono</label><input id="nc-tel" placeholder="+41 79 000 00 00"></div>
+      <div class="form-group form-full"><label>Email</label><input id="nc-em" type="email" placeholder="email@example.ch"></div>
+      <div class="form-group form-full"><label>Indirizzo</label><input id="nc-ind" placeholder="Via Esempio 1, 6900 Lugano"></div>
+      <div class="form-group form-full"><label>Note interne</label><textarea id="nc-no" placeholder="Note sul cliente..."></textarea></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-surface" onclick="closeModal('m-cliente')">Annulla</button>
+      <button class="btn btn-primary" onclick="salvaCliente()">💾 Salva</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-polizza">
+  <div class="modal">
+    <div class="modal-title">📋 Nuova polizza</div>
+    <div class="form-row">
+      <div class="form-group form-full"><label>Cliente *</label><select id="np-c"><option value="">— Seleziona —</option></select></div>
+      <div class="form-group"><label>N° Polizza *</label><input id="np-n" placeholder="CH-2026-00001"></div>
+      <div class="form-group"><label>Ramo *</label>
+        <select id="np-r"><option>Auto/Veicoli</option><option>Casa/Immobili</option><option>Vita</option>
+          <option>Salute</option><option>Azienda/RC</option><option>Infortuni</option><option>Viaggi</option></select>
+      </div>
+      <div class="form-group"><label>Compagnia</label>
+        <select id="np-co"><option>Zurich Insurance</option><option>Swiss Life</option><option>Helvetia</option>
+          <option>AXA Svizzera</option><option>Allianz Svizzera</option><option>Generali Svizzera</option>
+          <option>Baloise</option><option>Mobiliar</option><option>Vaudoise</option><option>Altra</option></select>
+      </div>
+      <div class="form-group"><label>Data inizio</label><input type="date" id="np-i"></div>
+      <div class="form-group"><label>Data scadenza *</label><input type="date" id="np-s"></div>
+      <div class="form-group"><label>Premio annuo CHF *</label><input type="number" id="np-p" placeholder="1200"></div>
+      <div class="form-group"><label>Frequenza</label>
+        <select id="np-f"><option>Annuale</option><option>Semestrale</option><option>Trimestrale</option><option>Mensile</option></select>
+      </div>
+      <div class="form-group form-full"><label>Note / oggetto assicurato</label><textarea id="np-no" placeholder="Veicolo, immobile, dettagli..."></textarea></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-surface" onclick="closeModal('m-polizza')">Annulla</button>
+      <button class="btn btn-primary" onclick="salvaPolizza()">💾 Salva</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-richiesta">
+  <div class="modal">
+    <div class="modal-title">📝 Nuova richiesta</div>
+    <div class="form-group"><label>Tipo *</label>
+      <select id="nr-t">
+        <option value="modifica">🔧 Modifica copertura</option><option value="disdetta">❌ Disdetta</option>
+        <option value="preventivo">💡 Preventivo</option><option value="sinistro">🚨 Sinistro</option>
+        <option value="documento">📄 Documento</option><option value="rinnovo">🔄 Rinnovo</option><option value="altro">✏️ Altro</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Polizza di riferimento</label>
+      <select id="nr-p"><option value="">— Nessuna —</option></select>
+    </div>
+    <div class="form-group"><label>Descrizione *</label>
+      <textarea id="nr-d" placeholder="Descrivi nel dettaglio cosa desideri..."></textarea>
+    </div>
+    <div class="form-group"><label>Urgenza</label>
+      <select id="nr-u"><option value="normale">Normale</option><option value="alta">Alta — entro questa settimana</option><option value="urgente">Urgente — risposta entro oggi</option></select>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-surface" onclick="closeModal('m-richiesta')">Annulla</button>
+      <button class="btn btn-primary" onclick="inviaRichiesta()">📨 Invia richiesta</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detail-panel">
+  <button class="detail-close" onclick="closeDetail()">✕ Chiudi</button>
+  <div id="detail-content" style="clear:both;padding-top:6px"></div>
+</div>
+
+<!-- NOTIF PANEL -->
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-header">
+    <span style="font-weight:600">🔔 Notifiche</span>
+    <button class="btn btn-surface btn-xs" onclick="toggleNotif()">✕</button>
+  </div>
+  <div class="notif-list" id="notif-list"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="t-icon">✅</span><span id="t-msg">OK</span>
+</div>
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const DK='phub_v4';
+let DB=JSON.parse(localStorage.getItem(DK)||'null');
+if(!DB) DB=initDB();
+let CU=null; // current user
+let CCid=null; // current chat client id
+let nLog=JSON.parse(localStorage.getItem('phub_nlog')||'[]');
+let selChs=['app','email','whatsapp'];
+
+function saveDB(){localStorage.setItem(DK,JSON.stringify(DB));}
+function saveNLog(){localStorage.setItem('phub_n
