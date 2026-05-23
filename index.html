@@ -1,3 +1,6 @@
+bash
+
+cat > /home/claude/polizzehub-v2.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -16,143 +19,134 @@
   --shadow:0 8px 32px rgba(0,0,0,0.5);--radius:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 /* LOGIN */
 #login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(ellipse at 20% 50%,rgba(59,130,246,.08) 0%,transparent 60%),
-             radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.06) 0%,transparent 50%),var(--bg);position:relative;}
-#login-screen::before{content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(30,45,71,.3) 60px,rgba(30,45,71,.3) 61px),
-                   repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(30,45,71,.3) 60px,rgba(30,45,71,.3) 61px);pointer-events:none;}
-.login-box{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:48px;width:100%;max-width:440px;
-  position:relative;box-shadow:var(--shadow);animation:fadeUp .4s ease;}
+  background:radial-gradient(ellipse at 20% 50%,rgba(59,130,246,.08),transparent 60%),
+             radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.06),transparent 50%),var(--bg);}
+.login-wrap{width:100%;max-width:460px;padding:20px;}
+.login-box{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:40px;
+  box-shadow:var(--shadow);animation:fadeUp .4s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.login-logo{text-align:center;margin-bottom:32px;}
-.login-logo-mark{width:64px;height:64px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:16px;
-  display:inline-flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:14px;box-shadow:0 8px 24px rgba(201,168,76,.3);}
-.login-logo h1{font-family:'Playfair Display',serif;font-size:26px;color:var(--text);}
-.login-logo p{font-size:13px;color:var(--text2);margin-top:4px;}
-.login-tabs{display:flex;background:var(--surface2);border-radius:10px;padding:4px;margin-bottom:26px;}
-.login-tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all .2s;}
-.login-tab.active{background:var(--surface3);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.3);}
-.demo-accounts{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);}
-.demo-accounts p{font-size:12px;color:var(--text3);margin-bottom:10px;text-align:center;}
-.demo-btns{display:flex;gap:8px;}
-.demo-btn{flex:1;padding:8px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;cursor:pointer;
-  text-align:center;font-size:11px;color:var(--text2);transition:all .15s;font-family:'Outfit',sans-serif;}
-.demo-btn:hover{border-color:var(--gold);color:var(--gold);}
-
-/* FORM */
-.form-group{margin-bottom:16px;}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);border:1px solid var(--border2);
-  border-radius:10px;padding:11px 14px;color:var(--text);font-size:13px;font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
-.form-group textarea{resize:vertical;min-height:80px;}
+.login-logo{text-align:center;margin-bottom:28px;}
+.login-logo-mark{width:60px;height:60px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-radius:16px;display:inline-flex;align-items:center;justify-content:center;font-size:26px;
+  margin-bottom:12px;box-shadow:0 8px 24px rgba(201,168,76,.3);}
+.login-logo h1{font-family:'Playfair Display',serif;font-size:24px;}
+.login-logo p{font-size:12px;color:var(--text2);margin-top:3px;}
+.login-tabs{display:flex;background:var(--surface2);border-radius:10px;padding:4px;margin-bottom:22px;}
+.login-tab{flex:1;padding:9px;text-align:center;border-radius:8px;cursor:pointer;font-size:12px;
+  font-weight:500;color:var(--text2);transition:all .2s;}
+.login-tab.active{background:var(--surface3);color:var(--text);}
+.mode-tabs{display:flex;gap:8px;margin-bottom:20px;}
+.mode-tab{flex:1;padding:8px;text-align:center;background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;cursor:pointer;font-size:11px;color:var(--text2);transition:all .2s;}
+.mode-tab.active{border-color:var(--gold);color:var(--gold);}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text2);
+  text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);
+  border:1px solid var(--border2);border-radius:10px;padding:10px 14px;color:var(--text);
+  font-size:13px;font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold);}
 .form-group select option{background:var(--surface2);}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .form-full{grid-column:1/-1;}
-.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;padding-top:18px;border-top:1px solid var(--border);}
-
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 22px;border-radius:10px;
-  font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'Outfit',sans-serif;transition:all .2s;letter-spacing:.2px;}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;
+  padding-top:16px;border-top:1px solid var(--border);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 20px;
+  border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;
+  font-family:'Outfit',sans-serif;transition:all .2s;}
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1000;width:100%;margin-top:6px;}
 .btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.4);}
 .btn-primary{background:var(--blue);color:white;}
-.btn-primary:hover{background:#2563eb;transform:translateY(-1px);}
+.btn-primary:hover{background:#2563eb;}
 .btn-surface{background:var(--surface3);color:var(--text);border:1px solid var(--border2);}
 .btn-surface:hover{border-color:var(--blue2);color:var(--blue2);}
 .btn-danger{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
 .btn-success{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);}
-.btn-sm{padding:7px 14px;font-size:12px;}
-.btn-xs{padding:5px 10px;font-size:11px;}
-
-/* APP LAYOUT */
+.btn-warning{background:rgba(249,115,22,.15);color:var(--orange);border:1px solid rgba(249,115,22,.3);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-xs{padding:4px 10px;font-size:11px;}
+.divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--text3);font-size:12px;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.link-btn{background:none;border:none;color:var(--blue2);font-size:12px;cursor:pointer;
+  font-family:'Outfit',sans-serif;text-decoration:underline;}
+/* APP */
 #app{display:none;min-height:100vh;}
 .app-layout{display:flex;min-height:100vh;}
-
-/* SIDEBAR */
-.sidebar{width:255px;min-height:100vh;background:var(--surface);border-right:1px solid var(--border);
+.sidebar{width:250px;min-height:100vh;background:var(--surface);border-right:1px solid var(--border);
   display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;}
-.sidebar-header{padding:22px 18px 18px;border-bottom:1px solid var(--border);}
-.brand{display:flex;align-items:center;gap:11px;}
-.brand-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:9px;
-  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 4px 12px rgba(201,168,76,.3);}
-.brand-text h2{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold2);}
-.brand-text span{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;}
-.sidebar-user{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px;}
-.user-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:13px;flex-shrink:0;}
+.sidebar-header{padding:20px 16px;border-bottom:1px solid var(--border);}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{width:34px;height:34px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.brand-text h2{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold2);}
+.brand-text span{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+.sidebar-user{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.user-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;}
+.avatar-admin{background:linear-gradient(135deg,#7c3aed,#a855f7);color:white;}
 .avatar-broker{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:white;}
 .avatar-client{background:linear-gradient(135deg,#166534,#22c55e);color:white;}
 .user-info .uname{font-size:12px;font-weight:600;}
 .user-info .urole{font-size:10px;color:var(--text3);}
-.nav-section{padding:14px 14px 6px;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;font-weight:600;}
-.nav-item{display:flex;align-items:center;gap:11px;padding:9px 14px;margin:1px 6px;border-radius:8px;cursor:pointer;
-  color:var(--text2);font-size:12px;font-weight:500;transition:all .15s;position:relative;}
+.nav-section{padding:12px 14px 5px;font-size:10px;color:var(--text3);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:600;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;margin:1px 6px;
+  border-radius:8px;cursor:pointer;color:var(--text2);font-size:12px;font-weight:500;
+  transition:all .15s;position:relative;}
 .nav-item:hover{background:var(--surface2);color:var(--text);}
 .nav-item.active{background:rgba(59,130,246,.12);color:var(--blue2);}
 .nav-item.active::before{content:'';position:absolute;left:-6px;top:50%;transform:translateY(-50%);
-  width:3px;height:18px;background:var(--blue2);border-radius:0 2px 2px 0;}
+  width:3px;height:16px;background:var(--blue2);border-radius:0 2px 2px 0;}
 .nav-icon{font-size:14px;width:18px;text-align:center;}
-.nav-badge{margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;
-  padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;}
-.nav-badge.gold{background:var(--gold);color:#1a1000;}
+.nav-badge{margin-left:auto;background:var(--red);color:white;font-size:9px;font-weight:700;
+  padding:2px 6px;border-radius:10px;min-width:16px;text-align:center;}
 .nav-badge.green{background:var(--green);color:#000;}
-.sidebar-footer{margin-top:auto;padding:14px 8px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:2px;}
-
-/* MAIN */
-.main-content{margin-left:255px;flex:1;padding:26px 30px;min-height:100vh;}
-.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;}
-.page-title{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:-.5px;line-height:1.2;}
-.page-subtitle{font-size:12px;color:var(--text2);margin-top:4px;}
-.page-actions{display:flex;gap:9px;}
+.nav-badge.gold{background:var(--gold);color:#1a1000;}
+.sidebar-footer{margin-top:auto;padding:12px 6px;border-top:1px solid var(--border);}
+.main-content{margin-left:250px;flex:1;padding:24px 28px;min-height:100vh;}
+.page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;}
+.page-title{font-family:'Playfair Display',serif;font-size:24px;letter-spacing:-.5px;}
+.page-subtitle{font-size:12px;color:var(--text2);margin-top:3px;}
+.page-actions{display:flex;gap:8px;flex-wrap:wrap;}
 .view{display:none;}
 .view.active{display:block;animation:fadeIn .2s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-
-/* STATS */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;
-  transition:border-color .2s,transform .2s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:all .2s;}
 .stat-card:hover{border-color:var(--border2);transform:translateY(-2px);}
-.stat-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:11px;}
+.stat-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:16px;margin-bottom:10px;}
 .stat-icon.blue{background:rgba(59,130,246,.15);}
 .stat-icon.gold{background:rgba(201,168,76,.15);}
 .stat-icon.red{background:rgba(239,68,68,.15);}
 .stat-icon.green{background:rgba(34,197,94,.15);}
-.stat-value{font-family:'Playfair Display',serif;font-size:28px;line-height:1;margin-bottom:4px;}
+.stat-icon.purple{background:rgba(168,85,247,.15);}
+.stat-value{font-family:'Playfair Display',serif;font-size:26px;line-height:1;margin-bottom:3px;}
 .stat-value.blue{color:var(--blue2);}.stat-value.gold{color:var(--gold2);}
 .stat-value.red{color:var(--red);}.stat-value.green{color:var(--green);}
+.stat-value.purple{color:var(--purple);}
 .stat-label{font-size:11px;color:var(--text2);font-weight:500;}
-.stat-trend{font-size:11px;color:var(--text3);margin-top:3px;}
-
-/* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.card-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .card-title{font-size:13px;font-weight:600;}
-.card-body{padding:18px;}
+.card-body{padding:16px;}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
-
-/* TABLE */
-.table-toolbar{padding:12px 16px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
-.search-input{flex:1;min-width:180px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;
-  padding:7px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;}
+.table-toolbar{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.search-input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:8px;padding:7px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;}
 .search-input:focus{border-color:var(--blue);}
 .search-input::placeholder{color:var(--text3);}
-.filter-select{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;
-  color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;cursor:pointer;}
+.filter-select{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;
+  padding:7px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;cursor:pointer;}
 table{width:100%;border-collapse:collapse;}
-th{padding:10px 16px;text-align:left;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;
-  font-weight:600;background:var(--surface2);border-bottom:1px solid var(--border);}
-td{padding:12px 16px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+th{padding:9px 14px;text-align:left;font-size:10px;color:var(--text3);text-transform:uppercase;
+  letter-spacing:.8px;font-weight:600;background:var(--surface2);border-bottom:1px solid var(--border);}
+td{padding:11px 14px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:middle;}
 tr:last-child td{border-bottom:none;}
 tbody tr:hover td{background:rgba(255,255,255,.015);}
-
-/* BADGES */
 .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;white-space:nowrap;}
 .badge-blue{background:rgba(59,130,246,.15);color:var(--blue2);}
 .badge-green{background:rgba(34,197,94,.15);color:var(--green);}
@@ -161,686 +155,670 @@ tbody tr:hover td{background:rgba(255,255,255,.015);}
 .badge-gold{background:rgba(201,168,76,.15);color:var(--gold2);}
 .badge-purple{background:rgba(168,85,247,.15);color:var(--purple);}
 .badge-gray{background:rgba(122,139,168,.15);color:var(--text2);}
-
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:9px;}
-.tl-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 16px;
-  display:flex;align-items:center;gap:12px;transition:all .15s;cursor:pointer;}
-.tl-item:hover{border-color:var(--border2);transform:translateX(4px);}
+.timeline{display:flex;flex-direction:column;gap:8px;}
+.tl-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:12px 14px;display:flex;align-items:center;gap:11px;transition:all .15s;cursor:pointer;}
+.tl-item:hover{border-color:var(--border2);transform:translateX(3px);}
 .tl-item.urgent{border-left:3px solid var(--red);}
 .tl-item.warning{border-left:3px solid var(--orange);}
 .tl-item.ok{border-left:3px solid var(--green);}
-.tl-date{text-align:center;min-width:44px;}
-.tl-day{font-family:'Playfair Display',serif;font-size:22px;line-height:1;}
-.tl-month{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
-.tl-sep{width:1px;height:32px;background:var(--border);flex-shrink:0;}
+.tl-date{text-align:center;min-width:42px;}
+.tl-day{font-family:'Playfair Display',serif;font-size:20px;line-height:1;}
+.tl-month{font-size:9px;color:var(--text3);text-transform:uppercase;}
+.tl-sep{width:1px;height:30px;background:var(--border);flex-shrink:0;}
 .tl-main{flex:1;}
 .tl-client{font-weight:600;font-size:12px;}
-.tl-detail{font-size:11px;color:var(--text2);margin-top:2px;}
+.tl-detail{font-size:11px;color:var(--text2);margin-top:1px;}
 .tl-right{text-align:right;}
-.tl-days{font-size:12px;font-weight:700;}
+.tl-days{font-size:11px;font-weight:700;}
 .tl-days.urgent{color:var(--red);}.tl-days.warning{color:var(--orange);}.tl-days.ok{color:var(--green);}
-.tl-premio{font-size:10px;color:var(--text3);margin-top:2px;}
-
-/* CHAT */
-.chat-layout{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - 150px);background:var(--surface);
-  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.chat-layout{display:grid;grid-template-columns:260px 1fr;height:calc(100vh - 140px);
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .chat-list{border-right:1px solid var(--border);overflow-y:auto;}
-.chat-list-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:13px;
-  display:flex;align-items:center;justify-content:space-between;}
-.chat-conv{padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;position:relative;}
+.chat-list-header{padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;font-size:12px;}
+.chat-conv{padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;position:relative;}
 .chat-conv:hover{background:var(--surface2);}
 .chat-conv.active{background:rgba(59,130,246,.08);border-left:3px solid var(--blue);}
-.chat-conv-name{font-size:12px;font-weight:600;margin-bottom:3px;}
-.chat-conv-preview{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
-.chat-conv-time{font-size:10px;color:var(--text3);position:absolute;top:12px;right:12px;}
-.unread-dot{width:7px;height:7px;background:var(--blue);border-radius:50%;position:absolute;bottom:12px;right:12px;}
+.chat-conv-name{font-size:12px;font-weight:600;margin-bottom:2px;}
+.chat-conv-preview{font-size:11px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;}
+.chat-conv-time{font-size:10px;color:var(--text3);position:absolute;top:11px;right:11px;}
+.unread-dot{width:7px;height:7px;background:var(--blue);border-radius:50%;position:absolute;bottom:11px;right:11px;}
 .chat-main{display:flex;flex-direction:column;}
-.chat-header{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.chat-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .chat-header-name{font-weight:600;font-size:13px;}
 .chat-header-sub{font-size:11px;color:var(--text2);}
-.chat-messages{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;}
-.msg{max-width:70%;padding:9px 13px;border-radius:13px;font-size:12px;line-height:1.5;}
-.msg.sent{align-self:flex-end;background:var(--blue);color:white;border-bottom-right-radius:4px;}
-.msg.received{align-self:flex-start;background:var(--surface2);border:1px solid var(--border);border-bottom-left-radius:4px;}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:9px;}
+.msg{max-width:68%;padding:9px 12px;border-radius:12px;font-size:12px;line-height:1.5;}
+.msg.sent{align-self:flex-end;background:var(--blue);color:white;border-bottom-right-radius:3px;}
+.msg.received{align-self:flex-start;background:var(--surface2);border:1px solid var(--border);border-bottom-left-radius:3px;}
 .msg-time{font-size:9px;opacity:.6;margin-top:3px;}
 .msg.sent .msg-time{text-align:right;}
 .msg-request{align-self:flex-start;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);
-  border-radius:11px;padding:11px 14px;max-width:78%;}
-.msg-request-type{font-size:10px;color:var(--purple);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;}
-.chat-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:9px;}
-.chat-quick-actions{display:flex;gap:7px;flex-wrap:wrap;}
-.quick-action{padding:4px 11px;background:var(--surface2);border:1px solid var(--border2);border-radius:20px;
-  font-size:10px;color:var(--text2);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
+  border-radius:10px;padding:10px 13px;max-width:76%;}
+.msg-request-type{font-size:10px;color:var(--purple);font-weight:700;text-transform:uppercase;margin-bottom:4px;}
+.chat-input-area{padding:11px 14px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:8px;}
+.chat-quick-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.quick-action{padding:4px 10px;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:20px;font-size:10px;color:var(--text2);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
 .quick-action:hover{border-color:var(--blue);color:var(--blue2);}
-.chat-input-row{display:flex;gap:9px;align-items:flex-end;}
+.chat-input-row{display:flex;gap:8px;align-items:flex-end;}
 .chat-input-row textarea{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;
-  padding:9px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;resize:none;min-height:40px;max-height:100px;}
+  padding:8px 12px;color:var(--text);font-size:12px;font-family:'Outfit',sans-serif;outline:none;
+  resize:none;min-height:38px;max-height:90px;}
 .chat-input-row textarea:focus{border-color:var(--blue);}
-.send-btn{width:40px;height:40px;background:var(--blue);border:none;border-radius:9px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-size:16px;color:white;transition:all .15s;flex-shrink:0;}
+.send-btn{width:38px;height:38px;background:var(--blue);border:none;border-radius:9px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:white;flex-shrink:0;}
 .send-btn:hover{background:#2563eb;}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;
   align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:30px;
-  width:100%;max-width:540px;max-height:90vh;overflow-y:auto;animation:fadeUp .2s ease;}
-.modal-lg{max-width:680px;}
-.modal-title{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:22px;}
-
-/* DETAIL PANEL */
-.detail-panel{position:fixed;top:0;right:0;bottom:0;width:440px;background:var(--surface);
-  border-left:1px solid var(--border);z-index:300;transform:translateX(100%);transition:transform .25s;overflow-y:auto;padding:26px;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;
+  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:fadeUp .2s ease;}
+.modal-title{font-family:'Playfair Display',serif;font-size:19px;margin-bottom:20px;}
+.detail-panel{position:fixed;top:0;right:0;bottom:0;width:420px;background:var(--surface);
+  border-left:1px solid var(--border);z-index:300;transform:translateX(100%);transition:transform .25s;overflow-y:auto;padding:24px;}
 .detail-panel.open{transform:translateX(0);}
 .detail-close{position:sticky;top:0;float:right;background:var(--surface2);border:1px solid var(--border);
-  border-radius:8px;padding:5px 11px;cursor:pointer;color:var(--text2);font-size:12px;
-  transition:all .15s;font-family:'Outfit',sans-serif;z-index:10;}
-.detail-close:hover{color:var(--text);}
-.detail-section{margin-top:20px;}
+  border-radius:8px;padding:5px 10px;cursor:pointer;color:var(--text2);font-size:11px;font-family:'Outfit',sans-serif;}
+.detail-section{margin-top:18px;}
 .detail-section-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;
-  font-weight:600;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;
+  font-weight:600;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;
   font-size:12px;border-bottom:1px solid rgba(30,45,71,.5);}
 .info-row:last-child{border-bottom:none;}
 .info-row .label{color:var(--text2);}
 .info-row .value{font-weight:500;text-align:right;max-width:58%;}
-.polizza-mini{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:12px;margin-bottom:9px;}
-.polizza-mini-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-
-/* RICHIESTE */
+.polizza-mini{background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:11px;margin-bottom:8px;}
 .richiesta-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;
-  padding:14px 16px;margin-bottom:9px;transition:border-color .15s;}
+  padding:13px 14px;margin-bottom:8px;transition:border-color .15s;}
 .richiesta-card:hover{border-color:var(--border2);}
-.richiesta-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;}
-
-/* NOTIFICHE */
-.notif-panel{position:fixed;top:0;right:0;bottom:0;width:360px;background:var(--surface);
+.richiesta-header{display:flex;align-items:center;gap:7px;margin-bottom:7px;flex-wrap:wrap;}
+.notif-panel{position:fixed;top:0;right:0;bottom:0;width:340px;background:var(--surface);
   border-left:1px solid var(--border);z-index:400;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;}
 .notif-panel.open{transform:translateX(0);}
-.notif-header{padding:18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.notif-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .notif-list{overflow-y:auto;flex:1;}
-.notif-item{padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.notif-item{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
 .notif-item:hover{background:var(--surface2);}
 .notif-item.unread{border-left:3px solid var(--blue);}
-.notif-item-title{font-size:12px;font-weight:600;margin-bottom:3px;}
-.notif-item-time{font-size:10px;color:var(--text3);margin-top:3px;}
-
-/* NOTIFICHE CANALI */
-.notif-channels{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0;}
-.channel-btn{flex:1;min-width:100px;padding:12px;background:var(--surface2);border:2px solid var(--border);
-  border-radius:10px;cursor:pointer;text-align:center;transition:all .15s;font-family:'Outfit',sans-serif;}
+.notif-item-title{font-size:12px;font-weight:600;margin-bottom:2px;}
+.notif-item-time{font-size:10px;color:var(--text3);}
+.notif-channels{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0;}
+.channel-btn{flex:1;min-width:90px;padding:10px;background:var(--surface2);border:2px solid var(--border);
+  border-radius:9px;cursor:pointer;text-align:center;transition:all .15s;font-family:'Outfit',sans-serif;}
 .channel-btn.selected{border-color:var(--blue);background:rgba(59,130,246,.08);}
-.channel-icon{font-size:22px;margin-bottom:5px;}
-.channel-name{font-size:11px;font-weight:600;}
-
-/* CLIENT PORTAL */
+.channel-icon{font-size:20px;margin-bottom:4px;}
+.channel-name{font-size:10px;font-weight:600;}
 .polizza-card-client{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:18px;margin-bottom:13px;transition:all .2s;}
-.polizza-card-client:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
-.pol-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
-.pol-card-ramo{font-family:'Playfair Display',serif;font-size:17px;}
+  padding:16px;margin-bottom:12px;transition:all .2s;}
+.polizza-card-client:hover{border-color:var(--border2);transform:translateY(-2px);}
+.pol-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.pol-card-ramo{font-family:'Playfair Display',serif;font-size:16px;}
 .pol-card-company{font-size:11px;color:var(--text2);margin-top:2px;}
-.pol-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
-.pol-info-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;}
+.pol-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.pol-info-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;}
 .pol-info-value{font-size:13px;font-weight:600;margin-top:2px;}
-.pol-card-actions{display:flex;gap:7px;flex-wrap:wrap;}
-
-/* URGENCY BAR */
+.pol-card-actions{display:flex;gap:6px;flex-wrap:wrap;}
 .urgency-bar{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;
-  padding:12px 16px;display:flex;align-items:center;gap:11px;margin-bottom:18px;
-  animation:urgPulse 3s infinite;}
+  padding:11px 14px;display:flex;align-items:center;gap:10px;margin-bottom:16px;animation:urgPulse 3s infinite;}
 @keyframes urgPulse{0%,100%{border-color:rgba(239,68,68,.25);}50%{border-color:rgba(239,68,68,.5);}}
-
-/* TOAST */
-.toast{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--border2);
-  border-radius:10px;padding:12px 18px;display:flex;align-items:center;gap:9px;font-size:12px;font-weight:500;
-  z-index:9999;transform:translateY(70px);opacity:0;transition:all .3s;box-shadow:var(--shadow);max-width:300px;}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--surface);border:1px solid var(--border2);
+  border-radius:10px;padding:11px 16px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;
+  z-index:9999;transform:translateY(70px);opacity:0;transition:all .3s;box-shadow:var(--shadow);max-width:280px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.t-success{border-color:rgba(34,197,94,.4);}
 .toast.t-error{border-color:rgba(239,68,68,.4);}
 .toast.t-info{border-color:rgba(59,130,246,.4);}
-
-/* SINISTRI LOG */
-.notif-log-entry{font-size:11px;padding:8px 0;border-bottom:1px solid var(--border);color:var(--text2);}
-
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+.user-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;transition:all .2s;}
+.user-card:hover{border-color:var(--border2);}
+.user-card-info{flex:1;}
+.user-card-name{font-weight:600;font-size:13px;}
+.user-card-sub{font-size:11px;color:var(--text2);margin-top:2px;}
+.user-card-actions{display:flex;gap:6px;}
+.alert-box{background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.3);border-radius:10px;
+  padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--orange);}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-@media(max-width:1100px){.stats-row{grid-template-columns:1fr 1fr;}.grid-2{grid-template-columns:1fr;}}
 @media(max-width:768px){
-  .sidebar{width:56px;}.sidebar .brand-text,.sidebar .nav-item span:not(.nav-icon),
-  .sidebar .user-info,.sidebar .nav-section{display:none;}
-  .main-content{margin-left:56px;padding:14px;}
+  .sidebar{width:52px;}
+  .sidebar .brand-text,.sidebar .nav-item span:not(.nav-icon),.sidebar .user-info,.sidebar .nav-section{display:none;}
+  .main-content{margin-left:52px;padding:14px;}
   .stats-row{grid-template-columns:1fr 1fr;}
+  .grid-2{grid-template-columns:1fr;}
   .chat-layout{grid-template-columns:1fr;}
   .detail-panel{width:100%;}
 }
 </style>
 </head>
 <body>
+HTMLEOF
+echo "Part 1 done: $(wc -c < /home/claude/polizzehub-v2.html)"
+  bash
 
-<!-- LOGIN -->
+cat >> /home/claude/polizzehub-v2.html << 'HTMLEOF'
+
+<!-- LOGIN SCREEN -->
 <div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">
-      <div class="login-logo-mark">🛡️</div>
-      <h1>PolizzeHub Pro</h1>
-      <p>Piattaforma assicurativa Svizzera</p>
+<div class="login-wrap">
+<div class="login-box">
+  <div class="login-logo">
+    <div class="login-logo-mark">🛡️</div>
+    <h1>PolizzeHub Pro</h1>
+    <p>Piattaforma assicurativa Svizzera</p>
+  </div>
+  <div class="login-tabs">
+    <div class="login-tab active" onclick="setLTab('broker')">🏢 Broker / Agente</div>
+    <div class="login-tab" onclick="setLTab('client')">👤 Cliente</div>
+  </div>
+
+  <!-- BROKER LOGIN/REGISTER -->
+  <div id="lt-broker">
+    <div class="mode-tabs">
+      <div class="mode-tab active" onclick="setMode('broker','login')">Accedi</div>
+      <div class="mode-tab" onclick="setMode('broker','register')">Registrati</div>
     </div>
-    <div class="login-tabs">
-      <div class="login-tab active" onclick="setLoginTab('broker')">🏢 Broker / Agente</div>
-      <div class="login-tab" onclick="setLoginTab('client')">👤 Cliente</div>
-    </div>
-    <div id="login-broker">
-      <div class="form-group"><label>Email agente</label>
-        <input id="b-email" value="agente@polizzehub.ch"></div>
-      <div class="form-group"><label>Password</label>
-        <input type="password" id="b-pass" value="demo1234"></div>
+    <div id="bm-login">
+      <div class="form-group"><label>Email</label><input id="b-em" placeholder="agente@polizzehub.ch"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="b-pw" placeholder="••••••••"></div>
       <button class="btn btn-gold" onclick="loginBroker()">Accedi come Broker →</button>
+      <div class="divider">oppure</div>
+      <p style="text-align:center;font-size:12px;color:var(--text2)">Primo accesso? <button class="link-btn" onclick="setMode('broker','register')">Crea account broker</button></p>
     </div>
-    <div id="login-client" style="display:none">
-      <div class="form-group"><label>Codice cliente o email</label>
-        <input id="c-code" value="C006" placeholder="Es: C006"></div>
-      <div class="form-group"><label>Password</label>
-        <input type="password" id="c-pass" value="demo1234"></div>
-      <button class="btn btn-gold" onclick="loginClient()">Accedi al mio portale →</button>
-    </div>
-    <div class="demo-accounts">
-      <p>⚡ Accesso rapido demo</p>
-      <div class="demo-btns">
-        <div class="demo-btn" onclick="quickLogin('broker')">🏢 Broker</div>
-        <div class="demo-btn" onclick="quickLogin('simona')">👤 Simona B.</div>
-        <div class="demo-btn" onclick="quickLogin('marco')">👤 Marco F.</div>
+    <div id="bm-register" style="display:none">
+      <div class="form-row">
+        <div class="form-group"><label>Nome *</label><input id="br-n" placeholder="Mario"></div>
+        <div class="form-group"><label>Cognome *</label><input id="br-cg" placeholder="Rossi"></div>
       </div>
+      <div class="form-group"><label>Agenzia / Studio</label><input id="br-ag" placeholder="Agenzia Assicurativa SA"></div>
+      <div class="form-group"><label>Email *</label><input id="br-em" type="email" placeholder="mario.rossi@agenzia.ch"></div>
+      <div class="form-group"><label>Telefono</label><input id="br-tel" placeholder="+41 79 000 00 00"></div>
+      <div class="form-group"><label>Password *</label><input type="password" id="br-pw" placeholder="min. 6 caratteri"></div>
+      <div class="form-group"><label>Ripeti password *</label><input type="password" id="br-pw2" placeholder="min. 6 caratteri"></div>
+      <button class="btn btn-gold" onclick="registerBroker()">🚀 Crea account broker</button>
+      <p style="text-align:center;font-size:12px;color:var(--text2);margin-top:12px">Hai già un account? <button class="link-btn" onclick="setMode('broker','login')">Accedi</button></p>
     </div>
   </div>
+
+  <!-- CLIENT LOGIN/REGISTER -->
+  <div id="lt-client" style="display:none">
+    <div class="mode-tabs">
+      <div class="mode-tab active" onclick="setMode('client','login')">Accedi</div>
+      <div class="mode-tab" onclick="setMode('client','register')">Registrati</div>
+    </div>
+    <div id="cm-login">
+      <div class="form-group"><label>Codice cliente o Email</label><input id="c-code" placeholder="Es: C001 oppure email"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="c-pw" placeholder="••••••••"></div>
+      <button class="btn btn-gold" onclick="loginClient()">Accedi al mio portale →</button>
+      <div class="divider">oppure</div>
+      <p style="text-align:center;font-size:12px;color:var(--text2)">Primo accesso? <button class="link-btn" onclick="setMode('client','register')">Crea account cliente</button></p>
+    </div>
+    <div id="cm-register" style="display:none">
+      <div class="form-row">
+        <div class="form-group"><label>Nome *</label><input id="cr-n" placeholder="Mario"></div>
+        <div class="form-group"><label>Cognome *</label><input id="cr-cg" placeholder="Rossi"></div>
+      </div>
+      <div class="form-group"><label>Tipo</label>
+        <select id="cr-tipo"><option>Privato</option><option>Azienda</option></select>
+      </div>
+      <div class="form-group"><label>Email *</label><input id="cr-em" type="email" placeholder="mario.rossi@email.ch"></div>
+      <div class="form-group"><label>Telefono</label><input id="cr-tel" placeholder="+41 79 000 00 00"></div>
+      <div class="form-group"><label>Indirizzo</label><input id="cr-ind" placeholder="Via Esempio 1, 6900 Lugano"></div>
+      <div class="form-group"><label>Password *</label><input type="password" id="cr-pw" placeholder="min. 6 caratteri"></div>
+      <div class="form-group"><label>Ripeti password *</label><input type="password" id="cr-pw2" placeholder="min. 6 caratteri"></div>
+      <div class="alert-box">⚠️ Dopo la registrazione il tuo account dovrà essere approvato dal broker prima di poter accedere.</div>
+      <button class="btn btn-gold" onclick="registerClient()">📨 Invia richiesta accesso</button>
+      <p style="text-align:center;font-size:12px;color:var(--text2);margin-top:12px">Hai già un account? <button class="link-btn" onclick="setMode('client','login')">Accedi</button></p>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-bottom:8px">⚡ Demo rapida</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <div class="mode-tab" style="cursor:pointer;flex:1" onclick="quickLogin('broker')">🏢 Broker demo</div>
+      <div class="mode-tab" style="cursor:pointer;flex:1" onclick="quickLogin('simona')">👤 Simona B.</div>
+      <div class="mode-tab" style="cursor:pointer;flex:1" onclick="quickLogin('marco')">👤 Marco F.</div>
+    </div>
+  </div>
+</div>
+</div>
 </div>
 
 <!-- APP -->
 <div id="app">
- <div class="app-layout">
-
-  <!-- SIDEBAR -->
+<div class="app-layout">
   <nav class="sidebar">
     <div class="sidebar-header">
       <div class="brand">
         <div class="brand-mark">🛡️</div>
-        <div class="brand-text">
-          <h2>PolizzeHub</h2>
-          <span id="sb-role-label">Pro Platform</span>
-        </div>
+        <div class="brand-text"><h2>PolizzeHub</h2><span id="sb-rl">Pro</span></div>
       </div>
     </div>
     <div class="sidebar-user">
-      <div class="user-avatar" id="sb-avatar">AG</div>
-      <div class="user-info">
-        <div class="uname" id="sb-name">Agente</div>
-        <div class="urole" id="sb-role">Broker</div>
-      </div>
+      <div class="user-avatar" id="sb-av">AG</div>
+      <div class="user-info"><div class="uname" id="sb-nm">Agente</div><div class="urole" id="sb-ro">Broker</div></div>
     </div>
 
-    <!-- BROKER NAV -->
     <div id="nav-broker">
       <div class="nav-section">Principale</div>
-      <div class="nav-item active" onclick="showView('dashboard')"><span class="nav-icon">📊</span><span>Dashboard</span></div>
-      <div class="nav-item" onclick="showView('clienti')"><span class="nav-icon">👥</span><span>Clienti</span><span class="nav-badge" id="nb-clienti">0</span></div>
-      <div class="nav-item" onclick="showView('polizze')"><span class="nav-icon">📋</span><span>Polizze</span></div>
-      <div class="nav-section">Monitoraggio</div>
-      <div class="nav-item" onclick="showView('scadenze')"><span class="nav-icon">⏰</span><span>Scadenze</span><span class="nav-badge" id="nb-scadenze" style="display:none">0</span></div>
-      <div class="nav-item" onclick="showView('notifiche-send')"><span class="nav-icon">📨</span><span>Invia Notifiche</span></div>
-      <div class="nav-item" onclick="showView('richieste')"><span class="nav-icon">📝</span><span>Richieste</span><span class="nav-badge" id="nb-richieste" style="display:none">0</span></div>
+      <div class="nav-item active" onclick="sv('dashboard')"><span class="nav-icon">📊</span><span>Dashboard</span></div>
+      <div class="nav-item" onclick="sv('agenti')"><span class="nav-icon">🏢</span><span>Agenti</span><span class="nav-badge gold" id="nb-ag" style="display:none">0</span></div>
+      <div class="nav-item" onclick="sv('clienti')"><span class="nav-icon">👥</span><span>Clienti</span><span class="nav-badge" id="nb-cl">0</span></div>
+      <div class="nav-item" onclick="sv('polizze')"><span class="nav-icon">📋</span><span>Polizze</span></div>
+      <div class="nav-section">Gestione</div>
+      <div class="nav-item" onclick="sv('scadenze')"><span class="nav-icon">⏰</span><span>Scadenze</span><span class="nav-badge" id="nb-sc" style="display:none">0</span></div>
+      <div class="nav-item" onclick="sv('notifiche-send')"><span class="nav-icon">📨</span><span>Notifiche</span></div>
+      <div class="nav-item" onclick="sv('richieste')"><span class="nav-icon">📝</span><span>Richieste</span><span class="nav-badge" id="nb-rq" style="display:none">0</span></div>
+      <div class="nav-item" onclick="sv('approvazioni')"><span class="nav-icon">✅</span><span>Approvazioni</span><span class="nav-badge" id="nb-ap" style="display:none">0</span></div>
       <div class="nav-section">Comunicazione</div>
-      <div class="nav-item" onclick="showView('chat')"><span class="nav-icon">💬</span><span>Messaggi</span><span class="nav-badge" id="nb-chat" style="display:none">0</span></div>
-      <div class="nav-item" onclick="showView('fatture')"><span class="nav-icon">💶</span><span>Fatture & Premi</span></div>
+      <div class="nav-item" onclick="sv('chat')"><span class="nav-icon">💬</span><span>Messaggi</span><span class="nav-badge" id="nb-ch" style="display:none">0</span></div>
+      <div class="nav-item" onclick="sv('fatture')"><span class="nav-icon">💶</span><span>Fatture</span></div>
     </div>
 
-    <!-- CLIENT NAV -->
     <div id="nav-client" style="display:none">
       <div class="nav-section">Il mio portale</div>
-      <div class="nav-item active" onclick="showView('c-home')"><span class="nav-icon">🏠</span><span>Le mie polizze</span></div>
-      <div class="nav-item" onclick="showView('c-docs')"><span class="nav-icon">📄</span><span>Documenti</span></div>
-      <div class="nav-item" onclick="showView('c-richieste')"><span class="nav-icon">📝</span><span>Le mie richieste</span><span class="nav-badge green" id="nb-c-rich" style="display:none">0</span></div>
-      <div class="nav-item" onclick="showView('c-chat')"><span class="nav-icon">💬</span><span>Chat con broker</span><span class="nav-badge" id="nb-c-chat" style="display:none">0</span></div>
-      <div class="nav-item" onclick="showView('c-sinistri')"><span class="nav-icon">🚨</span><span>Segnala sinistro</span></div>
+      <div class="nav-item active" onclick="sv('c-home')"><span class="nav-icon">🏠</span><span>Le mie polizze</span></div>
+      <div class="nav-item" onclick="sv('c-docs')"><span class="nav-icon">📄</span><span>Documenti</span></div>
+      <div class="nav-item" onclick="sv('c-richieste')"><span class="nav-icon">📝</span><span>Richieste</span><span class="nav-badge green" id="nb-cr" style="display:none">0</span></div>
+      <div class="nav-item" onclick="sv('c-chat')"><span class="nav-icon">💬</span><span>Chat broker</span><span class="nav-badge" id="nb-cc" style="display:none">0</span></div>
+      <div class="nav-item" onclick="sv('c-sinistri')"><span class="nav-icon">🚨</span><span>Segnala sinistro</span></div>
     </div>
 
     <div class="sidebar-footer">
-      <div class="nav-item" onclick="toggleNotif()"><span class="nav-icon">🔔</span><span>Notifiche</span><span class="nav-badge" id="nb-notif" style="display:none">0</span></div>
+      <div class="nav-item" onclick="toggleNotif()"><span class="nav-icon">🔔</span><span>Notifiche</span><span class="nav-badge" id="nb-no" style="display:none">0</span></div>
       <div class="nav-item" onclick="logout()"><span class="nav-icon">🚪</span><span>Esci</span></div>
     </div>
   </nav>
 
-  <!-- MAIN -->
-  <main class="main-content" id="main-content">
+  <main class="main-content">
 
-   <!-- DASHBOARD -->
-   <div class="view active" id="view-dashboard">
-    <div class="page-header">
-      <div><div class="page-title" id="d-greeting">Dashboard</div><div class="page-subtitle" id="d-date"></div></div>
-      <div class="page-actions">
-        <button class="btn btn-surface btn-sm" onclick="openModal('m-cliente')">＋ Cliente</button>
-        <button class="btn btn-primary btn-sm" onclick="openModal('m-polizza')">＋ Polizza</button>
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="page-header">
+        <div><div class="page-title" id="d-gr">Dashboard</div><div class="page-subtitle" id="d-dt"></div></div>
+        <div class="page-actions">
+          <button class="btn btn-surface btn-sm" onclick="om('m-cliente')">＋ Cliente</button>
+          <button class="btn btn-primary btn-sm" onclick="om('m-polizza')">＋ Polizza</button>
+        </div>
       </div>
-    </div>
-    <div id="urgent-bar" style="display:none" class="urgency-bar">
-      <span style="font-size:18px">🔴</span>
-      <div><strong id="urg-count">0</strong> polizze scadono entro 30 giorni — <span id="urg-names"></span></div>
-      <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="showView('scadenze')">Vedi →</button>
-    </div>
-    <div class="stats-row">
-      <div class="stat-card"><div class="stat-icon blue">👥</div><div class="stat-value blue" id="s-clienti">0</div><div class="stat-label">Clienti attivi</div><div class="stat-trend" id="s-clienti2"></div></div>
-      <div class="stat-card"><div class="stat-icon gold">📋</div><div class="stat-value gold" id="s-polizze">0</div><div class="stat-label">Polizze gestite</div><div class="stat-trend" id="s-polizze2"></div></div>
-      <div class="stat-card"><div class="stat-icon red">⏰</div><div class="stat-value red" id="s-scad">0</div><div class="stat-label">Scadenze 30gg</div><div class="stat-trend">da rinnovare</div></div>
-      <div class="stat-card"><div class="stat-icon green">💶</div><div class="stat-value green" id="s-premio"></div><div class="stat-label">Premio annuo totale</div><div class="stat-trend">portafoglio CHF</div></div>
-    </div>
-    <div class="grid-2" style="margin-bottom:18px">
+      <div id="urg-bar" style="display:none" class="urgency-bar">
+        <span>🔴</span>
+        <div><strong id="urg-ct">0</strong> polizze scadono entro 30 giorni — <span id="urg-nm"></span></div>
+        <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="sv('scadenze')">Vedi →</button>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-icon blue">👥</div><div class="stat-value blue" id="s-cl">0</div><div class="stat-label">Clienti totali</div></div>
+        <div class="stat-card"><div class="stat-icon gold">📋</div><div class="stat-value gold" id="s-po">0</div><div class="stat-label">Polizze attive</div></div>
+        <div class="stat-card"><div class="stat-icon red">⏰</div><div class="stat-value red" id="s-sc">0</div><div class="stat-label">Scadenze 30gg</div></div>
+        <div class="stat-card"><div class="stat-icon green">💶</div><div class="stat-value green" id="s-pr"></div><div class="stat-label">Premio annuo CHF</div></div>
+      </div>
+      <div class="grid-2" style="margin-bottom:16px">
+        <div class="card">
+          <div class="card-header"><span class="card-title">⏰ Scadenze urgenti</span><button class="btn btn-surface btn-xs" onclick="sv('scadenze')">Tutte</button></div>
+          <div style="padding:12px"><div class="timeline" id="d-sc"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">📝 Richieste aperte</span><button class="btn btn-surface btn-xs" onclick="sv('richieste')">Tutte</button></div>
+          <div id="d-rq" style="padding:12px"></div>
+        </div>
+      </div>
       <div class="card">
-        <div class="card-header"><span class="card-title">⏰ Scadenze urgenti</span><button class="btn btn-surface btn-xs" onclick="showView('scadenze')">Vedi tutte</button></div>
-        <div style="padding:14px"><div class="timeline" id="d-scadenze"></div></div>
+        <div class="card-header"><span class="card-title">💬 Messaggi non letti</span><button class="btn btn-surface btn-xs" onclick="sv('chat')">Chat</button></div>
+        <div id="d-mg" style="padding:12px"></div>
+      </div>
+    </div>
+
+    <!-- AGENTI -->
+    <div class="view" id="view-agenti">
+      <div class="page-header">
+        <div><div class="page-title">Agenti</div><div class="page-subtitle">Gestione broker e agenti</div></div>
+        <button class="btn btn-primary" onclick="om('m-agente')">＋ Nuovo agente</button>
+      </div>
+      <div id="agenti-list"></div>
+    </div>
+
+    <!-- CLIENTI -->
+    <div class="view" id="view-clienti">
+      <div class="page-header">
+        <div><div class="page-title">Clienti</div><div class="page-subtitle">Anagrafica completa</div></div>
+        <button class="btn btn-primary" onclick="om('m-cliente')">＋ Nuovo cliente</button>
       </div>
       <div class="card">
-        <div class="card-header"><span class="card-title">📝 Richieste aperte</span><button class="btn btn-surface btn-xs" onclick="showView('richieste')">Vedi tutte</button></div>
-        <div id="d-richieste" style="padding:14px"></div>
+        <div class="table-toolbar">
+          <input class="search-input" placeholder="🔍 Nome, email, codice..." id="sr-c" oninput="rCl()">
+          <select class="filter-select" id="fl-ct" onchange="rCl()"><option value="">Tutti</option><option>Privato</option><option>Azienda</option></select>
+        </div>
+        <table><thead><tr><th>Cliente</th><th>Contatti</th><th>Polizze</th><th>Prossima scad.</th><th>Premio tot.</th><th>Agente</th><th>Azioni</th></tr></thead>
+        <tbody id="tb-cl"></tbody></table>
       </div>
     </div>
-    <div class="card">
-      <div class="card-header"><span class="card-title">💬 Messaggi non letti</span><button class="btn btn-surface btn-xs" onclick="showView('chat')">Apri chat</button></div>
-      <div id="d-messaggi" style="padding:14px"></div>
-    </div>
-   </div>
 
-   <!-- CLIENTI -->
-   <div class="view" id="view-clienti">
-    <div class="page-header">
-      <div><div class="page-title">Clienti</div><div class="page-subtitle">Gestione anagrafica completa</div></div>
-      <button class="btn btn-primary" onclick="openModal('m-cliente')">＋ Nuovo cliente</button>
-    </div>
-    <div class="card">
-      <div class="table-toolbar">
-        <input class="search-input" placeholder="🔍 Cerca nome, email, codice..." id="srch-c" oninput="renderClienti()">
-        <select class="filter-select" id="flt-c-tipo" onchange="renderClienti()">
-          <option value="">Tutti</option><option>Privato</option><option>Azienda</option>
-        </select>
+    <!-- POLIZZE -->
+    <div class="view" id="view-polizze">
+      <div class="page-header">
+        <div><div class="page-title">Polizze</div><div class="page-subtitle">Portafoglio completo</div></div>
+        <button class="btn btn-primary" onclick="om('m-polizza')">＋ Nuova polizza</button>
       </div>
-      <table><thead><tr><th>Cliente</th><th>Contatti</th><th>Polizze</th><th>Prossima scadenza</th><th>Premio totale</th><th>Richieste</th><th>Azioni</th></tr></thead>
-      <tbody id="tb-clienti"></tbody></table>
-    </div>
-   </div>
-
-   <!-- POLIZZE -->
-   <div class="view" id="view-polizze">
-    <div class="page-header">
-      <div><div class="page-title">Polizze</div><div class="page-subtitle">Tutto il portafoglio</div></div>
-      <button class="btn btn-primary" onclick="openModal('m-polizza')">＋ Nuova polizza</button>
-    </div>
-    <div class="card">
-      <div class="table-toolbar">
-        <input class="search-input" placeholder="🔍 Cerca polizza, cliente, compagnia..." id="srch-p" oninput="renderPolizze()">
-        <select class="filter-select" id="flt-p-ramo" onchange="renderPolizze()">
-          <option value="">Tutti i rami</option>
-          <option>Auto/Veicoli</option><option>Casa/Immobili</option><option>Vita</option>
-          <option>Salute</option><option>Azienda/RC</option><option>Infortuni</option><option>Viaggi</option>
-        </select>
-        <select class="filter-select" id="flt-p-stato" onchange="renderPolizze()">
-          <option value="">Tutti gli stati</option><option value="attiva">Attive</option>
-          <option value="offerta">Offerte</option><option value="scaduta">Scadute</option>
-        </select>
-      </div>
-      <table><thead><tr><th>N° Polizza</th><th>Cliente</th><th>Ramo</th><th>Compagnia</th><th>Scadenza</th><th>Premio</th><th>Stato</th><th>Azioni</th></tr></thead>
-      <tbody id="tb-polizze"></tbody></table>
-    </div>
-   </div>
-
-   <!-- SCADENZE -->
-   <div class="view" id="view-scadenze">
-    <div class="page-header">
-      <div><div class="page-title">Scadenze</div><div class="page-subtitle">Rinnovi e interventi urgenti</div></div>
-      <div class="page-actions">
-        <select class="filter-select" id="flt-scad" onchange="renderScadenze()">
-          <option value="30">30 giorni</option><option value="60">60 giorni</option>
-          <option value="90">90 giorni</option><option value="365">Tutto l'anno</option>
-        </select>
-        <button class="btn btn-primary btn-sm" onclick="prepNotifAll()">📨 Notifica tutti</button>
-      </div>
-    </div>
-    <div class="timeline" id="tl-scadenze"></div>
-   </div>
-
-   <!-- INVIA NOTIFICHE -->
-   <div class="view" id="view-notifiche-send">
-    <div class="page-header">
-      <div><div class="page-title">Centro Notifiche</div><div class="page-subtitle">Invia comunicazioni automatiche</div></div>
-    </div>
-    <div class="grid-2" style="margin-bottom:18px">
       <div class="card">
-        <div class="card-header"><span class="card-title">📨 Invia notifica</span></div>
-        <div class="card-body">
-          <div class="form-group"><label>Destinatari</label>
-            <select id="n-dest" onchange="toggleClienteRow()">
-              <option value="scadenza30">Scadenza entro 30 giorni</option>
-              <option value="scadenza60">Scadenza entro 60 giorni</option>
-              <option value="tutti">Tutti i clienti</option>
-              <option value="singolo">Cliente specifico</option>
-            </select>
+        <div class="table-toolbar">
+          <input class="search-input" placeholder="🔍 Polizza, cliente, compagnia..." id="sr-p" oninput="rPo()">
+          <select class="filter-select" id="fl-pr" onchange="rPo()">
+            <option value="">Tutti i rami</option>
+            <option>Auto/Veicoli</option><option>Casa/Immobili</option><option>Vita</option>
+            <option>Salute</option><option>Azienda/RC</option><option>Infortuni</option><option>Viaggi</option>
+          </select>
+          <select class="filter-select" id="fl-ps" onchange="rPo()">
+            <option value="">Tutti gli stati</option><option value="attiva">Attive</option>
+            <option value="offerta">Offerte</option><option value="scaduta">Scadute</option>
+          </select>
+        </div>
+        <table><thead><tr><th>N° Polizza</th><th>Cliente</th><th>Ramo</th><th>Compagnia</th><th>Scadenza</th><th>Premio</th><th>Stato</th><th>Azioni</th></tr></thead>
+        <tbody id="tb-po"></tbody></table>
+      </div>
+    </div>
+
+    <!-- SCADENZE -->
+    <div class="view" id="view-scadenze">
+      <div class="page-header">
+        <div><div class="page-title">Scadenze</div><div class="page-subtitle">Rinnovi urgenti</div></div>
+        <div class="page-actions">
+          <select class="filter-select" id="fl-sg" onchange="rSc()">
+            <option value="30">30 giorni</option><option value="60">60 giorni</option>
+            <option value="90">90 giorni</option><option value="365">Tutto l'anno</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="prepNA()">📨 Notifica tutti</button>
+        </div>
+      </div>
+      <div class="timeline" id="tl-sc"></div>
+    </div>
+
+    <!-- NOTIFICHE SEND -->
+    <div class="view" id="view-notifiche-send">
+      <div class="page-header"><div><div class="page-title">Centro Notifiche</div><div class="page-subtitle">Invia comunicazioni ai clienti</div></div></div>
+      <div class="grid-2" style="margin-bottom:16px">
+        <div class="card">
+          <div class="card-header"><span class="card-title">📨 Invia notifica</span></div>
+          <div class="card-body">
+            <div class="form-group"><label>Destinatari</label>
+              <select id="n-dest" onchange="tCR()">
+                <option value="scadenza30">Scadenza entro 30gg</option>
+                <option value="scadenza60">Scadenza entro 60gg</option>
+                <option value="tutti">Tutti i clienti</option>
+                <option value="singolo">Cliente specifico</option>
+              </select>
+            </div>
+            <div id="n-cr" style="display:none" class="form-group"><label>Seleziona cliente</label><select id="n-cs"></select></div>
+            <div class="form-group"><label>Tipo</label>
+              <select id="n-tp">
+                <option value="scadenza">⏰ Avviso scadenza</option>
+                <option value="rinnovo">🔄 Proposta rinnovo</option>
+                <option value="documento">📄 Documento pronto</option>
+                <option value="personalizzato">✏️ Messaggio libero</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Canali</label>
+              <div class="notif-channels">
+                <div class="channel-btn selected" data-ch="app" onclick="tCH(this)"><div class="channel-icon">📱</div><div class="channel-name">App</div></div>
+                <div class="channel-btn selected" data-ch="email" onclick="tCH(this)"><div class="channel-icon">📧</div><div class="channel-name">Email</div></div>
+                <div class="channel-btn selected" data-ch="whatsapp" onclick="tCH(this)"><div class="channel-icon">💬</div><div class="channel-name">WhatsApp</div></div>
+                <div class="channel-btn" data-ch="sms" onclick="tCH(this)"><div class="channel-icon">📲</div><div class="channel-name">SMS</div></div>
+              </div>
+            </div>
+            <div class="form-group"><label>Testo personalizzato</label><textarea id="n-tx" style="min-height:70px" placeholder="Gentile [NOME]..."></textarea></div>
+            <button class="btn btn-primary" style="width:100%" onclick="invN()">🚀 Invia</button>
           </div>
-          <div class="form-group" id="n-c-row" style="display:none"><label>Seleziona cliente</label>
-            <select id="n-c-sel"></select>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">📊 Statistiche</span></div>
+          <div class="card-body" id="n-st"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">📋 Storico invii</span></div>
+        <table><thead><tr><th>Data</th><th>Destinatario</th><th>Tipo</th><th>Canali</th><th>Stato</th></tr></thead>
+        <tbody id="tb-nl"></tbody></table>
+      </div>
+    </div>
+
+    <!-- RICHIESTE -->
+    <div class="view" id="view-richieste">
+      <div class="page-header"><div><div class="page-title">Richieste clienti</div><div class="page-subtitle">Modifiche, disdette, sinistri</div></div></div>
+      <div class="table-toolbar" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border-bottom:none">
+        <select class="filter-select" id="fl-rs" onchange="rRq()"><option value="">Tutte</option><option value="aperta">Aperte</option><option value="in_lavorazione">In lavorazione</option><option value="completata">Completate</option></select>
+        <select class="filter-select" id="fl-rt" onchange="rRq()"><option value="">Tutti i tipi</option><option value="modifica">Modifica</option><option value="disdetta">Disdetta</option><option value="sinistro">Sinistro</option><option value="rinnovo">Rinnovo</option></select>
+      </div>
+      <div id="rq-list"></div>
+    </div>
+
+    <!-- APPROVAZIONI -->
+    <div class="view" id="view-approvazioni">
+      <div class="page-header"><div><div class="page-title">Approvazioni</div><div class="page-subtitle">Nuovi clienti in attesa di approvazione</div></div></div>
+      <div id="appr-list"></div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="view" id="view-chat">
+      <div class="page-header"><div><div class="page-title">Messaggi</div><div class="page-subtitle">Chat con i clienti</div></div></div>
+      <div class="chat-layout">
+        <div class="chat-list">
+          <div class="chat-list-header">Conversazioni <span class="badge badge-blue" id="ch-ur"></span></div>
+          <div id="conv-list"></div>
+        </div>
+        <div class="chat-main">
+          <div class="chat-header">
+            <div><div class="chat-header-name" id="ch-nm">Seleziona conversazione</div><div class="chat-header-sub" id="ch-sb"></div></div>
+            <button class="btn btn-surface btn-xs" id="ch-pr-btn" style="display:none" onclick="openDC()">👁 Profilo</button>
           </div>
-          <div class="form-group"><label>Tipo messaggio</label>
-            <select id="n-tipo">
-              <option value="scadenza">⏰ Avviso scadenza</option>
-              <option value="rinnovo">🔄 Proposta rinnovo</option>
-              <option value="documento">📄 Documento disponibile</option>
-              <option value="personalizzato">✏️ Messaggio libero</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Canali di invio</label>
-            <div class="notif-channels">
-              <div class="channel-btn selected" data-ch="app" onclick="toggleCh(this)"><div class="channel-icon">📱</div><div class="channel-name">App</div></div>
-              <div class="channel-btn selected" data-ch="email" onclick="toggleCh(this)"><div class="channel-icon">📧</div><div class="channel-name">Email</div></div>
-              <div class="channel-btn selected" data-ch="whatsapp" onclick="toggleCh(this)"><div class="channel-icon">💬</div><div class="channel-name">WhatsApp</div></div>
-              <div class="channel-btn" data-ch="sms" onclick="toggleCh(this)"><div class="channel-icon">📲</div><div class="channel-name">SMS</div></div>
+          <div class="chat-messages" id="b-msgs"></div>
+          <div class="chat-input-area">
+            <div class="chat-quick-actions">
+              <div class="quick-action" onclick="qi('✅ Polizza aggiornata!')">✅ Aggiornato</div>
+              <div class="quick-action" onclick="qi('La sua polizza scade tra ')">⏰ Scadenza</div>
+              <div class="quick-action" onclick="qi('Documento pronto: ')">📄 Documento</div>
+              <div class="quick-action" onclick="qi('Richiesta in lavorazione.')">🔄 In carico</div>
+            </div>
+            <div class="chat-input-row">
+              <textarea id="b-in" placeholder="Scrivi..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sBM();}"></textarea>
+              <button class="send-btn" onclick="sBM()">➤</button>
             </div>
           </div>
-          <div class="form-group"><label>Testo personalizzato (opzionale)</label>
-            <textarea id="n-testo" placeholder="Gentile [NOME], la polizza [N°] scade il [DATA]..."></textarea>
-          </div>
-          <button class="btn btn-primary" style="width:100%" onclick="inviaNotifica()">🚀 Invia notifica</button>
         </div>
       </div>
+    </div>
+
+    <!-- FATTURE -->
+    <div class="view" id="view-fatture">
+      <div class="page-header"><div><div class="page-title">Fatture & Premi</div><div class="page-subtitle">Gestione pagamenti</div></div></div>
       <div class="card">
-        <div class="card-header"><span class="card-title">📊 Statistiche portafoglio</span></div>
-        <div class="card-body" id="n-stats"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><span class="card-title">📋 Storico invii</span></div>
-      <table><thead><tr><th>Data/Ora</th><th>Destinatario</th><th>Tipo</th><th>Canali</th><th>Stato</th></tr></thead>
-      <tbody id="tb-notif-log"></tbody></table>
-    </div>
-   </div>
-
-   <!-- RICHIESTE -->
-   <div class="view" id="view-richieste">
-    <div class="page-header">
-      <div><div class="page-title">Richieste clienti</div><div class="page-subtitle">Gestisci modifiche, disdette, sinistri</div></div>
-    </div>
-    <div class="table-toolbar" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;border-bottom:none">
-      <select class="filter-select" id="flt-r-stato" onchange="renderRichieste()">
-        <option value="">Tutte</option><option value="aperta">Aperte</option>
-        <option value="in_lavorazione">In lavorazione</option><option value="completata">Completate</option>
-      </select>
-      <select class="filter-select" id="flt-r-tipo" onchange="renderRichieste()">
-        <option value="">Tutti i tipi</option><option value="modifica">Modifica</option>
-        <option value="disdetta">Disdetta</option><option value="sinistro">Sinistro</option>
-        <option value="preventivo">Preventivo</option><option value="rinnovo">Rinnovo</option>
-      </select>
-    </div>
-    <div id="rich-list"></div>
-   </div>
-
-   <!-- CHAT BROKER -->
-   <div class="view" id="view-chat">
-    <div class="page-header">
-      <div><div class="page-title">Messaggi</div><div class="page-subtitle">Chat diretta con i clienti</div></div>
-    </div>
-    <div class="chat-layout">
-      <div class="chat-list">
-        <div class="chat-list-header">Conversazioni <span class="badge badge-blue" id="chat-unread"></span></div>
-        <div id="conv-list"></div>
-      </div>
-      <div class="chat-main">
-        <div class="chat-header">
-          <div><div class="chat-header-name" id="chat-name">Seleziona una conversazione</div><div class="chat-header-sub" id="chat-sub"></div></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-surface btn-xs" id="chat-profilo-btn" style="display:none" onclick="openDetailCurrent()">👁 Profilo</button>
-          </div>
+        <div class="table-toolbar">
+          <input class="search-input" placeholder="🔍 Cerca..." id="sr-f" oninput="rFt()">
+          <select class="filter-select" id="fl-fs" onchange="rFt()"><option value="">Tutti</option><option value="attesa">In attesa</option><option value="pagato">Pagato</option><option value="scaduto">Scaduto</option></select>
         </div>
-        <div class="chat-messages" id="broker-msgs"></div>
-        <div class="chat-input-area">
-          <div class="chat-quick-actions">
-            <div class="quick-action" onclick="qi('✅ Polizza aggiornata!')">✅ Aggiornato</div>
-            <div class="quick-action" onclick="qi('La sua polizza scade tra ')">⏰ Scadenza</div>
-            <div class="quick-action" onclick="qi('Allego il documento richiesto.')">📄 Documento</div>
-            <div class="quick-action" onclick="qi('La richiesta è in lavorazione.')">🔄 In carico</div>
-          </div>
-          <div class="chat-input-row">
-            <textarea id="broker-input" placeholder="Scrivi un messaggio..." rows="1"
-              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendBMsg();}"></textarea>
-            <button class="send-btn" onclick="sendBMsg()">➤</button>
+        <table><thead><tr><th>ID</th><th>Cliente</th><th>Polizza</th><th>Importo</th><th>Scadenza</th><th>Stato</th><th>Azioni</th></tr></thead>
+        <tbody id="tb-ft"></tbody></table>
+      </div>
+    </div>
+
+    <!-- CLIENT HOME -->
+    <div class="view" id="view-c-home">
+      <div class="page-header">
+        <div><div class="page-title" id="c-gr">Le mie polizze</div><div class="page-subtitle">Il tuo portafoglio assicurativo</div></div>
+        <button class="btn btn-primary btn-sm" onclick="om('m-richiesta')">＋ Richiesta</button>
+      </div>
+      <div id="c-ub" style="display:none" class="urgency-bar">
+        <span>🔴</span><div id="c-ut"></div>
+        <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="om('m-richiesta')">Contatta broker →</button>
+      </div>
+      <div class="stats-row" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-value blue" id="cs-p">0</div><div class="stat-label">Polizze attive</div></div>
+        <div class="stat-card"><div class="stat-icon gold">💶</div><div class="stat-value gold" id="cs-pr"></div><div class="stat-label">Premio annuo</div></div>
+        <div class="stat-card"><div class="stat-icon red">⏰</div><div class="stat-value red" id="cs-s">0</div><div class="stat-label">Scadenze prossime</div></div>
+      </div>
+      <div id="c-pl"></div>
+    </div>
+
+    <!-- CLIENT RICHIESTE -->
+    <div class="view" id="view-c-richieste">
+      <div class="page-header">
+        <div><div class="page-title">Le mie richieste</div><div class="page-subtitle">Stato delle tue pratiche</div></div>
+        <button class="btn btn-primary" onclick="om('m-richiesta')">＋ Nuova richiesta</button>
+      </div>
+      <div id="c-rl"></div>
+    </div>
+
+    <!-- CLIENT CHAT -->
+    <div class="view" id="view-c-chat">
+      <div class="page-header"><div><div class="page-title">Chat con il broker</div><div class="page-subtitle">Comunicazione diretta</div></div></div>
+      <div class="chat-layout" style="grid-template-columns:1fr">
+        <div class="chat-main">
+          <div class="chat-header"><div><div class="chat-header-name">Broker — PolizzeHub</div><div class="chat-header-sub">🟢 Disponibile</div></div></div>
+          <div class="chat-messages" id="c-msgs"></div>
+          <div class="chat-input-area">
+            <div class="chat-quick-actions">
+              <div class="quick-action" onclick="cqi('Vorrei rinnovare la polizza ')">🔄 Rinnovo</div>
+              <div class="quick-action" onclick="om('m-richiesta')">📝 Richiesta formale</div>
+              <div class="quick-action" onclick="cqi('Ho bisogno di info su ')">ℹ️ Info</div>
+              <div class="quick-action" onclick="cqi('Ho avuto un sinistro: ')">🚨 Sinistro</div>
+            </div>
+            <div class="chat-input-row">
+              <textarea id="c-in" placeholder="Scrivi al broker..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sCM();}"></textarea>
+              <button class="send-btn" onclick="sCM()">➤</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-   </div>
 
-   <!-- FATTURE -->
-   <div class="view" id="view-fatture">
-    <div class="page-header">
-      <div><div class="page-title">Fatture & Premi</div><div class="page-subtitle">Gestione pagamenti</div></div>
-    </div>
-    <div class="card">
-      <div class="table-toolbar">
-        <input class="search-input" placeholder="🔍 Cerca..." id="srch-f" oninput="renderFatture()">
-        <select class="filter-select" id="flt-f-stato" onchange="renderFatture()">
-          <option value="">Tutti</option><option value="attesa">In attesa</option>
-          <option value="pagato">Pagato</option><option value="scaduto">Scaduto</option>
-        </select>
-      </div>
-      <table><thead><tr><th>ID</th><th>Cliente</th><th>Polizza</th><th>Importo</th><th>Scadenza pag.</th><th>Stato</th><th>Azioni</th></tr></thead>
-      <tbody id="tb-fatture"></tbody></table>
-    </div>
-   </div>
-
-   <!-- CLIENT HOME -->
-   <div class="view" id="view-c-home">
-    <div class="page-header">
-      <div><div class="page-title" id="c-greeting">Benvenuto</div><div class="page-subtitle">Il tuo portafoglio assicurativo</div></div>
-      <button class="btn btn-primary btn-sm" onclick="openModal('m-richiesta')">＋ Nuova richiesta</button>
-    </div>
-    <div id="c-urg-bar" style="display:none" class="urgency-bar">
-      <span style="font-size:18px">🔴</span>
-      <div id="c-urg-text"></div>
-      <button class="btn btn-danger btn-sm" style="margin-left:auto" onclick="openModal('m-richiesta')">Richiedi rinnovo →</button>
-    </div>
-    <div class="stats-row" style="grid-template-columns:repeat(3,1fr)">
-      <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-value blue" id="cs-pol">0</div><div class="stat-label">Polizze attive</div></div>
-      <div class="stat-card"><div class="stat-icon gold">💶</div><div class="stat-value gold" id="cs-prem"></div><div class="stat-label">Premio annuo</div></div>
-      <div class="stat-card"><div class="stat-icon red">⏰</div><div class="stat-value red" id="cs-scad">0</div><div class="stat-label">Scadenze prossime</div></div>
-    </div>
-    <div id="c-pol-list"></div>
-   </div>
-
-   <!-- CLIENT RICHIESTE -->
-   <div class="view" id="view-c-richieste">
-    <div class="page-header">
-      <div><div class="page-title">Le mie richieste</div><div class="page-subtitle">Stato delle tue pratiche</div></div>
-      <button class="btn btn-primary" onclick="openModal('m-richiesta')">＋ Nuova richiesta</button>
-    </div>
-    <div id="c-rich-list"></div>
-   </div>
-
-   <!-- CLIENT CHAT -->
-   <div class="view" id="view-c-chat">
-    <div class="page-header">
-      <div><div class="page-title">Chat con il broker</div><div class="page-subtitle">Comunicazione diretta e sicura</div></div>
-    </div>
-    <div class="chat-layout" style="grid-template-columns:1fr">
-      <div class="chat-main">
-        <div class="chat-header">
-          <div><div class="chat-header-name">Broker — PolizzeHub</div><div class="chat-header-sub">🟢 Disponibile</div></div>
-        </div>
-        <div class="chat-messages" id="client-msgs"></div>
-        <div class="chat-input-area">
-          <div class="chat-quick-actions">
-            <div class="quick-action" onclick="cqi('Vorrei rinnovare la polizza ')">🔄 Rinnovo</div>
-            <div class="quick-action" onclick="openModal('m-richiesta')">📝 Richiesta formale</div>
-            <div class="quick-action" onclick="cqi('Ho bisogno di informazioni su ')">ℹ️ Informazioni</div>
-            <div class="quick-action" onclick="cqi('Ho avuto un sinistro: ')">🚨 Sinistro</div>
+    <!-- CLIENT SINISTRI -->
+    <div class="view" id="view-c-sinistri">
+      <div class="page-header"><div><div class="page-title">Segnala sinistro</div><div class="page-subtitle">Avvia la pratica</div></div></div>
+      <div class="card" style="max-width:560px">
+        <div class="card-body">
+          <div class="form-group"><label>Polizza coinvolta</label><select id="sin-p"></select></div>
+          <div class="form-row">
+            <div class="form-group"><label>Data</label><input type="date" id="sin-d"></div>
+            <div class="form-group"><label>Tipo sinistro</label>
+              <select id="sin-t"><option>Incidente stradale</option><option>Furto</option><option>Danni parcheggio</option><option>Rottura vetri</option><option>Maltempo</option><option>Incendio</option><option>Altro</option></select>
+            </div>
           </div>
-          <div class="chat-input-row">
-            <textarea id="client-input" placeholder="Scrivi al tuo broker..." rows="1"
-              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendCMsg();}"></textarea>
-            <button class="send-btn" onclick="sendCMsg()">➤</button>
-          </div>
+          <div class="form-group"><label>Descrizione *</label><textarea id="sin-dc" placeholder="Cosa è successo, dove, quando..."></textarea></div>
+          <div class="form-group"><label>Controparte</label><input id="sin-ct" placeholder="Nome, targa..."></div>
+          <button class="btn btn-primary" style="width:100%" onclick="segnSin()">🚨 Segnala al broker</button>
         </div>
       </div>
     </div>
-   </div>
 
-   <!-- CLIENT SINISTRI -->
-   <div class="view" id="view-c-sinistri">
-    <div class="page-header">
-      <div><div class="page-title">Segnala sinistro</div><div class="page-subtitle">Avvia la pratica di sinistro</div></div>
+    <!-- CLIENT DOCS -->
+    <div class="view" id="view-c-docs">
+      <div class="page-header"><div><div class="page-title">Documenti</div><div class="page-subtitle">Polizze, attestati, CGA</div></div></div>
+      <div id="c-dl"></div>
     </div>
-    <div class="card" style="max-width:580px">
-      <div class="card-body">
-        <div class="form-group"><label>Polizza coinvolta</label><select id="sin-pol"></select></div>
-        <div class="form-row">
-          <div class="form-group"><label>Data sinistro</label><input type="date" id="sin-data"></div>
-          <div class="form-group"><label>Tipo sinistro</label>
-            <select id="sin-tipo">
-              <option>Incidente stradale</option><option>Furto / Tentato furto</option>
-              <option>Danni da parcheggio</option><option>Rottura vetri</option>
-              <option>Danni da maltempo</option><option>Incendio</option><option>Altro</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group"><label>Descrizione dell'accaduto *</label>
-          <textarea id="sin-desc" placeholder="Descrivi cosa è successo, dove e quando..."></textarea>
-        </div>
-        <div class="form-group"><label>Controparte (se presente)</label>
-          <input id="sin-ctrl" placeholder="Nome, targa veicolo..."></div>
-        <button class="btn btn-primary" style="width:100%" onclick="segnalaSinistro()">🚨 Segnala al broker</button>
-      </div>
-    </div>
-   </div>
-
-   <!-- CLIENT DOCS -->
-   <div class="view" id="view-c-docs">
-    <div class="page-header">
-      <div><div class="page-title">I miei documenti</div><div class="page-subtitle">Polizze, attestati e comunicazioni</div></div>
-    </div>
-    <div id="c-docs-list"></div>
-   </div>
 
   </main>
- </div>
+</div>
 </div>
 
 <!-- MODALS -->
-<div class="modal-overlay" id="m-cliente">
-  <div class="modal">
-    <div class="modal-title">👤 Nuovo cliente</div>
-    <div class="form-row">
-      <div class="form-group"><label>Nome *</label><input id="nc-n" placeholder="Mario"></div>
-      <div class="form-group"><label>Cognome *</label><input id="nc-cg" placeholder="Rossi"></div>
-      <div class="form-group"><label>Tipo</label><select id="nc-t"><option>Privato</option><option>Azienda</option></select></div>
-      <div class="form-group"><label>Telefono</label><input id="nc-tel" placeholder="+41 79 000 00 00"></div>
-      <div class="form-group form-full"><label>Email</label><input id="nc-em" type="email" placeholder="email@example.ch"></div>
-      <div class="form-group form-full"><label>Indirizzo</label><input id="nc-ind" placeholder="Via Esempio 1, 6900 Lugano"></div>
-      <div class="form-group form-full"><label>Note interne</label><textarea id="nc-no" placeholder="Note sul cliente..."></textarea></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-surface" onclick="closeModal('m-cliente')">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaCliente()">💾 Salva</button>
-    </div>
+<div class="modal-overlay" id="m-cliente"><div class="modal">
+  <div class="modal-title">👤 Nuovo cliente</div>
+  <div class="form-row">
+    <div class="form-group"><label>Nome *</label><input id="nc-n" placeholder="Mario"></div>
+    <div class="form-group"><label>Cognome *</label><input id="nc-cg" placeholder="Rossi"></div>
+    <div class="form-group"><label>Tipo</label><select id="nc-t"><option>Privato</option><option>Azienda</option></select></div>
+    <div class="form-group"><label>Telefono</label><input id="nc-tel" placeholder="+41 79 000 00 00"></div>
+    <div class="form-group form-full"><label>Email</label><input id="nc-em" type="email" placeholder="email@example.ch"></div>
+    <div class="form-group form-full"><label>Indirizzo</label><input id="nc-in" placeholder="Via Esempio 1, 6900 Lugano"></div>
+    <div class="form-group"><label>Password accesso</label><input type="password" id="nc-pw" placeholder="min. 6 caratteri"></div>
+    <div class="form-group"><label>Agente assegnato</label><select id="nc-ag"></select></div>
+    <div class="form-group form-full"><label>Note interne</label><textarea id="nc-no" placeholder="Note..."></textarea></div>
   </div>
-</div>
-
-<div class="modal-overlay" id="m-polizza">
-  <div class="modal">
-    <div class="modal-title">📋 Nuova polizza</div>
-    <div class="form-row">
-      <div class="form-group form-full"><label>Cliente *</label><select id="np-c"><option value="">— Seleziona —</option></select></div>
-      <div class="form-group"><label>N° Polizza *</label><input id="np-n" placeholder="CH-2026-00001"></div>
-      <div class="form-group"><label>Ramo *</label>
-        <select id="np-r"><option>Auto/Veicoli</option><option>Casa/Immobili</option><option>Vita</option>
-          <option>Salute</option><option>Azienda/RC</option><option>Infortuni</option><option>Viaggi</option></select>
-      </div>
-      <div class="form-group"><label>Compagnia</label>
-        <select id="np-co"><option>Zurich Insurance</option><option>Swiss Life</option><option>Helvetia</option>
-          <option>AXA Svizzera</option><option>Allianz Svizzera</option><option>Generali Svizzera</option>
-          <option>Baloise</option><option>Mobiliar</option><option>Vaudoise</option><option>Altra</option></select>
-      </div>
-      <div class="form-group"><label>Data inizio</label><input type="date" id="np-i"></div>
-      <div class="form-group"><label>Data scadenza *</label><input type="date" id="np-s"></div>
-      <div class="form-group"><label>Premio annuo CHF *</label><input type="number" id="np-p" placeholder="1200"></div>
-      <div class="form-group"><label>Frequenza</label>
-        <select id="np-f"><option>Annuale</option><option>Semestrale</option><option>Trimestrale</option><option>Mensile</option></select>
-      </div>
-      <div class="form-group form-full"><label>Note / oggetto assicurato</label><textarea id="np-no" placeholder="Veicolo, immobile, dettagli..."></textarea></div>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-surface" onclick="closeModal('m-polizza')">Annulla</button>
-      <button class="btn btn-primary" onclick="salvaPolizza()">💾 Salva</button>
-    </div>
+  <div class="form-actions">
+    <button class="btn btn-surface" onclick="cm('m-cliente')">Annulla</button>
+    <button class="btn btn-primary" onclick="saveCl()">💾 Salva</button>
   </div>
-</div>
+</div></div>
 
-<div class="modal-overlay" id="m-richiesta">
-  <div class="modal">
-    <div class="modal-title">📝 Nuova richiesta</div>
-    <div class="form-group"><label>Tipo *</label>
-      <select id="nr-t">
-        <option value="modifica">🔧 Modifica copertura</option><option value="disdetta">❌ Disdetta</option>
-        <option value="preventivo">💡 Preventivo</option><option value="sinistro">🚨 Sinistro</option>
-        <option value="documento">📄 Documento</option><option value="rinnovo">🔄 Rinnovo</option><option value="altro">✏️ Altro</option>
-      </select>
-    </div>
-    <div class="form-group"><label>Polizza di riferimento</label>
-      <select id="nr-p"><option value="">— Nessuna —</option></select>
-    </div>
-    <div class="form-group"><label>Descrizione *</label>
-      <textarea id="nr-d" placeholder="Descrivi nel dettaglio cosa desideri..."></textarea>
-    </div>
-    <div class="form-group"><label>Urgenza</label>
-      <select id="nr-u"><option value="normale">Normale</option><option value="alta">Alta — entro questa settimana</option><option value="urgente">Urgente — risposta entro oggi</option></select>
-    </div>
-    <div class="form-actions">
-      <button class="btn btn-surface" onclick="closeModal('m-richiesta')">Annulla</button>
-      <button class="btn btn-primary" onclick="inviaRichiesta()">📨 Invia richiesta</button>
-    </div>
+<div class="modal-overlay" id="m-agente"><div class="modal">
+  <div class="modal-title">🏢 Nuovo agente</div>
+  <div class="form-row">
+    <div class="form-group"><label>Nome *</label><input id="na-n" placeholder="Mario"></div>
+    <div class="form-group"><label>Cognome *</label><input id="na-cg" placeholder="Rossi"></div>
+    <div class="form-group form-full"><label>Agenzia</label><input id="na-ag" placeholder="Agenzia SA"></div>
+    <div class="form-group form-full"><label>Email *</label><input id="na-em" type="email" placeholder="agente@agenzia.ch"></div>
+    <div class="form-group"><label>Telefono</label><input id="na-tel" placeholder="+41 79 000 00 00"></div>
+    <div class="form-group"><label>Password *</label><input type="password" id="na-pw" placeholder="min. 6 caratteri"></div>
+    <div class="form-group form-full"><label>Note</label><textarea id="na-no" placeholder="Note..."></textarea></div>
   </div>
-</div>
+  <div class="form-actions">
+    <button class="btn btn-surface" onclick="cm('m-agente')">Annulla</button>
+    <button class="btn btn-primary" onclick="saveAg()">💾 Salva agente</button>
+  </div>
+</div></div>
 
-<!-- DETAIL PANEL -->
+<div class="modal-overlay" id="m-polizza"><div class="modal">
+  <div class="modal-title">📋 Nuova polizza</div>
+  <div class="form-row">
+    <div class="form-group form-full"><label>Cliente *</label><select id="np-c"><option value="">— Seleziona —</option></select></div>
+    <div class="form-group"><label>N° Polizza *</label><input id="np-n" placeholder="CH-2026-00001"></div>
+    <div class="form-group"><label>Ramo *</label>
+      <select id="np-r"><option>Auto/Veicoli</option><option>Casa/Immobili</option><option>Vita</option><option>Salute</option><option>Azienda/RC</option><option>Infortuni</option><option>Viaggi</option></select>
+    </div>
+    <div class="form-group"><label>Compagnia</label>
+      <select id="np-co"><option>Zurich Insurance</option><option>Swiss Life</option><option>Helvetia</option><option>AXA Svizzera</option><option>Allianz Svizzera</option><option>Generali Svizzera</option><option>Baloise</option><option>Mobiliar</option><option>Vaudoise</option><option>Altra</option></select>
+    </div>
+    <div class="form-group"><label>Data inizio</label><input type="date" id="np-i"></div>
+    <div class="form-group"><label>Scadenza *</label><input type="date" id="np-s"></div>
+    <div class="form-group"><label>Premio annuo CHF *</label><input type="number" id="np-p" placeholder="1200"></div>
+    <div class="form-group"><label>Frequenza</label>
+      <select id="np-f"><option>Annuale</option><option>Semestrale</option><option>Trimestrale</option><option>Mensile</option></select>
+    </div>
+    <div class="form-group form-full"><label>Note / oggetto assicurato</label><textarea id="np-no" placeholder="Veicolo, immobile..."></textarea></div>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-surface" onclick="cm('m-polizza')">Annulla</button>
+    <button class="btn btn-primary" onclick="savePo()">💾 Salva</button>
+  </div>
+</div></div>
+
+<div class="modal-overlay" id="m-richiesta"><div class="modal">
+  <div class="modal-title">📝 Nuova richiesta</div>
+  <div class="form-group"><label>Tipo *</label>
+    <select id="nr-t"><option value="modifica">🔧 Modifica copertura</option><option value="disdetta">❌ Disdetta</option><option value="preventivo">💡 Preventivo</option><option value="sinistro">🚨 Sinistro</option><option value="documento">📄 Documento</option><option value="rinnovo">🔄 Rinnovo</option><option value="altro">✏️ Altro</option></select>
+  </div>
+  <div class="form-group"><label>Polizza di riferimento</label><select id="nr-p"><option value="">— Nessuna —</option></select></div>
+  <div class="form-group"><label>Descrizione *</label><textarea id="nr-d" placeholder="Descrivi cosa desideri..."></textarea></div>
+  <div class="form-group"><label>Urgenza</label>
+    <select id="nr-u"><option value="normale">Normale</option><option value="alta">Alta — entro questa settimana</option><option value="urgente">Urgente — entro oggi</option></select>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-surface" onclick="cm('m-richiesta')">Annulla</button>
+    <button class="btn btn-primary" onclick="saveRq()">📨 Invia</button>
+  </div>
+</div></div>
+
 <div class="detail-panel" id="detail-panel">
-  <button class="detail-close" onclick="closeDetail()">✕ Chiudi</button>
-  <div id="detail-content" style="clear:both;padding-top:6px"></div>
+  <button class="detail-close" onclick="closeD()">✕ Chiudi</button>
+  <div id="detail-ct" style="clear:both;padding-top:6px"></div>
 </div>
 
-<!-- NOTIF PANEL -->
 <div class="notif-panel" id="notif-panel">
-  <div class="notif-header">
-    <span style="font-weight:600">🔔 Notifiche</span>
-    <button class="btn btn-surface btn-xs" onclick="toggleNotif()">✕</button>
-  </div>
+  <div class="notif-header"><span style="font-weight:600">🔔 Notifiche</span><button class="btn btn-surface btn-xs" onclick="toggleNotif()">✕</button></div>
   <div class="notif-list" id="notif-list"></div>
 </div>
+bash
 
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <span id="t-icon">✅</span><span id="t-msg">OK</span>
-</div>
+cat >> /home/claude/polizzehub-v2.html << 'JSEOF'
 <script>
-// ============================================================
-// DATA
-// ============================================================
-const DK='phub_v4';
+// ============ DATABASE ============
+const DK='phub_v5';
 let DB=JSON.parse(localStorage.getItem(DK)||'null');
-if(!DB) DB=initDB();
-let CU=null; // current user
-let CCid=null; // current chat client id
-let nLog=JSON.parse(localStorage.getItem('phub_nlog')||'[]');
-let selChs=['app','email','whatsapp'];
+if(!DB)DB=initDB();
+let CU=null,CCid=null,selChs=['app','email','whatsapp'];
+let nLog=JSON.parse(localStorage.getItem('phub_nl')||'[]');
 
-function saveDB(){localStorage.setItem(DK,JSON.stringify(DB));}
-function saveNLog(){localStorage.setItem('phub_nlog',JSON.stringify(nLog));}
-
+function sDB(){localStorage.setItem(DK,JSON.stringify(DB));}
+function sNL(){localStorage.setItem('phub_nl',JSON.stringify(nLog));}
 function ad(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r.toISOString().split('T')[0];}
 function tod(){return new Date().toISOString().split('T')[0];}
 function gid(p){return p+Date.now().toString(36).slice(-5).toUpperCase();}
@@ -848,13 +826,16 @@ function gid(p){return p+Date.now().toString(36).slice(-5).toUpperCase();}
 function initDB(){
   const t=tod();
   const db={
+    agenti:[
+      {id:'A001',nome:'Borivoje',cognome:'Jovanovic',agenzia:'PolizzeHub SA',email:'agente@polizzehub.ch',tel:'+41 91 123 45 67',pass:'demo1234',note:'Agente principale',attivo:true,codice:'TL11'},
+    ],
     clienti:[
-      {id:'C001',nome:'Marco',cognome:'Ferrari',tipo:'Privato',tel:'+41 79 123 45 67',email:'marco.ferrari@email.ch',indirizzo:'Via Lugano 12, 6900 Lugano',note:'',pass:'demo1234'},
-      {id:'C002',nome:'Giulia',cognome:'Bianchi',tipo:'Privato',tel:'+41 78 234 56 78',email:'giulia.bianchi@gmail.ch',indirizzo:'Hauptstrasse 5, 8001 Zürich',note:'Cliente da 8 anni',pass:'demo1234'},
-      {id:'C003',nome:'TechnoSA',cognome:'',tipo:'Azienda',tel:'+41 91 345 67 89',email:'info@technosa.ch',indirizzo:'Via Industria 3, 6928 Manno',note:'PMI 15 dip.',pass:'demo1234'},
-      {id:'C004',nome:'Hans',cognome:'Müller',tipo:'Privato',tel:'+41 76 456 78 90',email:'hans.mueller@bluewin.ch',indirizzo:'Bahnhofstrasse 22, 3001 Bern',note:'',pass:'demo1234'},
-      {id:'C005',nome:'Sofia',cognome:'Rossi',tipo:'Privato',tel:'+41 79 567 89 01',email:'sofia.rossi@email.ch',indirizzo:'Via Pretorio 8, 6900 Lugano',note:'',pass:'demo1234'},
-      {id:'C006',nome:'Simona',cognome:'Busarello',tipo:'Privato',tel:'',email:'busarello.simona@gmail.com',indirizzo:'Via Mondonico 11, 6982 Agno',note:'Nata 13.05.1989 · HYUNDAI Tucson PHEV · Leasing Cembra · Sconto eco 20%',pass:'demo1234'},
+      {id:'C001',nome:'Marco',cognome:'Ferrari',tipo:'Privato',tel:'+41 79 123 45 67',email:'marco.ferrari@email.ch',indirizzo:'Via Lugano 12, 6900 Lugano',note:'',pass:'demo1234',agenteId:'A001',approvato:true},
+      {id:'C002',nome:'Giulia',cognome:'Bianchi',tipo:'Privato',tel:'+41 78 234 56 78',email:'giulia.bianchi@gmail.ch',indirizzo:'Hauptstrasse 5, 8001 Zürich',note:'Cliente da 8 anni',pass:'demo1234',agenteId:'A001',approvato:true},
+      {id:'C003',nome:'TechnoSA',cognome:'',tipo:'Azienda',tel:'+41 91 345 67 89',email:'info@technosa.ch',indirizzo:'Via Industria 3, 6928 Manno',note:'PMI 15 dip.',pass:'demo1234',agenteId:'A001',approvato:true},
+      {id:'C004',nome:'Hans',cognome:'Müller',tipo:'Privato',tel:'+41 76 456 78 90',email:'hans.mueller@bluewin.ch',indirizzo:'Bahnhofstrasse 22, 3001 Bern',note:'',pass:'demo1234',agenteId:'A001',approvato:true},
+      {id:'C005',nome:'Sofia',cognome:'Rossi',tipo:'Privato',tel:'+41 79 567 89 01',email:'sofia.rossi@email.ch',indirizzo:'Via Pretorio 8, 6900 Lugano',note:'',pass:'demo1234',agenteId:'A001',approvato:true},
+      {id:'C006',nome:'Simona',cognome:'Busarello',tipo:'Privato',tel:'',email:'busarello.simona@gmail.com',indirizzo:'Via Mondonico 11, 6982 Agno',note:'Nata 13.05.1989 · HYUNDAI Tucson PHEV · Leasing Cembra · Sconto eco 20%',pass:'demo1234',agenteId:'A001',approvato:true},
     ],
     polizze:[
       {id:'P001',cId:'C001',num:'CH-2022-00123',ramo:'Auto/Veicoli',co:'Zurich Insurance',ini:'2022-01-01',scad:ad(t,12),pr:1850,fr:'Annuale',note:'VW Golf 2019 TI-1234',stato:'attiva'},
@@ -864,7 +845,7 @@ function initDB(){
       {id:'P005',cId:'C004',num:'CH-2023-00321',ramo:'Salute',co:'Allianz Svizzera',ini:'2023-01-01',scad:ad(t,145),pr:3200,fr:'Mensile',note:'',stato:'attiva'},
       {id:'P006',cId:'C005',num:'CH-2024-00055',ramo:'Infortuni',co:'Generali Svizzera',ini:'2024-01-01',scad:ad(t,55),pr:420,fr:'Annuale',note:'',stato:'attiva'},
       {id:'P007',cId:'C002',num:'CH-2023-00900',ramo:'Auto/Veicoli',co:'Mobiliar',ini:'2023-09-01',scad:ad(t,180),pr:980,fr:'Annuale',note:'BMW 320d 2021',stato:'attiva'},
-      {id:'P008',cId:'C006',num:'52311830-1',ramo:'Auto/Veicoli',co:'Generali Svizzera',ini:'2026-05-11',scad:'2031-12-31',pr:1431.40,fr:'Annuale',note:'HYUNDAI Tucson 1.6 TGDI PHEV · RC 100mio · Casco tot+parz · Offerta val. fino 11.08.2026',stato:'offerta'},
+      {id:'P008',cId:'C006',num:'52311830-1',ramo:'Auto/Veicoli',co:'Generali Svizzera',ini:'2026-05-11',scad:'2031-12-31',pr:1431.40,fr:'Annuale',note:'HYUNDAI Tucson 1.6 TGDI PHEV · RC 100mio · Casco tot+parz · Offerta val. 11.08.2026',stato:'offerta'},
     ],
     fatture:[
       {id:'F001',pId:'P001',cId:'C001',imp:1850,scad:ad(t,12),stato:'attesa',nota:'Premio annuale'},
@@ -875,42 +856,42 @@ function initDB(){
       {id:'F006',pId:'P008',cId:'C006',imp:1431.40,scad:'2026-12-31',stato:'attesa',nota:'Premio annuale Offerta 52311830'},
     ],
     richieste:[
-      {id:'R001',cId:'C001',tipo:'modifica',pId:'P001',desc:'Vorrei aggiungere copertura guida internazionale estesa.',urg:'normale',stato:'aperta',data:ad(t,-2),risp:''},
-      {id:'R002',cId:'C002',tipo:'rinnovo',pId:'P003',desc:'Polizza vita in scadenza, confermare rinnovo stesse condizioni.',urg:'alta',stato:'in_lavorazione',data:ad(t,-1),risp:'Stiamo preparando la proposta di rinnovo.'},
-      {id:'R003',cId:'C006',tipo:'documento',pId:'P008',desc:'Inviarmi copia polizza firmata per archivio.',urg:'normale',stato:'completata',data:ad(t,-5),risp:'Documento inviato via email.'},
+      {id:'R001',cId:'C001',tipo:'modifica',pId:'P001',desc:'Aggiungere copertura guida internazionale.',urg:'normale',stato:'aperta',data:ad(t,-2),risp:''},
+      {id:'R002',cId:'C002',tipo:'rinnovo',pId:'P003',desc:'Confermare rinnovo polizza vita stesse condizioni.',urg:'alta',stato:'in_lavorazione',data:ad(t,-1),risp:'Proposta rinnovo in preparazione.'},
+      {id:'R003',cId:'C006',tipo:'documento',pId:'P008',desc:'Copia polizza firmata per archivio.',urg:'normale',stato:'completata',data:ad(t,-5),risp:'Documento inviato via email.'},
     ],
     messaggi:{
       'C001':[
-        {id:'m1',da:'broker',tx:'Buongiorno Marco! La polizza auto scade tra 12 giorni.',ts:new Date(Date.now()-86400000*2).toISOString(),letto:true},
-        {id:'m2',da:'C001',tx:'Grazie per il promemoria! Possiamo rinnovare alle stesse condizioni?',ts:new Date(Date.now()-86400000).toISOString(),letto:false},
+        {id:'m1',da:'broker',tx:'Buongiorno Marco! La polizza auto scade tra 12 giorni.',ts:new Date(Date.now()-172800000).toISOString(),letto:true},
+        {id:'m2',da:'C001',tx:'Grazie! Possiamo rinnovare alle stesse condizioni?',ts:new Date(Date.now()-86400000).toISOString(),letto:false},
       ],
       'C002':[
-        {id:'m3',da:'broker',tx:'Gentile Giulia, la polizza vita scade tra 8 giorni. Proposta rinnovo pronta.',ts:new Date(Date.now()-3600000*3).toISOString(),letto:true},
-        {id:'m4',da:'C002',tx:'Perfetto! Può inviarmi il documento da firmare?',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
+        {id:'m3',da:'broker',tx:'Giulia, la polizza vita scade tra 8 giorni. Proposta pronta.',ts:new Date(Date.now()-10800000).toISOString(),letto:true},
+        {id:'m4',da:'C002',tx:'Grazie! Può inviarmi il documento da firmare?',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
       ],
       'C006':[
-        {id:'m5',da:'broker',tx:'Benvenuta Simona! Ho caricato la sua offerta Generali per il Tucson. Da confermare entro l\'11 agosto.',ts:new Date(Date.now()-86400000).toISOString(),letto:true},
+        {id:'m5',da:'broker',tx:'Benvenuta Simona! Offerta Generali caricata per il Tucson. Da confermare entro 11.08.',ts:new Date(Date.now()-86400000).toISOString(),letto:true},
       ],
     },
     notifiche:[
-      {id:'n1',tipo:'scadenza',tx:'Polizza P001 di Ferrari scade tra 12 giorni',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
-      {id:'n2',tipo:'richiesta',tx:'Nuova richiesta da Marco Ferrari: modifica copertura',ts:new Date(Date.now()-86400000).toISOString(),letto:false},
+      {id:'n1',tipo:'scadenza',tx:'Polizza di Ferrari scade tra 12 giorni',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
+      {id:'n2',tipo:'richiesta',tx:'Nuova richiesta da Marco Ferrari',ts:new Date(Date.now()-86400000).toISOString(),letto:false},
       {id:'n3',tipo:'messaggio',tx:'Nuovo messaggio da Giulia Bianchi',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
-    ]
+    ],
+    pendenti:[]
   };
   localStorage.setItem(DK,JSON.stringify(db));
   return db;
 }
 
-// ============================================================
-// UTILS
-// ============================================================
+// ============ UTILS ============
 function gg(s){const t=new Date();t.setHours(0,0,0,0);return Math.round((new Date(s)-t)/86400000);}
 function fd(s){if(!s)return'—';return new Date(s).toLocaleDateString('it-CH',{day:'2-digit',month:'2-digit',year:'numeric'});}
 function fc(n){return'CHF '+parseFloat(n).toLocaleString('it-CH',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function cn(id){const c=DB.clienti.find(x=>x.id===id);return c?`${c.nome} ${c.cognome}`.trim():'—';}
+function an(id){const a=DB.agenti.find(x=>x.id===id);return a?`${a.nome} ${a.cognome}`.trim():'—';}
 function pn(id){const p=DB.polizze.find(x=>x.id===id);return p?`${p.ramo} N°${p.num}`:'—';}
-function ts(ts){const d=new Date(ts),o=new Date();o.setHours(0,0,0,0);
+function fts(ts){const d=new Date(ts),o=new Date();o.setHours(0,0,0,0);
   return d>=o?d.toLocaleTimeString('it-CH',{hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString('it-CH',{day:'2-digit',month:'2-digit'});}
 function uc(g){return g<0||g<=14?'urgent':g<=30?'warning':'ok';}
 function rb(r){const m={'Auto/Veicoli':'badge-blue','Casa/Immobili':'badge-green','Vita':'badge-gold','Salute':'badge-purple','Azienda/RC':'badge-orange','Infortuni':'badge-red','Viaggi':'badge-gray'};return m[r]||'badge-gray';}
@@ -922,168 +903,279 @@ function spb(p){const g=gg(p.scad);
   return'<span class="badge badge-green">Attiva</span>';}
 function rl(t){const m={modifica:'🔧 Modifica',disdetta:'❌ Disdetta',preventivo:'💡 Preventivo',sinistro:'🚨 Sinistro',documento:'📄 Documento',rinnovo:'🔄 Rinnovo',altro:'✏️ Altro'};return m[t]||t;}
 function rsb(s){const m={aperta:'<span class="badge badge-orange">🔴 Aperta</span>',in_lavorazione:'<span class="badge badge-blue">🔄 In lavorazione</span>',completata:'<span class="badge badge-green">✅ Completata</span>'};return m[s]||'';}
-function setNB(id,n){const e=document.getElementById(id);if(!e)return;e.textContent=n;e.style.display=n>0?'inline-block':'none';}
+function sNB(id,n){const e=document.getElementById(id);if(!e)return;e.textContent=n;e.style.display=n>0?'inline-block':'none';}
 
-// ============================================================
-// LOGIN
-// ============================================================
-function setLoginTab(t){
+// ============ LOGIN ============
+let lTab='broker';
+function setLTab(t){
+  lTab=t;
   document.querySelectorAll('.login-tab').forEach((e,i)=>e.classList.toggle('active',(i===0&&t==='broker')||(i===1&&t==='client')));
-  document.getElementById('login-broker').style.display=t==='broker'?'block':'none';
-  document.getElementById('login-client').style.display=t==='client'?'block':'none';
+  document.getElementById('lt-broker').style.display=t==='broker'?'block':'none';
+  document.getElementById('lt-client').style.display=t==='client'?'block':'none';
+}
+function setMode(who,mode){
+  if(who==='broker'){
+    document.getElementById('bm-login').style.display=mode==='login'?'block':'none';
+    document.getElementById('bm-register').style.display=mode==='register'?'block':'none';
+    document.querySelectorAll('#lt-broker .mode-tab').forEach((e,i)=>e.classList.toggle('active',(i===0&&mode==='login')||(i===1&&mode==='register')));
+  }else{
+    document.getElementById('cm-login').style.display=mode==='login'?'block':'none';
+    document.getElementById('cm-register').style.display=mode==='register'?'block':'none';
+    document.querySelectorAll('#lt-client .mode-tab').forEach((e,i)=>e.classList.toggle('active',(i===0&&mode==='login')||(i===1&&mode==='register')));
+  }
 }
 function quickLogin(w){
-  if(w==='broker')loginBroker();
-  else if(w==='simona'){document.getElementById('c-code').value='C006';loginClient();}
-  else{document.getElementById('c-code').value='C001';loginClient();}
+  if(w==='broker'){document.getElementById('b-em').value='agente@polizzehub.ch';document.getElementById('b-pw').value='demo1234';loginBroker();}
+  else if(w==='simona'){document.getElementById('c-code').value='C006';document.getElementById('c-pw').value='demo1234';loginClient();}
+  else{document.getElementById('c-code').value='C001';document.getElementById('c-pw').value='demo1234';loginClient();}
 }
-function loginBroker(){CU={type:'broker',id:'broker',name:'Borivoje Jovanovic',ini:'BJ'};startApp();}
+function loginBroker(){
+  const em=document.getElementById('b-em').value.trim();
+  const pw=document.getElementById('b-pw').value;
+  const a=DB.agenti.find(x=>x.email===em&&x.pass===pw);
+  if(!a){showT('Email o password errati','error');return;}
+  CU={type:'broker',id:a.id,name:`${a.nome} ${a.cognome}`,ini:`${a.nome[0]}${a.cognome[0]}`};
+  startApp();
+}
 function loginClient(){
   const code=document.getElementById('c-code').value.trim();
-  const c=DB.clienti.find(x=>x.id===code||x.email===code);
-  if(!c){showToast('Cliente non trovato','error');return;}
+  const pw=document.getElementById('c-pw').value;
+  const c=DB.clienti.find(x=>(x.id===code||x.email===code)&&x.pass===pw);
+  if(!c){showT('Credenziali errate','error');return;}
+  if(!c.approvato){showT('Account in attesa di approvazione dal broker','info');return;}
   CU={type:'client',id:c.id,name:`${c.nome} ${c.cognome}`.trim(),ini:`${c.nome[0]}${c.cognome?c.cognome[0]:''}`};
   startApp();
 }
+function registerBroker(){
+  const n=document.getElementById('br-n').value.trim();
+  const cg=document.getElementById('br-cg').value.trim();
+  const em=document.getElementById('br-em').value.trim();
+  const pw=document.getElementById('br-pw').value;
+  const pw2=document.getElementById('br-pw2').value;
+  if(!n||!em||!pw){showT('Compila tutti i campi obbligatori','error');return;}
+  if(pw!==pw2){showT('Le password non coincidono','error');return;}
+  if(pw.length<6){showT('Password troppo corta (min. 6 caratteri)','error');return;}
+  if(DB.agenti.find(x=>x.email===em)){showT('Email già registrata','error');return;}
+  const id=gid('A');
+  DB.agenti.push({id,nome:n,cognome:cg,agenzia:document.getElementById('br-ag').value,
+    email:em,tel:document.getElementById('br-tel').value,pass:pw,note:'',attivo:true,
+    codice:'AG'+id.slice(-4)});
+  sDB();
+  showT(`Benvenuto ${n}! Account creato.`,'success');
+  document.getElementById('b-em').value=em;document.getElementById('b-pw').value=pw;
+  setMode('broker','login');setTimeout(()=>loginBroker(),500);
+}
+function registerClient(){
+  const n=document.getElementById('cr-n').value.trim();
+  const cg=document.getElementById('cr-cg').value.trim();
+  const em=document.getElementById('cr-em').value.trim();
+  const pw=document.getElementById('cr-pw').value;
+  const pw2=document.getElementById('cr-pw2').value;
+  if(!n||!em||!pw){showT('Compila tutti i campi obbligatori','error');return;}
+  if(pw!==pw2){showT('Le password non coincidono','error');return;}
+  if(pw.length<6){showT('Password troppo corta','error');return;}
+  if(DB.clienti.find(x=>x.email===em)){showT('Email già registrata','error');return;}
+  const id=gid('C');
+  const newC={id,nome:n,cognome:cg,tipo:document.getElementById('cr-tipo').value,
+    email:em,tel:document.getElementById('cr-tel').value,
+    indirizzo:document.getElementById('cr-ind').value,note:'',pass:pw,
+    agenteId:DB.agenti[0]?.id||'',approvato:false};
+  DB.clienti.push(newC);
+  DB.pendenti.push({id:gid('P'),clienteId:id,data:tod(),tipo:'nuovo_cliente'});
+  addN('approvazione',`🆕 Nuovo cliente registrato: ${n} ${cg} — in attesa di approvazione`);
+  sDB();
+  showT(`Richiesta inviata! Il broker approverà il tuo account a breve.`,'success');
+  setMode('client','login');
+}
 function logout(){CU=null;document.getElementById('login-screen').style.display='flex';document.getElementById('app').style.display='none';}
+
 function startApp(){
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.display='block';
-  document.getElementById('sb-name').textContent=CU.name;
-  document.getElementById('sb-role').textContent=CU.type==='broker'?'Broker / Agente':'Cliente';
-  document.getElementById('sb-role-label').textContent=CU.type==='broker'?'Broker Pro':'Portale Cliente';
-  const av=document.getElementById('sb-avatar');
-  av.textContent=CU.ini;av.className='user-avatar '+(CU.type==='broker'?'avatar-broker':'avatar-client');
+  document.getElementById('sb-nm').textContent=CU.name;
+  document.getElementById('sb-ro').textContent=CU.type==='broker'?'Broker / Agente':'Cliente';
+  document.getElementById('sb-rl').textContent=CU.type==='broker'?'Broker Pro':'Portale Cliente';
+  const av=document.getElementById('sb-av');av.textContent=CU.ini;
+  av.className='user-avatar '+(CU.type==='broker'?'avatar-broker':'avatar-client');
   document.getElementById('nav-broker').style.display=CU.type==='broker'?'block':'none';
   document.getElementById('nav-client').style.display=CU.type==='client'?'block':'none';
-  if(CU.type==='broker'){showView('dashboard');}else{showView('c-home');}
-  setupGreeting();updateBadges();autoCheck();
+  if(CU.type==='broker')sv('dashboard');else sv('c-home');
+  setupGreet();updBadges();autoChk();
 }
-function setupGreeting(){
+function setupGreet(){
   const h=new Date().getHours(),g=h<12?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
   const n=CU.name.split(' ')[0];
   if(CU.type==='broker'){
-    document.getElementById('d-greeting').textContent=`${g}, ${n}`;
-    document.getElementById('d-date').textContent=new Date().toLocaleDateString('it-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  }else{document.getElementById('c-greeting').textContent=`${g}, ${n}!`;}
+    document.getElementById('d-gr').textContent=`${g}, ${n}`;
+    document.getElementById('d-dt').textContent=new Date().toLocaleDateString('it-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  }else document.getElementById('c-gr').textContent=`${g}, ${n}!`;
 }
 
-// ============================================================
-// NAVIGATION
-// ============================================================
-function showView(name){
+// ============ NAVIGATION ============
+function sv(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   const el=document.getElementById('view-'+name);if(el)el.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')?.includes(`'${name}'`))n.classList.add('active');});
-  closeDetail();
-  const fns={dashboard:renderDashboard,clienti:renderClienti,polizze:renderPolizze,scadenze:renderScadenze,
-    'notifiche-send':renderNotifSend,richieste:renderRichieste,chat:renderBChat,fatture:renderFatture,
-    'c-home':renderCHome,'c-richieste':renderCRich,'c-chat':renderCChat,'c-sinistri':renderCSin,'c-docs':renderCDocs};
-  if(fns[name])fns[name]();
+  closeD();
+  const fn={dashboard:rDash,agenti:rAgenti,clienti:rCl,polizze:rPo,scadenze:rSc,'notifiche-send':rNS,
+    richieste:rRq,approvazioni:rAp,chat:rBChat,fatture:rFt,
+    'c-home':rCHome,'c-richieste':rCRich,'c-chat':rCChat,'c-sinistri':rCSin,'c-docs':rCDocs};
+  if(fn[name])fn[name]();
 }
 
-function updateBadges(){
+function updBadges(){
   const s30=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;}).length;
   const ra=DB.richieste.filter(r=>r.stato==='aperta').length;
+  const pend=DB.pendenti.length;
   const um=Object.values(DB.messaggi).reduce((s,ms)=>s+ms.filter(m=>CU?.type==='broker'?(!m.letto&&m.da!=='broker'):(m.da==='broker'&&!m.letto)).length,0);
   const nu=DB.notifiche.filter(n=>!n.letto).length;
-  setNB('nb-scadenze',s30);setNB('nb-richieste',ra);setNB('nb-chat',um);
-  setNB('nb-clienti',DB.clienti.length);setNB('nb-notif',nu);
+  sNB('nb-sc',s30);sNB('nb-rq',ra);sNB('nb-ch',um);sNB('nb-cl',DB.clienti.length);
+  sNB('nb-no',nu);sNB('nb-ap',pend);sNB('nb-ag',DB.agenti.length);
   if(CU?.type==='client'){
     const mr=DB.richieste.filter(r=>r.cId===CU.id&&r.stato!=='completata').length;
-    setNB('nb-c-rich',mr);setNB('nb-c-chat',um);
+    sNB('nb-cr',mr);sNB('nb-cc',um);
   }
-  renderNotifList();
+  rNotifList();
 }
 
-// ============================================================
-// DASHBOARD
-// ============================================================
-function renderDashboard(){
+// ============ DASHBOARD ============
+function rDash(){
   const s30=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;});
   const tot=DB.polizze.reduce((s,p)=>s+parseFloat(p.pr||0),0);
-  document.getElementById('s-clienti').textContent=DB.clienti.length;
-  document.getElementById('s-clienti2').textContent=DB.clienti.filter(c=>c.tipo==='Azienda').length+' aziende';
-  document.getElementById('s-polizze').textContent=DB.polizze.length;
-  document.getElementById('s-polizze2').textContent=DB.polizze.filter(p=>p.stato==='offerta').length+' offerte';
-  document.getElementById('s-scad').textContent=s30.length;
-  document.getElementById('s-premio').textContent='CHF '+Math.round(tot).toLocaleString('it-CH');
-  const ub=document.getElementById('urgent-bar');
-  if(s30.length>0){ub.style.display='flex';document.getElementById('urg-count').textContent=s30.length+' polizz'+(s30.length===1?'a':'e');
-    document.getElementById('urg-names').textContent=s30.slice(0,3).map(p=>cn(p.cId)).join(', ')+(s30.length>3?'...':'');
+  document.getElementById('s-cl').textContent=DB.clienti.length;
+  document.getElementById('s-po').textContent=DB.polizze.length;
+  document.getElementById('s-sc').textContent=s30.length;
+  document.getElementById('s-pr').textContent='CHF '+Math.round(tot).toLocaleString('it-CH');
+  const ub=document.getElementById('urg-bar');
+  if(s30.length>0){ub.style.display='flex';
+    document.getElementById('urg-ct').textContent=s30.length+' polizz'+(s30.length===1?'a':'e');
+    document.getElementById('urg-nm').textContent=s30.slice(0,3).map(p=>cn(p.cId)).join(', ')+(s30.length>3?'...':'');
   }else ub.style.display='none';
-  // scadenze
   const urg=DB.polizze.map(p=>({...p,g:gg(p.scad)})).filter(p=>p.g>=0&&p.g<=30).sort((a,b)=>a.g-b.g).slice(0,4);
-  const se=document.getElementById('d-scadenze');
+  const se=document.getElementById('d-sc');
   se.innerHTML=urg.length?urg.map(p=>{const d=new Date(p.scad),u=uc(p.g);
-    return`<div class="tl-item ${u}" onclick="openDetail('${p.id}',null)">
+    return`<div class="tl-item ${u}" onclick="openD('${p.id}',null)">
       <div class="tl-date"><div class="tl-day">${d.getDate()}</div><div class="tl-month">${d.toLocaleDateString('it-CH',{month:'short'})}</div></div>
       <div class="tl-sep"></div>
-      <div class="tl-main"><div class="tl-client">${cn(p.cId)}</div><div class="tl-detail">${p.ramo} · ${p.co}</div></div>
-      <div class="tl-right"><div class="tl-days ${u}">${p.g===0?'Oggi!':p.g+'gg'}</div><div class="tl-premio">${fc(p.pr)}</div></div>
-      <button class="btn btn-surface btn-xs" onclick="event.stopPropagation();prepNotif('${p.cId}')">📨</button>
-    </div>`;}).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:16px">🎉 Nessuna urgente!</p>';
-  // richieste
+      <div class="tl-main"><div class="tl-client">${cn(p.cId)}</div><div class="tl-detail">${p.ramo}·${p.co}</div></div>
+      <div class="tl-right"><div class="tl-days ${u}">${p.g===0?'Oggi!':p.g+'gg'}</div></div>
+      <button class="btn btn-surface btn-xs" onclick="event.stopPropagation();pN('${p.cId}')">📨</button>
+    </div>`;}).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:14px">🎉 Nessuna urgente!</p>';
   const ra=DB.richieste.filter(r=>r.stato==='aperta').slice(0,3);
-  const re=document.getElementById('d-richieste');
-  re.innerHTML=ra.length?ra.map(r=>`<div class="richiesta-card" onclick="showView('richieste')">
-    <div class="richiesta-header"><span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span>
-    <span style="font-size:10px;color:var(--text3)">${fd(r.data)}</span></div>
+  const re=document.getElementById('d-rq');
+  re.innerHTML=ra.length?ra.map(r=>`<div class="richiesta-card" onclick="sv('richieste')">
+    <div class="richiesta-header"><span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span><span style="font-size:10px;color:var(--text3)">${fd(r.data)}</span></div>
     <div style="font-size:12px;font-weight:600">${cn(r.cId)}</div>
-    <div style="font-size:11px;color:var(--text2);margin-top:3px">${r.desc.slice(0,65)}${r.desc.length>65?'...':''}</div>
-  </div>`).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:16px">✅ Nessuna aperta</p>';
-  // messaggi
+    <div style="font-size:11px;color:var(--text2);margin-top:2px">${r.desc.slice(0,60)}${r.desc.length>60?'...':''}</div>
+  </div>`).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:14px">✅ Nessuna aperta</p>';
   const ums=Object.entries(DB.messaggi).flatMap(([cId,ms])=>ms.filter(m=>m.da!=='broker'&&!m.letto).map(m=>({...m,cId}))).sort((a,b)=>new Date(b.ts)-new Date(a.ts)).slice(0,3);
-  const me=document.getElementById('d-messaggi');
-  me.innerHTML=ums.length?ums.map(m=>`<div class="richiesta-card" onclick="openChatWith('${m.cId}')">
-    <div class="richiesta-header"><span style="font-weight:600;font-size:12px">${cn(m.cId)}</span>
-    <span style="font-size:10px;color:var(--text3)">${ts(m.ts)}</span></div>
-    <div style="font-size:11px;color:var(--text2)">${m.tx.slice(0,80)}${m.tx.length>80?'...':''}</div>
-  </div>`).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:14px">Nessun messaggio non letto</p>';
-  updateBadges();
+  const me=document.getElementById('d-mg');
+  me.innerHTML=ums.length?ums.map(m=>`<div class="richiesta-card" onclick="oCW('${m.cId}')">
+    <div class="richiesta-header"><span style="font-weight:600;font-size:12px">${cn(m.cId)}</span><span style="font-size:10px;color:var(--text3)">${fts(m.ts)}</span></div>
+    <div style="font-size:11px;color:var(--text2)">${m.tx.slice(0,70)}${m.tx.length>70?'...':''}</div>
+  </div>`).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:12px">Nessun messaggio non letto</p>';
+  updBadges();
 }
 
-// ============================================================
-// CLIENTI
-// ============================================================
-function renderClienti(){
-  const q=(document.getElementById('srch-c')?.value||'').toLowerCase();
-  const tipo=document.getElementById('flt-c-tipo')?.value||'';
+// ============ AGENTI ============
+function rAgenti(){
+  const el=document.getElementById('agenti-list');if(!el)return;
+  el.innerHTML=`<div style="margin-bottom:12px;display:flex;justify-content:flex-end"><button class="btn btn-primary btn-sm" onclick="om('m-agente')">＋ Nuovo agente</button></div>`+
+  DB.agenti.map(a=>`<div class="user-card">
+    <div class="user-avatar avatar-broker">${a.nome[0]}${a.cognome[0]}</div>
+    <div class="user-card-info">
+      <div class="user-card-name">${a.nome} ${a.cognome} <span class="badge badge-gold">${a.codice}</span> ${a.attivo?'<span class="badge badge-green">Attivo</span>':'<span class="badge badge-red">Inattivo</span>'}</div>
+      <div class="user-card-sub">${a.agenzia||'—'} · ${a.email} · ${a.tel||'—'}</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:3px">Clienti assegnati: ${DB.clienti.filter(c=>c.agenteId===a.id).length} · Polizze: ${DB.polizze.filter(p=>DB.clienti.find(c=>c.id===p.cId&&c.agenteId===a.id)).length}</div>
+    </div>
+    <div class="user-card-actions">
+      <button class="btn btn-surface btn-xs" onclick="toggleAgente('${a.id}')">${a.attivo?'⏸ Disattiva':'▶ Attiva'}</button>
+      <button class="btn btn-danger btn-xs" onclick="delA('${a.id}')">🗑</button>
+    </div>
+  </div>`).join('');
+}
+
+function toggleAgente(id){const a=DB.agenti.find(x=>x.id===id);if(a){a.attivo=!a.attivo;sDB();rAgenti();showT(a.attivo?'Agente attivato':'Agente disattivato','success');}}
+function delA(id){if(!confirm('Eliminare questo agente?'))return;DB.agenti=DB.agenti.filter(a=>a.id!==id);sDB();rAgenti();showT('Eliminato','success');}
+
+// ============ APPROVAZIONI ============
+function rAp(){
+  const el=document.getElementById('appr-list');if(!el)return;
+  const pend=DB.pendenti.filter(p=>p.tipo==='nuovo_cliente');
+  if(!pend.length){el.innerHTML='<div style="text-align:center;padding:50px;color:var(--text3)">✅ Nessuna approvazione in attesa</div>';return;}
+  el.innerHTML=pend.map(p=>{
+    const c=DB.clienti.find(x=>x.id===p.clienteId);if(!c)return'';
+    return`<div class="user-card">
+      <div class="user-avatar avatar-client">${c.nome[0]}${c.cognome?c.cognome[0]:''}</div>
+      <div class="user-card-info">
+        <div class="user-card-name">${c.nome} ${c.cognome} <span class="badge badge-orange">In attesa</span></div>
+        <div class="user-card-sub">${c.tipo} · ${c.email} · ${c.tel||'—'}</div>
+        <div style="font-size:11px;color:var(--text2);margin-top:2px">${c.indirizzo||'—'} · Registrato: ${fd(p.data)}</div>
+      </div>
+      <div class="user-card-actions">
+        <select class="filter-select" id="ag-sel-${p.id}" style="font-size:11px;padding:4px 8px">
+          ${DB.agenti.map(a=>`<option value="${a.id}">${a.nome} ${a.cognome}</option>`).join('')}
+        </select>
+        <button class="btn btn-success btn-xs" onclick="approvaC('${p.id}','${c.id}')">✅ Approva</button>
+        <button class="btn btn-danger btn-xs" onclick="rifiutaC('${p.id}','${c.id}')">❌ Rifiuta</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function approvaC(pId,cId){
+  const c=DB.clienti.find(x=>x.id===cId);
+  const agSel=document.getElementById('ag-sel-'+pId)?.value||DB.agenti[0]?.id;
+  if(c){c.approvato=true;c.agenteId=agSel;}
+  DB.pendenti=DB.pendenti.filter(p=>p.id!==pId);
+  if(!DB.messaggi[cId])DB.messaggi[cId]=[];
+  DB.messaggi[cId].push({id:gid('m'),da:'broker',tx:`Benvenuto/a ${c?.nome}! Il suo account è stato approvato. Può accedere al portale.`,ts:new Date().toISOString(),letto:false});
+  sDB();rAp();updBadges();showT(`${cn(cId)} approvato!`,'success');
+}
+function rifiutaC(pId,cId){
+  if(!confirm('Rifiutare questo cliente?'))return;
+  DB.clienti=DB.clienti.filter(c=>c.id!==cId);
+  DB.pendenti=DB.pendenti.filter(p=>p.id!==pId);
+  sDB();rAp();updBadges();showT('Cliente rifiutato','success');
+}
+
+// ============ CLIENTI ============
+function rCl(){
+  const q=(document.getElementById('sr-c')?.value||'').toLowerCase();
+  const tipo=document.getElementById('fl-ct')?.value||'';
   const fl=DB.clienti.filter(c=>`${c.nome} ${c.cognome} ${c.email} ${c.id}`.toLowerCase().includes(q)&&(!tipo||c.tipo===tipo));
-  const tb=document.getElementById('tb-clienti');if(!tb)return;
+  const tb=document.getElementById('tb-cl');if(!tb)return;
   tb.innerHTML=fl.map(c=>{
     const ps=DB.polizze.filter(p=>p.cId===c.id);
     const pr=ps.map(p=>p.scad).sort()[0];const gp=pr?gg(pr):null;
     const tot=ps.reduce((s,p)=>s+parseFloat(p.pr||0),0);
     const ra=DB.richieste.filter(r=>r.cId===c.id&&r.stato==='aperta').length;
-    return`<tr><td><div style="font-weight:600">${c.nome} ${c.cognome}</div><div style="font-size:10px;color:var(--text3)">${c.id}·${c.tipo}</div></td>
-    <td><div style="font-size:11px">${c.tel||'—'}</div><div style="font-size:11px;color:var(--text2)">${c.email||'—'}</div></td>
-    <td><span class="badge badge-blue">${ps.length}</span></td>
-    <td><span style="color:var(--${gp===null?'text3':gp<=14?'red':gp<=30?'orange':'text2'})">${pr?fd(pr)+' ('+gp+'gg)':'—'}</span></td>
-    <td style="font-weight:600">${tot>0?fc(tot):'—'}</td>
-    <td>${ra>0?`<span class="badge badge-orange">${ra}</span>`:'<span class="badge badge-gray">0</span>'}</td>
-    <td style="display:flex;gap:4px;flex-wrap:wrap">
-      <button class="btn btn-surface btn-xs" onclick="openDetail(null,'${c.id}')">📂</button>
-      <button class="btn btn-surface btn-xs" onclick="openChatWith('${c.id}')">💬</button>
-      <button class="btn btn-surface btn-xs" onclick="prepNotif('${c.id}')">📨</button>
-      <button class="btn btn-danger btn-xs" onclick="delC('${c.id}')">🗑</button>
-    </td></tr>`;
-  }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px">Nessun cliente</td></tr>';
+    return`<tr>
+      <td><div style="font-weight:600">${c.nome} ${c.cognome}${!c.approvato?' <span class="badge badge-orange">In attesa</span>':''}</div><div style="font-size:10px;color:var(--text3)">${c.id}·${c.tipo}</div></td>
+      <td><div style="font-size:11px">${c.tel||'—'}</div><div style="font-size:11px;color:var(--text2)">${c.email||'—'}</div></td>
+      <td><span class="badge badge-blue">${ps.length}</span></td>
+      <td><span style="color:var(--${gp===null?'text3':gp<=14?'red':gp<=30?'orange':'text2'})">${pr?fd(pr)+' ('+gp+'gg)':'—'}</span></td>
+      <td style="font-weight:600">${tot>0?fc(tot):'—'}</td>
+      <td style="font-size:11px;color:var(--text2)">${an(c.agenteId)}</td>
+      <td style="display:flex;gap:4px;flex-wrap:wrap">
+        <button class="btn btn-surface btn-xs" onclick="openD(null,'${c.id}')">📂</button>
+        <button class="btn btn-surface btn-xs" onclick="oCW('${c.id}')">💬</button>
+        <button class="btn btn-surface btn-xs" onclick="pN('${c.id}')">📨</button>
+        <button class="btn btn-danger btn-xs" onclick="delC('${c.id}')">🗑</button>
+      </td></tr>`;
+  }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:28px">Nessun cliente</td></tr>';
 }
 
-// ============================================================
-// POLIZZE
-// ============================================================
-function renderPolizze(){
-  const q=(document.getElementById('srch-p')?.value||'').toLowerCase();
-  const rm=document.getElementById('flt-p-ramo')?.value||'';
-  const st=document.getElementById('flt-p-stato')?.value||'';
-  const fl=DB.polizze.filter(p=>{
-    const g=gg(p.scad);const s=g<0?'scaduta':p.stato;
+// ============ POLIZZE ============
+function rPo(){
+  const q=(document.getElementById('sr-p')?.value||'').toLowerCase();
+  const rm=document.getElementById('fl-pr')?.value||'';
+  const st=document.getElementById('fl-ps')?.value||'';
+  const fl=DB.polizze.filter(p=>{const g=gg(p.scad);const s=g<0?'scaduta':p.stato;
     return`${cn(p.cId)} ${p.num} ${p.co}`.toLowerCase().includes(q)&&(!rm||p.ramo===rm)&&(!st||s===st);
   }).sort((a,b)=>gg(a.scad)-gg(b.scad));
-  const tb=document.getElementById('tb-polizze');if(!tb)return;
+  const tb=document.getElementById('tb-po');if(!tb)return;
   tb.innerHTML=fl.map(p=>{const g=gg(p.scad);return`<tr>
     <td><code style="color:var(--blue2);font-size:11px">${p.num}</code></td>
     <td style="font-weight:600">${cn(p.cId)}</td>
@@ -1094,21 +1186,19 @@ function renderPolizze(){
     <td style="font-weight:600">${fc(p.pr)}</td>
     <td>${spb(p)}</td>
     <td style="display:flex;gap:4px">
-      <button class="btn btn-surface btn-xs" onclick="openDetail('${p.id}',null)">👁</button>
-      <button class="btn btn-surface btn-xs" onclick="prepNotif('${p.cId}')">📨</button>
+      <button class="btn btn-surface btn-xs" onclick="openD('${p.id}',null)">👁</button>
+      <button class="btn btn-surface btn-xs" onclick="pN('${p.cId}')">📨</button>
       <button class="btn btn-danger btn-xs" onclick="delP('${p.id}')">🗑</button>
-    </td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:30px">Nessuna polizza</td></tr>';
+    </td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:28px">Nessuna polizza</td></tr>';
 }
 
-// ============================================================
-// SCADENZE
-// ============================================================
-function renderScadenze(){
-  const mx=parseInt(document.getElementById('flt-scad')?.value||'30');
+// ============ SCADENZE ============
+function rSc(){
+  const mx=parseInt(document.getElementById('fl-sg')?.value||'30');
   const ls=DB.polizze.map(p=>({...p,g:gg(p.scad)})).filter(p=>p.g>=-7&&p.g<=mx).sort((a,b)=>a.g-b.g);
-  const el=document.getElementById('tl-scadenze');if(!el)return;
+  const el=document.getElementById('tl-sc');if(!el)return;
   el.innerHTML=ls.length?ls.map(p=>{const d=new Date(p.scad);const u=uc(p.g);
-    const gl=p.g<0?`SCADUTA ${Math.abs(p.g)}gg fa`:p.g===0?'SCADE OGGI!':p.g+'gg';
+    const gl=p.g<0?`SCADUTA ${Math.abs(p.g)}gg fa`:p.g===0?'OGGI!':p.g+'gg';
     return`<div class="tl-item ${u}">
       <div class="tl-date"><div class="tl-day">${d.getDate()}</div><div class="tl-month">${d.toLocaleDateString('it-CH',{month:'short',year:'2-digit'})}</div></div>
       <div class="tl-sep"></div>
@@ -1116,54 +1206,50 @@ function renderScadenze(){
         <div class="tl-detail">${p.ramo}·${p.co}·N°${p.num}</div>
         <div class="tl-detail">Premio: ${fc(p.pr)}/${p.fr}</div></div>
       <div class="tl-right"><div class="tl-days ${u}">${gl}</div>${spb(p)}</div>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <button class="btn btn-surface btn-xs" onclick="openDetail('${p.id}',null)">📂</button>
-        <button class="btn btn-primary btn-xs" onclick="prepNotif('${p.cId}')">📨</button>
+      <div style="display:flex;gap:4px">
+        <button class="btn btn-surface btn-xs" onclick="openD('${p.id}',null)">📂</button>
+        <button class="btn btn-primary btn-xs" onclick="pN('${p.cId}')">📨</button>
       </div>
     </div>`;}).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">🎉 Nessuna scadenza nel periodo</div>';
 }
 
-// ============================================================
-// NOTIFICHE SEND
-// ============================================================
-function renderNotifSend(){
-  const sel=document.getElementById('n-c-sel');
+// ============ NOTIFICHE SEND ============
+function rNS(){
+  const sel=document.getElementById('n-cs');
   if(sel)sel.innerHTML=DB.clienti.map(c=>`<option value="${c.id}">${c.nome} ${c.cognome}</option>`).join('');
   const s30=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;}).length;
   const s60=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=60;}).length;
-  const ns=document.getElementById('n-stats');
+  const ns=document.getElementById('n-st');
   if(ns)ns.innerHTML=`
     <div class="info-row"><span class="label">Scadenze 30gg</span><span class="value" style="color:var(--red)">${s30}</span></div>
     <div class="info-row"><span class="label">Scadenze 60gg</span><span class="value" style="color:var(--orange)">${s60}</span></div>
     <div class="info-row"><span class="label">Notifiche inviate</span><span class="value">${nLog.length}</span></div>
     <div class="info-row"><span class="label">Clienti totali</span><span class="value">${DB.clienti.length}</span></div>
-    <div class="info-row"><span class="label">Con email</span><span class="value">${DB.clienti.filter(c=>c.email).length}</span></div>
-    <div class="info-row"><span class="label">Con telefono</span><span class="value">${DB.clienti.filter(c=>c.tel).length}</span></div>`;
-  const tb=document.getElementById('tb-notif-log');if(!tb)return;
-  tb.innerHTML=nLog.length?[...nLog].reverse().slice(0,20).map(l=>`<tr>
-    <td style="font-size:11px">${ts(l.ts)}</td><td>${l.dest}</td>
+    <div class="info-row"><span class="label">Con email</span><span class="value">${DB.clienti.filter(c=>c.email).length}</span></div>`;
+  const tb=document.getElementById('tb-nl');if(!tb)return;
+  tb.innerHTML=nLog.length?[...nLog].reverse().slice(0,15).map(l=>`<tr>
+    <td style="font-size:11px">${fts(l.ts)}</td><td>${l.dest}</td>
     <td><span class="badge badge-blue">${l.tipo}</span></td>
     <td style="font-size:11px">${l.chs.join(', ')}</td>
     <td><span class="badge badge-green">✅</span></td></tr>`).join('')
-    :'<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:30px">Nessuna notifica inviata</td></tr>';
+    :'<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:28px">Nessuna notifica inviata</td></tr>';
 }
-function toggleClienteRow(){document.getElementById('n-c-row').style.display=document.getElementById('n-dest').value==='singolo'?'block':'none';}
-function toggleCh(el){el.classList.toggle('selected');const ch=el.dataset.ch;
+function tCR(){document.getElementById('n-cr').style.display=document.getElementById('n-dest').value==='singolo'?'block':'none';}
+function tCH(el){el.classList.toggle('selected');const ch=el.dataset.ch;
   if(el.classList.contains('selected'))selChs.push(ch);else selChs=selChs.filter(x=>x!==ch);}
-function inviaNotifica(){
-  const dest=document.getElementById('n-dest').value;
-  const tipo=document.getElementById('n-tipo').value;
-  if(!selChs.length){showToast('Seleziona almeno un canale','error');return;}
+function invN(){
+  const dest=document.getElementById('n-dest').value;const tipo=document.getElementById('n-tp').value;
+  if(!selChs.length){showT('Seleziona almeno un canale','error');return;}
   let targets=[];
   if(dest==='scadenza30')targets=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;}).map(p=>p.cId);
   else if(dest==='scadenza60')targets=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=60;}).map(p=>p.cId);
   else if(dest==='tutti')targets=DB.clienti.map(c=>c.id);
-  else targets=[document.getElementById('n-c-sel').value];
+  else targets=[document.getElementById('n-cs').value];
   targets=[...new Set(targets)];
-  const msgs={'scadenza':'⏰ Gentile [N], la sua polizza sta per scadere. Contatti il broker per il rinnovo.',
-    'rinnovo':'🔄 Gentile [N], le proponiamo il rinnovo della polizza. Risponda per confermare.',
-    'documento':'📄 Gentile [N], un nuovo documento è disponibile nel suo portale.',
-    'personalizzato':document.getElementById('n-testo').value||'Messaggio dal broker.'};
+  const msgs={scadenza:'⏰ Gentile [N], la sua polizza sta per scadere. La contatteremo per il rinnovo.',
+    rinnovo:'🔄 Gentile [N], le proponiamo il rinnovo della sua polizza. Risponda per confermare.',
+    documento:'📄 Gentile [N], un documento è disponibile nel suo portale.',
+    personalizzato:document.getElementById('n-tx').value||'Messaggio dal broker.'};
   targets.forEach(cId=>{
     const c=DB.clienti.find(x=>x.id===cId);if(!c)return;
     const tx=msgs[tipo].replace('[N]',c.nome);
@@ -1171,135 +1257,123 @@ function inviaNotifica(){
     DB.messaggi[cId].push({id:gid('m'),da:'broker',tx,ts:new Date().toISOString(),letto:false});
     nLog.push({ts:new Date().toISOString(),dest:`${c.nome} ${c.cognome}`,tipo,chs:[...selChs],tx});
   });
-  saveDB();saveNLog();
+  sDB();sNL();
   addN('invio',`Notifica inviata a ${targets.length} client${targets.length===1?'e':'i'}`);
-  showToast(`✅ Inviata a ${targets.length} client${targets.length===1?'e':'i'}!`,'success');
-  renderNotifSend();updateBadges();
+  showT(`✅ Inviata a ${targets.length} client${targets.length===1?'e':'i'}!`,'success');
+  rNS();updBadges();
 }
-function prepNotifAll(){document.getElementById('n-dest').value='scadenza30';showView('notifiche-send');}
-function prepNotif(cId){document.getElementById('n-dest').value='singolo';document.getElementById('n-c-row').style.display='block';
-  const sel=document.getElementById('n-c-sel');if(sel){sel.innerHTML=DB.clienti.map(c=>`<option value="${c.id}" ${c.id===cId?'selected':''}>${c.nome} ${c.cognome}</option>`).join('');}
-  showView('notifiche-send');}
+function prepNA(){document.getElementById('n-dest').value='scadenza30';sv('notifiche-send');}
+function pN(cId){document.getElementById('n-dest').value='singolo';document.getElementById('n-cr').style.display='block';
+  const sel=document.getElementById('n-cs');if(sel)sel.innerHTML=DB.clienti.map(c=>`<option value="${c.id}" ${c.id===cId?'selected':''}>${c.nome} ${c.cognome}</option>`).join('');
+  sv('notifiche-send');}
 
-// ============================================================
-// RICHIESTE broker
-// ============================================================
-function renderRichieste(){
-  const st=document.getElementById('flt-r-stato')?.value||'';
-  const ti=document.getElementById('flt-r-tipo')?.value||'';
+// ============ RICHIESTE broker ============
+function rRq(){
+  const st=document.getElementById('fl-rs')?.value||'';
+  const ti=document.getElementById('fl-rt')?.value||'';
   const fl=DB.richieste.filter(r=>(!st||r.stato===st)&&(!ti||r.tipo===ti)).sort((a,b)=>new Date(b.data)-new Date(a.data));
-  const el=document.getElementById('rich-list');if(!el)return;
+  const el=document.getElementById('rq-list');if(!el)return;
   el.innerHTML=fl.length?fl.map(r=>`<div class="richiesta-card">
     <div class="richiesta-header">
       <span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span>
       ${rsb(r.stato)}
+      ${r.urg==='urgente'?'<span class="badge badge-red">🔴 Urgente</span>':r.urg==='alta'?'<span class="badge badge-orange">Alta</span>':''}
       <span style="font-size:10px;color:var(--text3);margin-left:auto">${fd(r.data)}</span>
     </div>
-    <div style="display:flex;gap:9px;align-items:center;margin-bottom:7px">
-      <span style="font-weight:600;font-size:12px">${cn(r.cId)}</span>
-      ${r.pId?`<span class="badge badge-blue" style="font-size:9px">${pn(r.pId)}</span>`:''}
-      ${r.urg==='urgente'?'<span class="badge badge-red">🔴 Urgente</span>':r.urg==='alta'?'<span class="badge badge-orange">Alta</span>':''}
-    </div>
-    <div style="font-size:12px;color:var(--text2);margin-bottom:10px">${r.desc}</div>
-    ${r.risp?`<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:7px;padding:9px 11px;font-size:11px;margin-bottom:10px">
-      <strong style="color:var(--green)">✅ Risposta:</strong> ${r.risp}</div>`:''}
-    <div style="display:flex;gap:7px;flex-wrap:wrap">
+    <div style="font-weight:600;font-size:12px;margin-bottom:6px">${cn(r.cId)}${r.pId?` <span class="badge badge-blue" style="font-size:9px">${pn(r.pId)}</span>`:''}</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:9px">${r.desc}</div>
+    ${r.risp?`<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:7px;padding:8px 10px;font-size:11px;margin-bottom:9px"><strong style="color:var(--green)">✅</strong> ${r.risp}</div>`:''}
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
       ${r.stato==='aperta'?`<button class="btn btn-primary btn-xs" onclick="updR('${r.id}','in_lavorazione')">🔄 Prendi in carico</button>`:''}
       ${r.stato!=='completata'?`<button class="btn btn-success btn-xs" onclick="updR('${r.id}','completata')">✅ Completa</button>`:''}
-      <button class="btn btn-surface btn-xs" onclick="openChatWith('${r.cId}')">💬 Chat</button>
+      <button class="btn btn-surface btn-xs" onclick="oCW('${r.cId}')">💬 Chat</button>
       <button class="btn btn-surface btn-xs" onclick="addRisp('${r.id}')">✏️ Risposta</button>
     </div>
-  </div>`).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna richiesta trovata</div>';
+  </div>`).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna richiesta</div>';
 }
-function updR(id,stato){const r=DB.richieste.find(x=>x.id===id);if(r){r.stato=stato;saveDB();renderRichieste();updateBadges();showToast('Aggiornato','success');}}
-function addRisp(id){const r=prompt('Risposta al cliente:');if(r===null)return;const x=DB.richieste.find(i=>i.id===id);if(x){x.risp=r;x.stato='in_lavorazione';saveDB();renderRichieste();showToast('Risposta aggiunta','success');}}
+function updR(id,stato){const r=DB.richieste.find(x=>x.id===id);if(r){r.stato=stato;sDB();rRq();updBadges();showT('Aggiornato','success');}}
+function addRisp(id){const r=prompt('Risposta al cliente:');if(r===null)return;const x=DB.richieste.find(i=>i.id===id);if(x){x.risp=r;x.stato='in_lavorazione';sDB();rRq();showT('Risposta aggiunta','success');}}
 
-// ============================================================
-// CHAT broker
-// ============================================================
-function renderBChat(){
+// ============ CHAT broker ============
+function rBChat(){
   const cl=document.getElementById('conv-list');if(!cl)return;
-  cl.innerHTML=DB.clienti.map(c=>{
+  cl.innerHTML=DB.clienti.filter(c=>c.approvato).map(c=>{
     const ms=DB.messaggi[c.id]||[];const last=ms[ms.length-1];
     const unr=ms.filter(m=>m.da!=='broker'&&!m.letto).length;
     return`<div class="chat-conv ${CCid===c.id?'active':''}" onclick="selChat('${c.id}')">
       <div class="chat-conv-name">${c.nome} ${c.cognome}</div>
       <div class="chat-conv-preview">${last?last.tx:'Nessun messaggio'}</div>
-      <div class="chat-conv-time">${last?ts(last.ts):''}</div>
+      <div class="chat-conv-time">${last?fts(last.ts):''}</div>
       ${unr>0?'<div class="unread-dot"></div>':''}
     </div>`;}).join('');
   const unr=Object.values(DB.messaggi).reduce((s,ms)=>s+ms.filter(m=>m.da!=='broker'&&!m.letto).length,0);
-  const cu=document.getElementById('chat-unread');if(cu){cu.textContent=unr;cu.style.display=unr>0?'inline-block':'none';}
-  if(CCid)renderBMsgs();
+  const cu=document.getElementById('ch-ur');if(cu){cu.textContent=unr;cu.style.display=unr>0?'inline-block':'none';}
+  if(CCid)rBMsgs();
 }
 function selChat(cId){
   CCid=cId;const c=DB.clienti.find(x=>x.id===cId);
-  document.getElementById('chat-name').textContent=`${c.nome} ${c.cognome}`;
-  document.getElementById('chat-sub').textContent=c.email;
-  document.getElementById('chat-profilo-btn').style.display='inline-flex';
+  document.getElementById('ch-nm').textContent=`${c.nome} ${c.cognome}`;
+  document.getElementById('ch-sb').textContent=c.email;
+  document.getElementById('ch-pr-btn').style.display='inline-flex';
   if(DB.messaggi[cId])DB.messaggi[cId].forEach(m=>{if(m.da!=='broker')m.letto=true;});
-  saveDB();renderBMsgs();renderBChat();updateBadges();
+  sDB();rBMsgs();rBChat();updBadges();
 }
-function renderBMsgs(){
-  const el=document.getElementById('broker-msgs');if(!el||!CCid)return;
+function rBMsgs(){
+  const el=document.getElementById('b-msgs');if(!el||!CCid)return;
   const ms=DB.messaggi[CCid]||[];
   el.innerHTML=ms.map(m=>{
-    if(m.tipo==='richiesta')return`<div class="msg-request"><div class="msg-request-type">📝 ${rl(m.tipo_r)} inviata</div>
-      <div style="font-size:12px">${m.tx}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">${ts(m.ts)}</div>
-      <div style="display:flex;gap:7px;margin-top:8px">
-        <button class="btn btn-primary btn-xs" onclick="updR('${m.rId}','in_lavorazione')">🔄 Prendi in carico</button>
-        <button class="btn btn-surface btn-xs" onclick="showView('richieste')">📋 Vedi</button>
+    if(m.tipo==='richiesta')return`<div class="msg-request"><div class="msg-request-type">📝 ${rl(m.tipo_r)}</div>
+      <div style="font-size:12px">${m.tx}</div><div style="font-size:9px;opacity:.6;margin-top:3px">${fts(m.ts)}</div>
+      <div style="display:flex;gap:6px;margin-top:7px">
+        <button class="btn btn-primary btn-xs" onclick="updR('${m.rId}','in_lavorazione')">🔄 Carico</button>
+        <button class="btn btn-surface btn-xs" onclick="sv('richieste')">📋 Vedi</button>
       </div></div>`;
     const s=m.da==='broker';
-    return`<div class="msg ${s?'sent':'received'}">${m.tx}<div class="msg-time">${ts(m.ts)}${s?' · Broker':''}</div></div>`;
+    return`<div class="msg ${s?'sent':'received'}">${m.tx}<div class="msg-time">${fts(m.ts)}${s?' · Broker':''}</div></div>`;
   }).join('');
   el.scrollTop=el.scrollHeight;
 }
-function sendBMsg(){
-  if(!CCid)return;const inp=document.getElementById('broker-input');const tx=inp.value.trim();if(!tx)return;
+function sBM(){
+  if(!CCid)return;const inp=document.getElementById('b-in');const tx=inp.value.trim();if(!tx)return;
   if(!DB.messaggi[CCid])DB.messaggi[CCid]=[];
   DB.messaggi[CCid].push({id:gid('m'),da:'broker',tx,ts:new Date().toISOString(),letto:false});
-  saveDB();inp.value='';renderBMsgs();addN('msg',`Risposta inviata a ${cn(CCid)}`);
+  sDB();inp.value='';rBMsgs();
 }
-function qi(t){const i=document.getElementById('broker-input');i.value=t;i.focus();}
-function openChatWith(cId){CCid=cId;showView('chat');setTimeout(()=>selChat(cId),50);}
-function openDetailCurrent(){if(CCid)openDetail(null,CCid);}
+function qi(t){const i=document.getElementById('b-in');i.value=t;i.focus();}
+function oCW(cId){CCid=cId;sv('chat');setTimeout(()=>selChat(cId),50);}
+function openDC(){if(CCid)openD(null,CCid);}
 
-// ============================================================
-// FATTURE
-// ============================================================
-function renderFatture(){
-  const q=(document.getElementById('srch-f')?.value||'').toLowerCase();
-  const st=document.getElementById('flt-f-stato')?.value||'';
+// ============ FATTURE ============
+function rFt(){
+  const q=(document.getElementById('sr-f')?.value||'').toLowerCase();
+  const st=document.getElementById('fl-fs')?.value||'';
   const fl=DB.fatture.filter(f=>`${cn(f.cId)} ${f.id}`.toLowerCase().includes(q)&&(!st||f.stato===st));
-  const tb=document.getElementById('tb-fatture');if(!tb)return;
+  const tb=document.getElementById('tb-ft');if(!tb)return;
   tb.innerHTML=fl.map(f=>{const pol=DB.polizze.find(p=>p.id===f.pId);const g=gg(f.scad);
     const sb=f.stato==='pagato'?'<span class="badge badge-green">✅ Pagato</span>':
-      f.stato==='scaduto'?'<span class="badge badge-red">❌ Scaduto</span>':'<span class="badge badge-orange">⏳ Attesa</span>';
+      f.stato==='scaduto'?'<span class="badge badge-red">❌ Scaduto</span>':'<span class="badge badge-orange">⏳</span>';
     return`<tr><td><code style="color:var(--blue2);font-size:11px">${f.id}</code></td>
     <td>${cn(f.cId)}</td><td style="font-size:11px">${pol?pol.ramo:'—'}</td>
     <td style="font-weight:600">${fc(f.imp)}</td>
     <td style="color:var(--${g<0?'red':g<=7?'orange':'text2'})">${fd(f.scad)}</td>
     <td>${sb}</td>
     <td>${f.stato!=='pagato'?`<button class="btn btn-success btn-xs" onclick="payF('${f.id}')">✅ Pagato</button>`:''}</td></tr>`;
-  }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px">Nessuna fattura</td></tr>';
+  }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:28px">Nessuna fattura</td></tr>';
 }
-function payF(id){const f=DB.fatture.find(x=>x.id===id);if(f){f.stato='pagato';saveDB();renderFatture();showToast('Fattura pagata','success');}}
+function payF(id){const f=DB.fatture.find(x=>x.id===id);if(f){f.stato='pagato';sDB();rFt();showT('Fattura pagata','success');}}
 
-// ============================================================
-// CLIENT HOME
-// ============================================================
-function renderCHome(){
+// ============ CLIENT HOME ============
+function rCHome(){
   const cId=CU.id;const ps=DB.polizze.filter(p=>p.cId===cId);
   const urg=ps.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;});
   const tot=ps.reduce((s,p)=>s+parseFloat(p.pr||0),0);
-  document.getElementById('cs-pol').textContent=ps.length;
-  document.getElementById('cs-prem').textContent='CHF '+Math.round(tot).toLocaleString('it-CH');
-  document.getElementById('cs-scad').textContent=urg.length;
-  const ub=document.getElementById('c-urg-bar');
-  if(urg.length>0){ub.style.display='flex';document.getElementById('c-urg-text').innerHTML=`<strong>${urg.length}</strong> polizz${urg.length===1?'a':'e'} scad${urg.length===1?'e':'ono'} entro 30 giorni`;}
+  document.getElementById('cs-p').textContent=ps.length;
+  document.getElementById('cs-pr').textContent='CHF '+Math.round(tot).toLocaleString('it-CH');
+  document.getElementById('cs-s').textContent=urg.length;
+  const ub=document.getElementById('c-ub');
+  if(urg.length>0){ub.style.display='flex';document.getElementById('c-ut').innerHTML=`<strong>${urg.length}</strong> polizz${urg.length===1?'a':'e'} scad${urg.length===1?'e':'ono'} entro 30 giorni`;}
   else ub.style.display='none';
-  const el=document.getElementById('c-pol-list');if(!el)return;
+  const el=document.getElementById('c-pl');if(!el)return;
   el.innerHTML=ps.length?ps.map(p=>{const g=gg(p.scad);return`<div class="polizza-card-client">
     <div class="pol-card-header">
       <div><div class="pol-card-ramo">${p.ramo}</div><div class="pol-card-company">${p.co}</div></div>
@@ -1311,247 +1385,249 @@ function renderCHome(){
       <div><div class="pol-info-label">Scadenza</div><div class="pol-info-value" style="color:var(--${g<0?'red':g<=30?'orange':'text'})">${fd(p.scad)}</div></div>
       <div><div class="pol-info-label">Frequenza</div><div class="pol-info-value">${p.fr}</div></div>
     </div>
-    ${p.note?`<div style="font-size:11px;color:var(--text3);margin-bottom:12px;padding:7px 10px;background:var(--surface2);border-radius:6px">📝 ${p.note}</div>`:''}
+    ${p.note?`<div style="font-size:11px;color:var(--text3);margin-bottom:11px;padding:6px 9px;background:var(--surface2);border-radius:6px">📝 ${p.note}</div>`:''}
     <div class="pol-card-actions">
-      <button class="btn btn-surface btn-sm" onclick="openRichClient('${p.id}','rinnovo')">🔄 Rinnova</button>
-      <button class="btn btn-surface btn-sm" onclick="openRichClient('${p.id}','modifica')">🔧 Modifica</button>
-      <button class="btn btn-surface btn-sm" onclick="openRichClient('${p.id}','disdetta')">❌ Disdetta</button>
-      <button class="btn btn-primary btn-sm" onclick="showView('c-chat')">💬 Broker</button>
+      <button class="btn btn-surface btn-sm" onclick="oRC('${p.id}','rinnovo')">🔄 Rinnova</button>
+      <button class="btn btn-surface btn-sm" onclick="oRC('${p.id}','modifica')">🔧 Modifica</button>
+      <button class="btn btn-surface btn-sm" onclick="oRC('${p.id}','disdetta')">❌ Disdetta</button>
+      <button class="btn btn-primary btn-sm" onclick="sv('c-chat')">💬 Broker</button>
     </div>
-  </div>`;}  ).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna polizza</div>';
+  </div>`;}  ).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna polizza associata.</div>';
 }
 
-// ============================================================
-// CLIENT RICHIESTE
-// ============================================================
-function renderCRich(){
+// ============ CLIENT RICHIESTE ============
+function rCRich(){
   const cId=CU.id;const rs=DB.richieste.filter(r=>r.cId===cId).sort((a,b)=>new Date(b.data)-new Date(a.data));
-  const el=document.getElementById('c-rich-list');if(!el)return;
+  const el=document.getElementById('c-rl');if(!el)return;
   el.innerHTML=rs.length?rs.map(r=>`<div class="richiesta-card">
     <div class="richiesta-header">
       <span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span>
       ${rsb(r.stato)}
       <span style="font-size:10px;color:var(--text3);margin-left:auto">${fd(r.data)}</span>
     </div>
-    ${r.pId?`<div style="font-size:11px;color:var(--text2);margin-bottom:6px">${pn(r.pId)}</div>`:''}
-    <div style="font-size:12px;color:var(--text2);margin-bottom:${r.risp?'10':'0'}px">${r.desc}</div>
-    ${r.risp?`<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:7px;padding:9px 11px;font-size:11px;margin-top:7px">
-      <strong style="color:var(--green)">✅ Risposta broker:</strong><br>${r.risp}</div>`:''}
+    ${r.pId?`<div style="font-size:11px;color:var(--text2);margin-bottom:5px">${pn(r.pId)}</div>`:''}
+    <div style="font-size:12px;color:var(--text2)">${r.desc}</div>
+    ${r.risp?`<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:7px;padding:8px 10px;font-size:11px;margin-top:8px"><strong style="color:var(--green)">✅ Risposta broker:</strong><br>${r.risp}</div>`:''}
   </div>`).join(''):`<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna richiesta.<br>
-    <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="openModal('m-richiesta')">＋ Nuova</button></div>`;
+    <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="om('m-richiesta')">＋ Nuova</button></div>`;
 }
 
-// ============================================================
-// CLIENT CHAT
-// ============================================================
-function renderCChat(){
+// ============ CLIENT CHAT ============
+function rCChat(){
   const cId=CU.id;const ms=(DB.messaggi[cId]||[]);
-  ms.forEach(m=>{if(m.da==='broker')m.letto=true;});saveDB();
-  const el=document.getElementById('client-msgs');if(!el)return;
+  ms.forEach(m=>{if(m.da==='broker')m.letto=true;});sDB();
+  const el=document.getElementById('c-msgs');if(!el)return;
   el.innerHTML=ms.map(m=>{
-    if(m.tipo==='richiesta')return`<div class="msg-request"><div class="msg-request-type">📝 ${rl(m.tipo_r)} inviata</div>
-      <div style="font-size:12px">${m.tx}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">${ts(m.ts)}</div></div>`;
+    if(m.tipo==='richiesta')return`<div class="msg-request"><div class="msg-request-type">📝 ${rl(m.tipo_r)}</div>
+      <div style="font-size:12px">${m.tx}</div></div>`;
     const s=m.da===cId||m.da==='client';
-    return`<div class="msg ${s?'sent':'received'}">${m.tx}<div class="msg-time">${ts(m.ts)}${!s?' · Broker':''}</div></div>`;
+    return`<div class="msg ${s?'sent':'received'}">${m.tx}<div class="msg-time">${fts(m.ts)}${!s?' · Broker':''}</div></div>`;
   }).join('');
-  el.scrollTop=el.scrollHeight;updateBadges();
+  el.scrollTop=el.scrollHeight;updBadges();
 }
-function sendCMsg(){
-  const inp=document.getElementById('client-input');const tx=inp.value.trim();if(!tx)return;
+function sCM(){
+  const inp=document.getElementById('c-in');const tx=inp.value.trim();if(!tx)return;
   const cId=CU.id;if(!DB.messaggi[cId])DB.messaggi[cId]=[];
   DB.messaggi[cId].push({id:gid('m'),da:cId,tx,ts:new Date().toISOString(),letto:false});
-  saveDB();inp.value='';renderCChat();
+  sDB();inp.value='';rCChat();
   setTimeout(()=>{
-    DB.messaggi[cId].push({id:gid('m'),da:'broker',tx:'Grazie per il messaggio! Ho ricevuto la sua richiesta e la contatterò a breve. 🙏',ts:new Date().toISOString(),letto:false});
-    saveDB();renderCChat();addN('msg','Nuovo messaggio dal broker');updateBadges();
-  },1600);
+    DB.messaggi[cId].push({id:gid('m'),da:'broker',tx:'Grazie per il messaggio! La contatterò al più presto. 🙏',ts:new Date().toISOString(),letto:false});
+    sDB();rCChat();addN('msg','Nuovo messaggio dal broker');updBadges();
+  },1500);
 }
-function cqi(t){const i=document.getElementById('client-input');i.value=t;i.focus();}
+function cqi(t){const i=document.getElementById('c-in');i.value=t;i.focus();}
 
-// ============================================================
-// CLIENT SINISTRI
-// ============================================================
-function renderCSin(){
-  const sel=document.getElementById('sin-pol');if(!sel)return;
+// ============ CLIENT SINISTRI ============
+function rCSin(){
+  const sel=document.getElementById('sin-p');if(!sel)return;
   sel.innerHTML=DB.polizze.filter(p=>p.cId===CU.id).map(p=>`<option value="${p.id}">${p.ramo}·${p.num}</option>`).join('');
 }
-function segnalaSinistro(){
-  const desc=document.getElementById('sin-desc').value.trim();
-  if(!desc){showToast('Descrivi l\'accaduto','error');return;}
-  const id=gid('R');const tipo=document.getElementById('sin-tipo').value;
-  const data=document.getElementById('sin-data').value;const ctrl=document.getElementById('sin-ctrl').value;
+function segnSin(){
+  const desc=document.getElementById('sin-dc').value.trim();
+  if(!desc){showT('Descrivi l\'accaduto','error');return;}
+  const id=gid('R');const tipo=document.getElementById('sin-t').value;
+  const data=document.getElementById('sin-d').value;const ctrl=document.getElementById('sin-ct').value;
   const tx=`SINISTRO: ${tipo}${data?' · '+fd(data):''} — ${desc}${ctrl?' · Controparte: '+ctrl:''}`;
-  DB.richieste.push({id,cId:CU.id,tipo:'sinistro',pId:document.getElementById('sin-pol').value,desc:tx,urg:'urgente',stato:'aperta',data:tod(),risp:''});
+  DB.richieste.push({id,cId:CU.id,tipo:'sinistro',pId:document.getElementById('sin-p').value,desc:tx,urg:'urgente',stato:'aperta',data:tod(),risp:''});
   const cId=CU.id;if(!DB.messaggi[cId])DB.messaggi[cId]=[];
   DB.messaggi[cId].push({id:gid('m'),da:cId,tipo:'richiesta',tipo_r:'sinistro',rId:id,tx,ts:new Date().toISOString(),letto:false});
-  addN('richiesta',`🚨 Sinistro da ${cn(cId)}`);saveDB();
-  showToast('Sinistro segnalato!','success');
-  document.getElementById('sin-desc').value='';document.getElementById('sin-ctrl').value='';
-  setTimeout(()=>showView('c-richieste'),600);
+  addN('richiesta',`🚨 Sinistro da ${cn(cId)}`);sDB();
+  showT('Sinistro segnalato!','success');
+  document.getElementById('sin-dc').value='';document.getElementById('sin-ct').value='';
+  setTimeout(()=>sv('c-richieste'),600);
 }
 
-// ============================================================
-// CLIENT DOCS
-// ============================================================
-function renderCDocs(){
-  const el=document.getElementById('c-docs-list');if(!el)return;
+// ============ CLIENT DOCS ============
+function rCDocs(){
+  const el=document.getElementById('c-dl');if(!el)return;
   const ps=DB.polizze.filter(p=>p.cId===CU.id);
-  el.innerHTML=ps.length?ps.map(p=>`<div class="card" style="margin-bottom:12px">
-    <div class="card-header">
-      <div><div class="card-title">${p.ramo} — ${p.co}</div><div style="font-size:11px;color:var(--text2)">N°${p.num}</div></div>
-      ${spb(p)}
-    </div>
+  el.innerHTML=ps.length?ps.map(p=>`<div class="card" style="margin-bottom:11px">
+    <div class="card-header"><div><div class="card-title">${p.ramo} — ${p.co}</div><div style="font-size:11px;color:var(--text2)">N°${p.num}</div></div>${spb(p)}</div>
     <div class="card-body">
-      <div class="info-row"><span class="label">Polizza (PDF)</span><button class="btn btn-surface btn-xs" onclick="fakeD('Polizza_${p.num}.pdf')">📄 Scarica</button></div>
-      <div class="info-row"><span class="label">Attestato assicurativo</span><button class="btn btn-surface btn-xs" onclick="fakeD('Attestato_${p.num}.pdf')">📄 Scarica</button></div>
-      <div class="info-row"><span class="label">Condizioni generali (CGA)</span><button class="btn btn-surface btn-xs" onclick="fakeD('CGA_2026.pdf')">📄 Scarica</button></div>
-      <div class="info-row"><span class="label">Ultima fattura</span><button class="btn btn-surface btn-xs" onclick="fakeD('Fattura_${p.num}.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">Polizza (PDF)</span><button class="btn btn-surface btn-xs" onclick="fkD('Polizza_${p.num}.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">Attestato assicurativo</span><button class="btn btn-surface btn-xs" onclick="fkD('Attestato_${p.num}.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">CGA 2026</span><button class="btn btn-surface btn-xs" onclick="fkD('CGA_${p.co.replace(/ /g,'_')}.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">Ultima fattura</span><button class="btn btn-surface btn-xs" onclick="fkD('Fattura_${p.num}.pdf')">📄 Scarica</button></div>
     </div>
   </div>`).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessun documento</div>';
 }
-function fakeD(n){showToast(`📄 Download ${n} avviato...`,'success');}
+function fkD(n){showT(`📄 Download ${n}...`,'success');}
 
-// ============================================================
-// DETAIL PANEL
-// ============================================================
-function openDetail(pId,cId){
+// ============ DETAIL PANEL ============
+function openD(pId,cId){
   let c,pols;
   if(pId){const p=DB.polizze.find(x=>x.id===pId);if(!p)return;c=DB.clienti.find(x=>x.id===p.cId);pols=[p];}
   else{c=DB.clienti.find(x=>x.id===cId);if(!c)return;pols=DB.polizze.filter(p=>p.cId===c.id);}
-  document.getElementById('detail-content').innerHTML=`
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
-      <div class="user-avatar avatar-client" style="width:48px;height:48px;font-size:17px">${c.nome[0]}${c.cognome?c.cognome[0]:''}</div>
-      <div><div style="font-family:'Playfair Display',serif;font-size:20px">${c.nome} ${c.cognome}</div>
+  document.getElementById('detail-ct').innerHTML=`
+    <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px">
+      <div class="user-avatar avatar-client" style="width:46px;height:46px;font-size:16px">${c.nome[0]}${c.cognome?c.cognome[0]:''}</div>
+      <div><div style="font-family:'Playfair Display',serif;font-size:18px">${c.nome} ${c.cognome}</div>
         <span class="badge ${c.tipo==='Azienda'?'badge-orange':'badge-blue'}">${c.tipo}</span>
         <span class="badge badge-gray">${c.id}</span></div>
     </div>
-    <div style="display:flex;gap:7px;margin-bottom:18px">
-      <button class="btn btn-primary btn-xs" onclick="openChatWith('${c.id}');closeDetail()">💬 Msg</button>
-      <button class="btn btn-surface btn-xs" onclick="prepNotif('${c.id}')">📨 Notifica</button>
-      <button class="btn btn-surface btn-xs" onclick="openModal('m-polizza')">＋ Polizza</button>
+    <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-xs" onclick="oCW('${c.id}');closeD()">💬 Msg</button>
+      <button class="btn btn-surface btn-xs" onclick="pN('${c.id}')">📨 Notifica</button>
+      <button class="btn btn-surface btn-xs" onclick="om('m-polizza')">＋ Polizza</button>
     </div>
     <div class="detail-section"><div class="detail-section-title">Contatti</div>
       <div class="info-row"><span class="label">📞</span><span class="value">${c.tel||'—'}</span></div>
       <div class="info-row"><span class="label">✉️</span><span class="value">${c.email||'—'}</span></div>
       <div class="info-row"><span class="label">📍</span><span class="value">${c.indirizzo||'—'}</span></div>
+      <div class="info-row"><span class="label">👤 Agente</span><span class="value">${an(c.agenteId)}</span></div>
     </div>
     <div class="detail-section"><div class="detail-section-title">Polizze (${pols.length})</div>
       ${pols.map(p=>{const g=gg(p.scad);return`<div class="polizza-mini">
-        <div class="polizza-mini-header"><span style="font-weight:600;font-size:12px">${p.ramo}</span>${spb(p)}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-weight:600;font-size:12px">${p.ramo}</span>${spb(p)}</div>
         <div class="info-row"><span class="label">Compagnia</span><span class="value">${p.co}</span></div>
-        <div class="info-row"><span class="label">N° Polizza</span><span class="value" style="color:var(--blue2)">${p.num}</span></div>
+        <div class="info-row"><span class="label">N°</span><span class="value" style="color:var(--blue2)">${p.num}</span></div>
         <div class="info-row"><span class="label">Premio</span><span class="value">${fc(p.pr)}/${p.fr}</span></div>
         <div class="info-row"><span class="label">Scadenza</span><span class="value" style="color:var(--${g<0?'red':g<=30?'orange':'text'})">${fd(p.scad)} (${g<0?'SCADUTA':g+'gg'})</span></div>
-        ${p.note?`<div style="font-size:10px;color:var(--text3);margin-top:5px">${p.note}</div>`:''}
+        ${p.note?`<div style="font-size:10px;color:var(--text3);margin-top:4px">${p.note}</div>`:''}
       </div>`;}).join('')}
     </div>
     ${c.note?`<div class="detail-section"><div class="detail-section-title">Note interne</div><p style="font-size:12px;color:var(--text2)">${c.note}</p></div>`:''}`;
   document.getElementById('detail-panel').classList.add('open');
 }
-function closeDetail(){document.getElementById('detail-panel').classList.remove('open');}
+function closeD(){document.getElementById('detail-panel').classList.remove('open');}
 
-// ============================================================
-// NOTIFICHE sistema
-// ============================================================
+// ============ NOTIFICHE SISTEMA ============
 function addN(tipo,tx){DB.notifiche.unshift({id:gid('n'),tipo,tx,ts:new Date().toISOString(),letto:false});
-  if(DB.notifiche.length>50)DB.notifiche=DB.notifiche.slice(0,50);saveDB();updateBadges();}
-function renderNotifList(){
+  if(DB.notifiche.length>50)DB.notifiche=DB.notifiche.slice(0,50);sDB();updBadges();}
+function rNotifList(){
   const el=document.getElementById('notif-list');if(!el)return;
   el.innerHTML=DB.notifiche.slice(0,20).map(n=>`<div class="notif-item ${n.letto?'':'unread'}" onclick="markN('${n.id}')">
     <div class="notif-item-title">${n.tx}</div>
-    <div class="notif-item-time">${ts(n.ts)}</div>
+    <div class="notif-item-time">${fts(n.ts)}</div>
   </div>`).join('')||'<div style="text-align:center;padding:40px;color:var(--text3)">Nessuna notifica</div>';
 }
-function markN(id){const n=DB.notifiche.find(x=>x.id===id);if(n)n.letto=true;saveDB();updateBadges();}
+function markN(id){const n=DB.notifiche.find(x=>x.id===id);if(n)n.letto=true;sDB();updBadges();}
 function toggleNotif(){document.getElementById('notif-panel').classList.toggle('open');}
 
-// ============================================================
-// MODALS
-// ============================================================
-function openModal(id){
+// ============ MODALS ============
+function om(id){
   if(id==='m-polizza'){const sel=document.getElementById('np-c');
-    sel.innerHTML='<option value="">— Seleziona —</option>'+DB.clienti.map(c=>`<option value="${c.id}">${c.nome} ${c.cognome}</option>`).join('');}
+    sel.innerHTML='<option value="">— Seleziona —</option>'+DB.clienti.filter(c=>c.approvato).map(c=>`<option value="${c.id}">${c.nome} ${c.cognome}</option>`).join('');}
   if(id==='m-richiesta'){const sel=document.getElementById('nr-p');
     const ps=CU?.type==='client'?DB.polizze.filter(p=>p.cId===CU.id):DB.polizze;
     sel.innerHTML='<option value="">— Nessuna —</option>'+ps.map(p=>`<option value="${p.id}">${p.ramo} N°${p.num}${CU?.type==='broker'?' — '+cn(p.cId):''}</option>`).join('');}
+  if(id==='m-cliente'){const sel=document.getElementById('nc-ag');
+    sel.innerHTML=DB.agenti.map(a=>`<option value="${a.id}">${a.nome} ${a.cognome}</option>`).join('');}
   document.getElementById(id).classList.add('open');
 }
-function closeModal(id){document.getElementById(id).classList.remove('open');}
+function cm(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 
-// ============================================================
-// SALVA
-// ============================================================
-function salvaCliente(){
-  const n=document.getElementById('nc-n').value.trim();if(!n){showToast('Inserisci il nome','error');return;}
-  DB.clienti.push({id:gid('C'),nome:n,cognome:document.getElementById('nc-cg').value.trim(),tipo:document.getElementById('nc-t').value,
-    tel:document.getElementById('nc-tel').value,email:document.getElementById('nc-em').value,
-    indirizzo:document.getElementById('nc-ind').value,note:document.getElementById('nc-no').value,pass:'demo1234'});
-  saveDB();closeModal('m-cliente');['nc-n','nc-cg','nc-tel','nc-em','nc-ind','nc-no'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-  showToast(`Cliente ${n} aggiunto!`,'success');renderClienti();updateBadges();
+// ============ SALVA ============
+function saveCl(){
+  const n=document.getElementById('nc-n').value.trim();if(!n){showT('Inserisci il nome','error');return;}
+  const em=document.getElementById('nc-em').value.trim();
+  const pw=document.getElementById('nc-pw').value||'demo1234';
+  if(em&&DB.clienti.find(c=>c.email===em)){showT('Email già registrata','error');return;}
+  DB.clienti.push({id:gid('C'),nome:n,cognome:document.getElementById('nc-cg').value.trim(),
+    tipo:document.getElementById('nc-t').value,tel:document.getElementById('nc-tel').value,
+    email:em,indirizzo:document.getElementById('nc-in').value,
+    note:document.getElementById('nc-no').value,pass:pw,
+    agenteId:document.getElementById('nc-ag').value||DB.agenti[0]?.id,approvato:true});
+  sDB();cm('m-cliente');['nc-n','nc-cg','nc-tel','nc-em','nc-in','nc-no','nc-pw'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  showT(`Cliente ${n} aggiunto!`,'success');rCl();updBadges();
 }
-function salvaPolizza(){
+function saveAg(){
+  const n=document.getElementById('na-n').value.trim();
+  const em=document.getElementById('na-em').value.trim();
+  const pw=document.getElementById('na-pw').value;
+  if(!n||!em||!pw){showT('Compila i campi obbligatori','error');return;}
+  if(pw.length<6){showT('Password troppo corta','error');return;}
+  if(DB.agenti.find(a=>a.email===em)){showT('Email già registrata','error');return;}
+  const id=gid('A');
+  DB.agenti.push({id,nome:n,cognome:document.getElementById('na-cg').value.trim(),
+    agenzia:document.getElementById('na-ag').value,email:em,
+    tel:document.getElementById('na-tel').value,pass:pw,
+    note:document.getElementById('na-no').value,attivo:true,codice:'AG'+id.slice(-4)});
+  sDB();cm('m-agente');['na-n','na-cg','na-ag','na-em','na-tel','na-pw','na-no'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  showT(`Agente ${n} aggiunto!`,'success');rAgenti();updBadges();
+}
+function savePo(){
   const cId=document.getElementById('np-c').value;const num=document.getElementById('np-n').value.trim();
   const scad=document.getElementById('np-s').value;const pr=document.getElementById('np-p').value;
-  if(!cId||!num||!scad||!pr){showToast('Compila i campi obbligatori','error');return;}
+  if(!cId||!num||!scad||!pr){showT('Compila i campi obbligatori','error');return;}
   const id=gid('P');
   DB.polizze.push({id,cId,num,ramo:document.getElementById('np-r').value,co:document.getElementById('np-co').value,
     ini:document.getElementById('np-i').value,scad,pr:parseFloat(pr),fr:document.getElementById('np-f').value,
     note:document.getElementById('np-no').value,stato:'attiva'});
   DB.fatture.push({id:gid('F'),pId:id,cId,imp:parseFloat(pr),scad,stato:'attesa',nota:'Premio '+document.getElementById('np-f').value.toLowerCase()});
-  saveDB();closeModal('m-polizza');showToast('Polizza aggiunta!','success');renderPolizze();updateBadges();
+  sDB();cm('m-polizza');showT('Polizza aggiunta!','success');rPo();updBadges();
 }
-function inviaRichiesta(){
-  const desc=document.getElementById('nr-d').value.trim();if(!desc){showToast('Descrivi la richiesta','error');return;}
+function saveRq(){
+  const desc=document.getElementById('nr-d').value.trim();if(!desc){showT('Descrivi la richiesta','error');return;}
   const tipo=document.getElementById('nr-t').value;const pId=document.getElementById('nr-p').value;
   const id=gid('R');
   DB.richieste.push({id,cId:CU.id,tipo,pId:pId||null,desc,urg:document.getElementById('nr-u').value,stato:'aperta',data:tod(),risp:''});
   const cId=CU.id;if(!DB.messaggi[cId])DB.messaggi[cId]=[];
   DB.messaggi[cId].push({id:gid('m'),da:cId,tipo:'richiesta',tipo_r:tipo,rId:id,tx:desc,ts:new Date().toISOString(),letto:false});
   addN('richiesta',`Nuova richiesta (${rl(tipo)}) da ${cn(cId)}`);
-  saveDB();closeModal('m-richiesta');document.getElementById('nr-d').value='';
-  showToast('Richiesta inviata!','success');renderCRich();updateBadges();
+  sDB();cm('m-richiesta');document.getElementById('nr-d').value='';
+  showT('Richiesta inviata!','success');rCRich();updBadges();
 }
-function openRichClient(pId,tipo){
+function oRC(pId,tipo){
   document.getElementById('nr-t').value=tipo;
   const sel=document.getElementById('nr-p');
   const ps=DB.polizze.filter(p=>p.cId===CU.id);
   sel.innerHTML='<option value="">— Nessuna —</option>'+ps.map(p=>`<option value="${p.id}" ${p.id===pId?'selected':''}>${p.ramo} N°${p.num}</option>`).join('');
-  openModal('m-richiesta');
+  om('m-richiesta');
 }
 
-// ============================================================
-// ELIMINA
-// ============================================================
+// ============ ELIMINA ============
 function delC(id){if(!confirm('Eliminare questo cliente?'))return;
   DB.clienti=DB.clienti.filter(c=>c.id!==id);DB.polizze=DB.polizze.filter(p=>p.cId!==id);
   DB.fatture=DB.fatture.filter(f=>f.cId!==id);DB.richieste=DB.richieste.filter(r=>r.cId!==id);
-  delete DB.messaggi[id];saveDB();renderClienti();updateBadges();showToast('Eliminato','success');}
+  delete DB.messaggi[id];sDB();rCl();updBadges();showT('Eliminato','success');}
 function delP(id){if(!confirm('Eliminare questa polizza?'))return;
   DB.polizze=DB.polizze.filter(p=>p.id!==id);DB.fatture=DB.fatture.filter(f=>f.pId!==id);
-  saveDB();renderPolizze();updateBadges();showToast('Eliminata','success');}
+  sDB();rPo();updBadges();showT('Eliminata','success');}
 
-// ============================================================
-// TOAST
-// ============================================================
-function showToast(msg,type='success'){
-  const t=document.getElementById('toast');const ic={'success':'✅','error':'❌','info':'ℹ️','warning':'⚠️'};
-  document.getElementById('t-icon').textContent=ic[type]||'✅';document.getElementById('t-msg').textContent=msg;
+// ============ TOAST ============
+function showT(msg,type='success'){
+  const t=document.getElementById('toast');const ic={success:'✅',error:'❌',info:'ℹ️',warning:'⚠️'};
+  document.getElementById('t-ic').textContent=ic[type]||'✅';document.getElementById('t-ms').textContent=msg;
   t.className='toast show t-'+type;clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
-// ============================================================
-// AUTO CHECK
-// ============================================================
-function autoCheck(){
+// ============ AUTO CHECK ============
+function autoChk(){
   if(CU?.type!=='broker')return;
   DB.polizze.forEach(p=>{const g=gg(p.scad);
-    if([7,14,30].includes(g)){
-      const td=tod();const ok=DB.notifiche.some(n=>n.tx.includes(p.num)&&n.ts.startsWith(td));
-      if(!ok)addN('scadenza',`⏰ Polizza ${p.num} di ${cn(p.cId)} scade tra ${g} giorni`);
-    }
+    if([7,14,30].includes(g)){const td=tod();
+      const ok=DB.notifiche.some(n=>n.tx.includes(p.num)&&n.ts.startsWith(td));
+      if(!ok)addN('scadenza',`⏰ Polizza ${p.num} di ${cn(p.cId)} scade tra ${g} giorni`);}
   });
 }
 </script>
 </body>
 </html>
+JSEOF
+echo "TOTALE: $(wc -c < /home/claude/polizzehub-v2.html) bytes"
+<div class="toast" id="toast"><span id="t-ic">✅</span><span id="t-ms">OK</span></div>
+HTMLEOF
+echo "HTML done: $(wc -c < /home/claude/polizzehub-v2.html)"
