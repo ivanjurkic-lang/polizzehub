@@ -1,7 +1,3 @@
-bash
-
-head -c 50000 /mnt/user-data/outputs/polizzehub-platform.htmlOutput
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -843,4 +839,719 @@ let nLog=JSON.parse(localStorage.getItem('phub_nlog')||'[]');
 let selChs=['app','email','whatsapp'];
 
 function saveDB(){localStorage.setItem(DK,JSON.stringify(DB));}
-function saveNLog(){localStorage.setItem('phub_n
+function saveNLog(){localStorage.setItem('phub_nlog',JSON.stringify(nLog));}
+
+function ad(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r.toISOString().split('T')[0];}
+function tod(){return new Date().toISOString().split('T')[0];}
+function gid(p){return p+Date.now().toString(36).slice(-5).toUpperCase();}
+
+function initDB(){
+  const t=tod();
+  const db={
+    clienti:[
+      {id:'C001',nome:'Marco',cognome:'Ferrari',tipo:'Privato',tel:'+41 79 123 45 67',email:'marco.ferrari@email.ch',indirizzo:'Via Lugano 12, 6900 Lugano',note:'',pass:'demo1234'},
+      {id:'C002',nome:'Giulia',cognome:'Bianchi',tipo:'Privato',tel:'+41 78 234 56 78',email:'giulia.bianchi@gmail.ch',indirizzo:'Hauptstrasse 5, 8001 Zürich',note:'Cliente da 8 anni',pass:'demo1234'},
+      {id:'C003',nome:'TechnoSA',cognome:'',tipo:'Azienda',tel:'+41 91 345 67 89',email:'info@technosa.ch',indirizzo:'Via Industria 3, 6928 Manno',note:'PMI 15 dip.',pass:'demo1234'},
+      {id:'C004',nome:'Hans',cognome:'Müller',tipo:'Privato',tel:'+41 76 456 78 90',email:'hans.mueller@bluewin.ch',indirizzo:'Bahnhofstrasse 22, 3001 Bern',note:'',pass:'demo1234'},
+      {id:'C005',nome:'Sofia',cognome:'Rossi',tipo:'Privato',tel:'+41 79 567 89 01',email:'sofia.rossi@email.ch',indirizzo:'Via Pretorio 8, 6900 Lugano',note:'',pass:'demo1234'},
+      {id:'C006',nome:'Simona',cognome:'Busarello',tipo:'Privato',tel:'',email:'busarello.simona@gmail.com',indirizzo:'Via Mondonico 11, 6982 Agno',note:'Nata 13.05.1989 · HYUNDAI Tucson PHEV · Leasing Cembra · Sconto eco 20%',pass:'demo1234'},
+    ],
+    polizze:[
+      {id:'P001',cId:'C001',num:'CH-2022-00123',ramo:'Auto/Veicoli',co:'Zurich Insurance',ini:'2022-01-01',scad:ad(t,12),pr:1850,fr:'Annuale',note:'VW Golf 2019 TI-1234',stato:'attiva'},
+      {id:'P002',cId:'C001',num:'CH-2021-00456',ramo:'Casa/Immobili',co:'Helvetia',ini:'2021-03-01',scad:ad(t,95),pr:650,fr:'Annuale',note:'App. 3.5 locali',stato:'attiva'},
+      {id:'P003',cId:'C002',num:'CH-2023-00789',ramo:'Vita',co:'Swiss Life',ini:'2023-06-01',scad:ad(t,8),pr:2400,fr:'Mensile',note:'',stato:'attiva'},
+      {id:'P004',cId:'C003',num:'CH-2022-01001',ramo:'Azienda/RC',co:'AXA Svizzera',ini:'2022-07-01',scad:ad(t,25),pr:4200,fr:'Semestrale',note:'RC Prof + D&O',stato:'attiva'},
+      {id:'P005',cId:'C004',num:'CH-2023-00321',ramo:'Salute',co:'Allianz Svizzera',ini:'2023-01-01',scad:ad(t,145),pr:3200,fr:'Mensile',note:'',stato:'attiva'},
+      {id:'P006',cId:'C005',num:'CH-2024-00055',ramo:'Infortuni',co:'Generali Svizzera',ini:'2024-01-01',scad:ad(t,55),pr:420,fr:'Annuale',note:'',stato:'attiva'},
+      {id:'P007',cId:'C002',num:'CH-2023-00900',ramo:'Auto/Veicoli',co:'Mobiliar',ini:'2023-09-01',scad:ad(t,180),pr:980,fr:'Annuale',note:'BMW 320d 2021',stato:'attiva'},
+      {id:'P008',cId:'C006',num:'52311830-1',ramo:'Auto/Veicoli',co:'Generali Svizzera',ini:'2026-05-11',scad:'2031-12-31',pr:1431.40,fr:'Annuale',note:'HYUNDAI Tucson 1.6 TGDI PHEV · RC 100mio · Casco tot+parz · Offerta val. fino 11.08.2026',stato:'offerta'},
+    ],
+    fatture:[
+      {id:'F001',pId:'P001',cId:'C001',imp:1850,scad:ad(t,12),stato:'attesa',nota:'Premio annuale'},
+      {id:'F002',pId:'P003',cId:'C002',imp:2400,scad:ad(t,8),stato:'attesa',nota:'Premio annuale'},
+      {id:'F003',pId:'P004',cId:'C003',imp:2100,scad:ad(t,25),stato:'attesa',nota:'Premio semestrale'},
+      {id:'F004',pId:'P005',cId:'C004',imp:800,scad:ad(t,-5),stato:'scaduto',nota:'Premio trimestrale'},
+      {id:'F005',pId:'P006',cId:'C005',imp:420,scad:ad(t,-30),stato:'pagato',nota:'Premio annuale'},
+      {id:'F006',pId:'P008',cId:'C006',imp:1431.40,scad:'2026-12-31',stato:'attesa',nota:'Premio annuale Offerta 52311830'},
+    ],
+    richieste:[
+      {id:'R001',cId:'C001',tipo:'modifica',pId:'P001',desc:'Vorrei aggiungere copertura guida internazionale estesa.',urg:'normale',stato:'aperta',data:ad(t,-2),risp:''},
+      {id:'R002',cId:'C002',tipo:'rinnovo',pId:'P003',desc:'Polizza vita in scadenza, confermare rinnovo stesse condizioni.',urg:'alta',stato:'in_lavorazione',data:ad(t,-1),risp:'Stiamo preparando la proposta di rinnovo.'},
+      {id:'R003',cId:'C006',tipo:'documento',pId:'P008',desc:'Inviarmi copia polizza firmata per archivio.',urg:'normale',stato:'completata',data:ad(t,-5),risp:'Documento inviato via email.'},
+    ],
+    messaggi:{
+      'C001':[
+        {id:'m1',da:'broker',tx:'Buongiorno Marco! La polizza auto scade tra 12 giorni.',ts:new Date(Date.now()-86400000*2).toISOString(),letto:true},
+        {id:'m2',da:'C001',tx:'Grazie per il promemoria! Possiamo rinnovare alle stesse condizioni?',ts:new Date(Date.now()-86400000).toISOString(),letto:false},
+      ],
+      'C002':[
+        {id:'m3',da:'broker',tx:'Gentile Giulia, la polizza vita scade tra 8 giorni. Proposta rinnovo pronta.',ts:new Date(Date.now()-3600000*3).toISOString(),letto:true},
+        {id:'m4',da:'C002',tx:'Perfetto! Può inviarmi il documento da firmare?',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
+      ],
+      'C006':[
+        {id:'m5',da:'broker',tx:'Benvenuta Simona! Ho caricato la sua offerta Generali per il Tucson. Da confermare entro l\'11 agosto.',ts:new Date(Date.now()-86400000).toISOString(),letto:true},
+      ],
+    },
+    notifiche:[
+      {id:'n1',tipo:'scadenza',tx:'Polizza P001 di Ferrari scade tra 12 giorni',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
+      {id:'n2',tipo:'richiesta',tx:'Nuova richiesta da Marco Ferrari: modifica copertura',ts:new Date(Date.now()-86400000).toISOString(),letto:false},
+      {id:'n3',tipo:'messaggio',tx:'Nuovo messaggio da Giulia Bianchi',ts:new Date(Date.now()-3600000).toISOString(),letto:false},
+    ]
+  };
+  localStorage.setItem(DK,JSON.stringify(db));
+  return db;
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function gg(s){const t=new Date();t.setHours(0,0,0,0);return Math.round((new Date(s)-t)/86400000);}
+function fd(s){if(!s)return'—';return new Date(s).toLocaleDateString('it-CH',{day:'2-digit',month:'2-digit',year:'numeric'});}
+function fc(n){return'CHF '+parseFloat(n).toLocaleString('it-CH',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function cn(id){const c=DB.clienti.find(x=>x.id===id);return c?`${c.nome} ${c.cognome}`.trim():'—';}
+function pn(id){const p=DB.polizze.find(x=>x.id===id);return p?`${p.ramo} N°${p.num}`:'—';}
+function ts(ts){const d=new Date(ts),o=new Date();o.setHours(0,0,0,0);
+  return d>=o?d.toLocaleTimeString('it-CH',{hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString('it-CH',{day:'2-digit',month:'2-digit'});}
+function uc(g){return g<0||g<=14?'urgent':g<=30?'warning':'ok';}
+function rb(r){const m={'Auto/Veicoli':'badge-blue','Casa/Immobili':'badge-green','Vita':'badge-gold','Salute':'badge-purple','Azienda/RC':'badge-orange','Infortuni':'badge-red','Viaggi':'badge-gray'};return m[r]||'badge-gray';}
+function spb(p){const g=gg(p.scad);
+  if(p.stato==='offerta')return'<span class="badge badge-purple">📄 Offerta</span>';
+  if(g<0)return'<span class="badge badge-red">Scaduta</span>';
+  if(g<=14)return'<span class="badge badge-red">⚠️ Urgente</span>';
+  if(g<=30)return'<span class="badge badge-orange">Presto</span>';
+  return'<span class="badge badge-green">Attiva</span>';}
+function rl(t){const m={modifica:'🔧 Modifica',disdetta:'❌ Disdetta',preventivo:'💡 Preventivo',sinistro:'🚨 Sinistro',documento:'📄 Documento',rinnovo:'🔄 Rinnovo',altro:'✏️ Altro'};return m[t]||t;}
+function rsb(s){const m={aperta:'<span class="badge badge-orange">🔴 Aperta</span>',in_lavorazione:'<span class="badge badge-blue">🔄 In lavorazione</span>',completata:'<span class="badge badge-green">✅ Completata</span>'};return m[s]||'';}
+function setNB(id,n){const e=document.getElementById(id);if(!e)return;e.textContent=n;e.style.display=n>0?'inline-block':'none';}
+
+// ============================================================
+// LOGIN
+// ============================================================
+function setLoginTab(t){
+  document.querySelectorAll('.login-tab').forEach((e,i)=>e.classList.toggle('active',(i===0&&t==='broker')||(i===1&&t==='client')));
+  document.getElementById('login-broker').style.display=t==='broker'?'block':'none';
+  document.getElementById('login-client').style.display=t==='client'?'block':'none';
+}
+function quickLogin(w){
+  if(w==='broker')loginBroker();
+  else if(w==='simona'){document.getElementById('c-code').value='C006';loginClient();}
+  else{document.getElementById('c-code').value='C001';loginClient();}
+}
+function loginBroker(){CU={type:'broker',id:'broker',name:'Borivoje Jovanovic',ini:'BJ'};startApp();}
+function loginClient(){
+  const code=document.getElementById('c-code').value.trim();
+  const c=DB.clienti.find(x=>x.id===code||x.email===code);
+  if(!c){showToast('Cliente non trovato','error');return;}
+  CU={type:'client',id:c.id,name:`${c.nome} ${c.cognome}`.trim(),ini:`${c.nome[0]}${c.cognome?c.cognome[0]:''}`};
+  startApp();
+}
+function logout(){CU=null;document.getElementById('login-screen').style.display='flex';document.getElementById('app').style.display='none';}
+function startApp(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('sb-name').textContent=CU.name;
+  document.getElementById('sb-role').textContent=CU.type==='broker'?'Broker / Agente':'Cliente';
+  document.getElementById('sb-role-label').textContent=CU.type==='broker'?'Broker Pro':'Portale Cliente';
+  const av=document.getElementById('sb-avatar');
+  av.textContent=CU.ini;av.className='user-avatar '+(CU.type==='broker'?'avatar-broker':'avatar-client');
+  document.getElementById('nav-broker').style.display=CU.type==='broker'?'block':'none';
+  document.getElementById('nav-client').style.display=CU.type==='client'?'block':'none';
+  if(CU.type==='broker'){showView('dashboard');}else{showView('c-home');}
+  setupGreeting();updateBadges();autoCheck();
+}
+function setupGreeting(){
+  const h=new Date().getHours(),g=h<12?'Buongiorno':h<18?'Buon pomeriggio':'Buonasera';
+  const n=CU.name.split(' ')[0];
+  if(CU.type==='broker'){
+    document.getElementById('d-greeting').textContent=`${g}, ${n}`;
+    document.getElementById('d-date').textContent=new Date().toLocaleDateString('it-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  }else{document.getElementById('c-greeting').textContent=`${g}, ${n}!`;}
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const el=document.getElementById('view-'+name);if(el)el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')?.includes(`'${name}'`))n.classList.add('active');});
+  closeDetail();
+  const fns={dashboard:renderDashboard,clienti:renderClienti,polizze:renderPolizze,scadenze:renderScadenze,
+    'notifiche-send':renderNotifSend,richieste:renderRichieste,chat:renderBChat,fatture:renderFatture,
+    'c-home':renderCHome,'c-richieste':renderCRich,'c-chat':renderCChat,'c-sinistri':renderCSin,'c-docs':renderCDocs};
+  if(fns[name])fns[name]();
+}
+
+function updateBadges(){
+  const s30=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;}).length;
+  const ra=DB.richieste.filter(r=>r.stato==='aperta').length;
+  const um=Object.values(DB.messaggi).reduce((s,ms)=>s+ms.filter(m=>CU?.type==='broker'?(!m.letto&&m.da!=='broker'):(m.da==='broker'&&!m.letto)).length,0);
+  const nu=DB.notifiche.filter(n=>!n.letto).length;
+  setNB('nb-scadenze',s30);setNB('nb-richieste',ra);setNB('nb-chat',um);
+  setNB('nb-clienti',DB.clienti.length);setNB('nb-notif',nu);
+  if(CU?.type==='client'){
+    const mr=DB.richieste.filter(r=>r.cId===CU.id&&r.stato!=='completata').length;
+    setNB('nb-c-rich',mr);setNB('nb-c-chat',um);
+  }
+  renderNotifList();
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard(){
+  const s30=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;});
+  const tot=DB.polizze.reduce((s,p)=>s+parseFloat(p.pr||0),0);
+  document.getElementById('s-clienti').textContent=DB.clienti.length;
+  document.getElementById('s-clienti2').textContent=DB.clienti.filter(c=>c.tipo==='Azienda').length+' aziende';
+  document.getElementById('s-polizze').textContent=DB.polizze.length;
+  document.getElementById('s-polizze2').textContent=DB.polizze.filter(p=>p.stato==='offerta').length+' offerte';
+  document.getElementById('s-scad').textContent=s30.length;
+  document.getElementById('s-premio').textContent='CHF '+Math.round(tot).toLocaleString('it-CH');
+  const ub=document.getElementById('urgent-bar');
+  if(s30.length>0){ub.style.display='flex';document.getElementById('urg-count').textContent=s30.length+' polizz'+(s30.length===1?'a':'e');
+    document.getElementById('urg-names').textContent=s30.slice(0,3).map(p=>cn(p.cId)).join(', ')+(s30.length>3?'...':'');
+  }else ub.style.display='none';
+  // scadenze
+  const urg=DB.polizze.map(p=>({...p,g:gg(p.scad)})).filter(p=>p.g>=0&&p.g<=30).sort((a,b)=>a.g-b.g).slice(0,4);
+  const se=document.getElementById('d-scadenze');
+  se.innerHTML=urg.length?urg.map(p=>{const d=new Date(p.scad),u=uc(p.g);
+    return`<div class="tl-item ${u}" onclick="openDetail('${p.id}',null)">
+      <div class="tl-date"><div class="tl-day">${d.getDate()}</div><div class="tl-month">${d.toLocaleDateString('it-CH',{month:'short'})}</div></div>
+      <div class="tl-sep"></div>
+      <div class="tl-main"><div class="tl-client">${cn(p.cId)}</div><div class="tl-detail">${p.ramo} · ${p.co}</div></div>
+      <div class="tl-right"><div class="tl-days ${u}">${p.g===0?'Oggi!':p.g+'gg'}</div><div class="tl-premio">${fc(p.pr)}</div></div>
+      <button class="btn btn-surface btn-xs" onclick="event.stopPropagation();prepNotif('${p.cId}')">📨</button>
+    </div>`;}).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:16px">🎉 Nessuna urgente!</p>';
+  // richieste
+  const ra=DB.richieste.filter(r=>r.stato==='aperta').slice(0,3);
+  const re=document.getElementById('d-richieste');
+  re.innerHTML=ra.length?ra.map(r=>`<div class="richiesta-card" onclick="showView('richieste')">
+    <div class="richiesta-header"><span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span>
+    <span style="font-size:10px;color:var(--text3)">${fd(r.data)}</span></div>
+    <div style="font-size:12px;font-weight:600">${cn(r.cId)}</div>
+    <div style="font-size:11px;color:var(--text2);margin-top:3px">${r.desc.slice(0,65)}${r.desc.length>65?'...':''}</div>
+  </div>`).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:16px">✅ Nessuna aperta</p>';
+  // messaggi
+  const ums=Object.entries(DB.messaggi).flatMap(([cId,ms])=>ms.filter(m=>m.da!=='broker'&&!m.letto).map(m=>({...m,cId}))).sort((a,b)=>new Date(b.ts)-new Date(a.ts)).slice(0,3);
+  const me=document.getElementById('d-messaggi');
+  me.innerHTML=ums.length?ums.map(m=>`<div class="richiesta-card" onclick="openChatWith('${m.cId}')">
+    <div class="richiesta-header"><span style="font-weight:600;font-size:12px">${cn(m.cId)}</span>
+    <span style="font-size:10px;color:var(--text3)">${ts(m.ts)}</span></div>
+    <div style="font-size:11px;color:var(--text2)">${m.tx.slice(0,80)}${m.tx.length>80?'...':''}</div>
+  </div>`).join(''):'<p style="color:var(--text3);font-size:12px;text-align:center;padding:14px">Nessun messaggio non letto</p>';
+  updateBadges();
+}
+
+// ============================================================
+// CLIENTI
+// ============================================================
+function renderClienti(){
+  const q=(document.getElementById('srch-c')?.value||'').toLowerCase();
+  const tipo=document.getElementById('flt-c-tipo')?.value||'';
+  const fl=DB.clienti.filter(c=>`${c.nome} ${c.cognome} ${c.email} ${c.id}`.toLowerCase().includes(q)&&(!tipo||c.tipo===tipo));
+  const tb=document.getElementById('tb-clienti');if(!tb)return;
+  tb.innerHTML=fl.map(c=>{
+    const ps=DB.polizze.filter(p=>p.cId===c.id);
+    const pr=ps.map(p=>p.scad).sort()[0];const gp=pr?gg(pr):null;
+    const tot=ps.reduce((s,p)=>s+parseFloat(p.pr||0),0);
+    const ra=DB.richieste.filter(r=>r.cId===c.id&&r.stato==='aperta').length;
+    return`<tr><td><div style="font-weight:600">${c.nome} ${c.cognome}</div><div style="font-size:10px;color:var(--text3)">${c.id}·${c.tipo}</div></td>
+    <td><div style="font-size:11px">${c.tel||'—'}</div><div style="font-size:11px;color:var(--text2)">${c.email||'—'}</div></td>
+    <td><span class="badge badge-blue">${ps.length}</span></td>
+    <td><span style="color:var(--${gp===null?'text3':gp<=14?'red':gp<=30?'orange':'text2'})">${pr?fd(pr)+' ('+gp+'gg)':'—'}</span></td>
+    <td style="font-weight:600">${tot>0?fc(tot):'—'}</td>
+    <td>${ra>0?`<span class="badge badge-orange">${ra}</span>`:'<span class="badge badge-gray">0</span>'}</td>
+    <td style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="btn btn-surface btn-xs" onclick="openDetail(null,'${c.id}')">📂</button>
+      <button class="btn btn-surface btn-xs" onclick="openChatWith('${c.id}')">💬</button>
+      <button class="btn btn-surface btn-xs" onclick="prepNotif('${c.id}')">📨</button>
+      <button class="btn btn-danger btn-xs" onclick="delC('${c.id}')">🗑</button>
+    </td></tr>`;
+  }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px">Nessun cliente</td></tr>';
+}
+
+// ============================================================
+// POLIZZE
+// ============================================================
+function renderPolizze(){
+  const q=(document.getElementById('srch-p')?.value||'').toLowerCase();
+  const rm=document.getElementById('flt-p-ramo')?.value||'';
+  const st=document.getElementById('flt-p-stato')?.value||'';
+  const fl=DB.polizze.filter(p=>{
+    const g=gg(p.scad);const s=g<0?'scaduta':p.stato;
+    return`${cn(p.cId)} ${p.num} ${p.co}`.toLowerCase().includes(q)&&(!rm||p.ramo===rm)&&(!st||s===st);
+  }).sort((a,b)=>gg(a.scad)-gg(b.scad));
+  const tb=document.getElementById('tb-polizze');if(!tb)return;
+  tb.innerHTML=fl.map(p=>{const g=gg(p.scad);return`<tr>
+    <td><code style="color:var(--blue2);font-size:11px">${p.num}</code></td>
+    <td style="font-weight:600">${cn(p.cId)}</td>
+    <td><span class="badge ${rb(p.ramo)}">${p.ramo}</span></td>
+    <td style="font-size:11px">${p.co}</td>
+    <td><span style="color:var(--${g<0?'red':g<=14?'red':g<=30?'orange':'text2'})">${fd(p.scad)}</span>
+      <div style="font-size:10px;color:var(--text3)">${g<0?'SCADUTA':g+'gg'}</div></td>
+    <td style="font-weight:600">${fc(p.pr)}</td>
+    <td>${spb(p)}</td>
+    <td style="display:flex;gap:4px">
+      <button class="btn btn-surface btn-xs" onclick="openDetail('${p.id}',null)">👁</button>
+      <button class="btn btn-surface btn-xs" onclick="prepNotif('${p.cId}')">📨</button>
+      <button class="btn btn-danger btn-xs" onclick="delP('${p.id}')">🗑</button>
+    </td></tr>`;}).join('')||'<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:30px">Nessuna polizza</td></tr>';
+}
+
+// ============================================================
+// SCADENZE
+// ============================================================
+function renderScadenze(){
+  const mx=parseInt(document.getElementById('flt-scad')?.value||'30');
+  const ls=DB.polizze.map(p=>({...p,g:gg(p.scad)})).filter(p=>p.g>=-7&&p.g<=mx).sort((a,b)=>a.g-b.g);
+  const el=document.getElementById('tl-scadenze');if(!el)return;
+  el.innerHTML=ls.length?ls.map(p=>{const d=new Date(p.scad);const u=uc(p.g);
+    const gl=p.g<0?`SCADUTA ${Math.abs(p.g)}gg fa`:p.g===0?'SCADE OGGI!':p.g+'gg';
+    return`<div class="tl-item ${u}">
+      <div class="tl-date"><div class="tl-day">${d.getDate()}</div><div class="tl-month">${d.toLocaleDateString('it-CH',{month:'short',year:'2-digit'})}</div></div>
+      <div class="tl-sep"></div>
+      <div class="tl-main"><div class="tl-client">${cn(p.cId)}</div>
+        <div class="tl-detail">${p.ramo}·${p.co}·N°${p.num}</div>
+        <div class="tl-detail">Premio: ${fc(p.pr)}/${p.fr}</div></div>
+      <div class="tl-right"><div class="tl-days ${u}">${gl}</div>${spb(p)}</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <button class="btn btn-surface btn-xs" onclick="openDetail('${p.id}',null)">📂</button>
+        <button class="btn btn-primary btn-xs" onclick="prepNotif('${p.cId}')">📨</button>
+      </div>
+    </div>`;}).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">🎉 Nessuna scadenza nel periodo</div>';
+}
+
+// ============================================================
+// NOTIFICHE SEND
+// ============================================================
+function renderNotifSend(){
+  const sel=document.getElementById('n-c-sel');
+  if(sel)sel.innerHTML=DB.clienti.map(c=>`<option value="${c.id}">${c.nome} ${c.cognome}</option>`).join('');
+  const s30=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;}).length;
+  const s60=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=60;}).length;
+  const ns=document.getElementById('n-stats');
+  if(ns)ns.innerHTML=`
+    <div class="info-row"><span class="label">Scadenze 30gg</span><span class="value" style="color:var(--red)">${s30}</span></div>
+    <div class="info-row"><span class="label">Scadenze 60gg</span><span class="value" style="color:var(--orange)">${s60}</span></div>
+    <div class="info-row"><span class="label">Notifiche inviate</span><span class="value">${nLog.length}</span></div>
+    <div class="info-row"><span class="label">Clienti totali</span><span class="value">${DB.clienti.length}</span></div>
+    <div class="info-row"><span class="label">Con email</span><span class="value">${DB.clienti.filter(c=>c.email).length}</span></div>
+    <div class="info-row"><span class="label">Con telefono</span><span class="value">${DB.clienti.filter(c=>c.tel).length}</span></div>`;
+  const tb=document.getElementById('tb-notif-log');if(!tb)return;
+  tb.innerHTML=nLog.length?[...nLog].reverse().slice(0,20).map(l=>`<tr>
+    <td style="font-size:11px">${ts(l.ts)}</td><td>${l.dest}</td>
+    <td><span class="badge badge-blue">${l.tipo}</span></td>
+    <td style="font-size:11px">${l.chs.join(', ')}</td>
+    <td><span class="badge badge-green">✅</span></td></tr>`).join('')
+    :'<tr><td colspan="5" style="text-align:center;color:var(--text3);padding:30px">Nessuna notifica inviata</td></tr>';
+}
+function toggleClienteRow(){document.getElementById('n-c-row').style.display=document.getElementById('n-dest').value==='singolo'?'block':'none';}
+function toggleCh(el){el.classList.toggle('selected');const ch=el.dataset.ch;
+  if(el.classList.contains('selected'))selChs.push(ch);else selChs=selChs.filter(x=>x!==ch);}
+function inviaNotifica(){
+  const dest=document.getElementById('n-dest').value;
+  const tipo=document.getElementById('n-tipo').value;
+  if(!selChs.length){showToast('Seleziona almeno un canale','error');return;}
+  let targets=[];
+  if(dest==='scadenza30')targets=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;}).map(p=>p.cId);
+  else if(dest==='scadenza60')targets=DB.polizze.filter(p=>{const g=gg(p.scad);return g>=0&&g<=60;}).map(p=>p.cId);
+  else if(dest==='tutti')targets=DB.clienti.map(c=>c.id);
+  else targets=[document.getElementById('n-c-sel').value];
+  targets=[...new Set(targets)];
+  const msgs={'scadenza':'⏰ Gentile [N], la sua polizza sta per scadere. Contatti il broker per il rinnovo.',
+    'rinnovo':'🔄 Gentile [N], le proponiamo il rinnovo della polizza. Risponda per confermare.',
+    'documento':'📄 Gentile [N], un nuovo documento è disponibile nel suo portale.',
+    'personalizzato':document.getElementById('n-testo').value||'Messaggio dal broker.'};
+  targets.forEach(cId=>{
+    const c=DB.clienti.find(x=>x.id===cId);if(!c)return;
+    const tx=msgs[tipo].replace('[N]',c.nome);
+    if(!DB.messaggi[cId])DB.messaggi[cId]=[];
+    DB.messaggi[cId].push({id:gid('m'),da:'broker',tx,ts:new Date().toISOString(),letto:false});
+    nLog.push({ts:new Date().toISOString(),dest:`${c.nome} ${c.cognome}`,tipo,chs:[...selChs],tx});
+  });
+  saveDB();saveNLog();
+  addN('invio',`Notifica inviata a ${targets.length} client${targets.length===1?'e':'i'}`);
+  showToast(`✅ Inviata a ${targets.length} client${targets.length===1?'e':'i'}!`,'success');
+  renderNotifSend();updateBadges();
+}
+function prepNotifAll(){document.getElementById('n-dest').value='scadenza30';showView('notifiche-send');}
+function prepNotif(cId){document.getElementById('n-dest').value='singolo';document.getElementById('n-c-row').style.display='block';
+  const sel=document.getElementById('n-c-sel');if(sel){sel.innerHTML=DB.clienti.map(c=>`<option value="${c.id}" ${c.id===cId?'selected':''}>${c.nome} ${c.cognome}</option>`).join('');}
+  showView('notifiche-send');}
+
+// ============================================================
+// RICHIESTE broker
+// ============================================================
+function renderRichieste(){
+  const st=document.getElementById('flt-r-stato')?.value||'';
+  const ti=document.getElementById('flt-r-tipo')?.value||'';
+  const fl=DB.richieste.filter(r=>(!st||r.stato===st)&&(!ti||r.tipo===ti)).sort((a,b)=>new Date(b.data)-new Date(a.data));
+  const el=document.getElementById('rich-list');if(!el)return;
+  el.innerHTML=fl.length?fl.map(r=>`<div class="richiesta-card">
+    <div class="richiesta-header">
+      <span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span>
+      ${rsb(r.stato)}
+      <span style="font-size:10px;color:var(--text3);margin-left:auto">${fd(r.data)}</span>
+    </div>
+    <div style="display:flex;gap:9px;align-items:center;margin-bottom:7px">
+      <span style="font-weight:600;font-size:12px">${cn(r.cId)}</span>
+      ${r.pId?`<span class="badge badge-blue" style="font-size:9px">${pn(r.pId)}</span>`:''}
+      ${r.urg==='urgente'?'<span class="badge badge-red">🔴 Urgente</span>':r.urg==='alta'?'<span class="badge badge-orange">Alta</span>':''}
+    </div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:10px">${r.desc}</div>
+    ${r.risp?`<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:7px;padding:9px 11px;font-size:11px;margin-bottom:10px">
+      <strong style="color:var(--green)">✅ Risposta:</strong> ${r.risp}</div>`:''}
+    <div style="display:flex;gap:7px;flex-wrap:wrap">
+      ${r.stato==='aperta'?`<button class="btn btn-primary btn-xs" onclick="updR('${r.id}','in_lavorazione')">🔄 Prendi in carico</button>`:''}
+      ${r.stato!=='completata'?`<button class="btn btn-success btn-xs" onclick="updR('${r.id}','completata')">✅ Completa</button>`:''}
+      <button class="btn btn-surface btn-xs" onclick="openChatWith('${r.cId}')">💬 Chat</button>
+      <button class="btn btn-surface btn-xs" onclick="addRisp('${r.id}')">✏️ Risposta</button>
+    </div>
+  </div>`).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna richiesta trovata</div>';
+}
+function updR(id,stato){const r=DB.richieste.find(x=>x.id===id);if(r){r.stato=stato;saveDB();renderRichieste();updateBadges();showToast('Aggiornato','success');}}
+function addRisp(id){const r=prompt('Risposta al cliente:');if(r===null)return;const x=DB.richieste.find(i=>i.id===id);if(x){x.risp=r;x.stato='in_lavorazione';saveDB();renderRichieste();showToast('Risposta aggiunta','success');}}
+
+// ============================================================
+// CHAT broker
+// ============================================================
+function renderBChat(){
+  const cl=document.getElementById('conv-list');if(!cl)return;
+  cl.innerHTML=DB.clienti.map(c=>{
+    const ms=DB.messaggi[c.id]||[];const last=ms[ms.length-1];
+    const unr=ms.filter(m=>m.da!=='broker'&&!m.letto).length;
+    return`<div class="chat-conv ${CCid===c.id?'active':''}" onclick="selChat('${c.id}')">
+      <div class="chat-conv-name">${c.nome} ${c.cognome}</div>
+      <div class="chat-conv-preview">${last?last.tx:'Nessun messaggio'}</div>
+      <div class="chat-conv-time">${last?ts(last.ts):''}</div>
+      ${unr>0?'<div class="unread-dot"></div>':''}
+    </div>`;}).join('');
+  const unr=Object.values(DB.messaggi).reduce((s,ms)=>s+ms.filter(m=>m.da!=='broker'&&!m.letto).length,0);
+  const cu=document.getElementById('chat-unread');if(cu){cu.textContent=unr;cu.style.display=unr>0?'inline-block':'none';}
+  if(CCid)renderBMsgs();
+}
+function selChat(cId){
+  CCid=cId;const c=DB.clienti.find(x=>x.id===cId);
+  document.getElementById('chat-name').textContent=`${c.nome} ${c.cognome}`;
+  document.getElementById('chat-sub').textContent=c.email;
+  document.getElementById('chat-profilo-btn').style.display='inline-flex';
+  if(DB.messaggi[cId])DB.messaggi[cId].forEach(m=>{if(m.da!=='broker')m.letto=true;});
+  saveDB();renderBMsgs();renderBChat();updateBadges();
+}
+function renderBMsgs(){
+  const el=document.getElementById('broker-msgs');if(!el||!CCid)return;
+  const ms=DB.messaggi[CCid]||[];
+  el.innerHTML=ms.map(m=>{
+    if(m.tipo==='richiesta')return`<div class="msg-request"><div class="msg-request-type">📝 ${rl(m.tipo_r)} inviata</div>
+      <div style="font-size:12px">${m.tx}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">${ts(m.ts)}</div>
+      <div style="display:flex;gap:7px;margin-top:8px">
+        <button class="btn btn-primary btn-xs" onclick="updR('${m.rId}','in_lavorazione')">🔄 Prendi in carico</button>
+        <button class="btn btn-surface btn-xs" onclick="showView('richieste')">📋 Vedi</button>
+      </div></div>`;
+    const s=m.da==='broker';
+    return`<div class="msg ${s?'sent':'received'}">${m.tx}<div class="msg-time">${ts(m.ts)}${s?' · Broker':''}</div></div>`;
+  }).join('');
+  el.scrollTop=el.scrollHeight;
+}
+function sendBMsg(){
+  if(!CCid)return;const inp=document.getElementById('broker-input');const tx=inp.value.trim();if(!tx)return;
+  if(!DB.messaggi[CCid])DB.messaggi[CCid]=[];
+  DB.messaggi[CCid].push({id:gid('m'),da:'broker',tx,ts:new Date().toISOString(),letto:false});
+  saveDB();inp.value='';renderBMsgs();addN('msg',`Risposta inviata a ${cn(CCid)}`);
+}
+function qi(t){const i=document.getElementById('broker-input');i.value=t;i.focus();}
+function openChatWith(cId){CCid=cId;showView('chat');setTimeout(()=>selChat(cId),50);}
+function openDetailCurrent(){if(CCid)openDetail(null,CCid);}
+
+// ============================================================
+// FATTURE
+// ============================================================
+function renderFatture(){
+  const q=(document.getElementById('srch-f')?.value||'').toLowerCase();
+  const st=document.getElementById('flt-f-stato')?.value||'';
+  const fl=DB.fatture.filter(f=>`${cn(f.cId)} ${f.id}`.toLowerCase().includes(q)&&(!st||f.stato===st));
+  const tb=document.getElementById('tb-fatture');if(!tb)return;
+  tb.innerHTML=fl.map(f=>{const pol=DB.polizze.find(p=>p.id===f.pId);const g=gg(f.scad);
+    const sb=f.stato==='pagato'?'<span class="badge badge-green">✅ Pagato</span>':
+      f.stato==='scaduto'?'<span class="badge badge-red">❌ Scaduto</span>':'<span class="badge badge-orange">⏳ Attesa</span>';
+    return`<tr><td><code style="color:var(--blue2);font-size:11px">${f.id}</code></td>
+    <td>${cn(f.cId)}</td><td style="font-size:11px">${pol?pol.ramo:'—'}</td>
+    <td style="font-weight:600">${fc(f.imp)}</td>
+    <td style="color:var(--${g<0?'red':g<=7?'orange':'text2'})">${fd(f.scad)}</td>
+    <td>${sb}</td>
+    <td>${f.stato!=='pagato'?`<button class="btn btn-success btn-xs" onclick="payF('${f.id}')">✅ Pagato</button>`:''}</td></tr>`;
+  }).join('')||'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px">Nessuna fattura</td></tr>';
+}
+function payF(id){const f=DB.fatture.find(x=>x.id===id);if(f){f.stato='pagato';saveDB();renderFatture();showToast('Fattura pagata','success');}}
+
+// ============================================================
+// CLIENT HOME
+// ============================================================
+function renderCHome(){
+  const cId=CU.id;const ps=DB.polizze.filter(p=>p.cId===cId);
+  const urg=ps.filter(p=>{const g=gg(p.scad);return g>=0&&g<=30;});
+  const tot=ps.reduce((s,p)=>s+parseFloat(p.pr||0),0);
+  document.getElementById('cs-pol').textContent=ps.length;
+  document.getElementById('cs-prem').textContent='CHF '+Math.round(tot).toLocaleString('it-CH');
+  document.getElementById('cs-scad').textContent=urg.length;
+  const ub=document.getElementById('c-urg-bar');
+  if(urg.length>0){ub.style.display='flex';document.getElementById('c-urg-text').innerHTML=`<strong>${urg.length}</strong> polizz${urg.length===1?'a':'e'} scad${urg.length===1?'e':'ono'} entro 30 giorni`;}
+  else ub.style.display='none';
+  const el=document.getElementById('c-pol-list');if(!el)return;
+  el.innerHTML=ps.length?ps.map(p=>{const g=gg(p.scad);return`<div class="polizza-card-client">
+    <div class="pol-card-header">
+      <div><div class="pol-card-ramo">${p.ramo}</div><div class="pol-card-company">${p.co}</div></div>
+      ${spb(p)}
+    </div>
+    <div class="pol-info-grid">
+      <div><div class="pol-info-label">N° Polizza</div><div class="pol-info-value" style="color:var(--blue2)">${p.num}</div></div>
+      <div><div class="pol-info-label">Premio annuo</div><div class="pol-info-value">${fc(p.pr)}</div></div>
+      <div><div class="pol-info-label">Scadenza</div><div class="pol-info-value" style="color:var(--${g<0?'red':g<=30?'orange':'text'})">${fd(p.scad)}</div></div>
+      <div><div class="pol-info-label">Frequenza</div><div class="pol-info-value">${p.fr}</div></div>
+    </div>
+    ${p.note?`<div style="font-size:11px;color:var(--text3);margin-bottom:12px;padding:7px 10px;background:var(--surface2);border-radius:6px">📝 ${p.note}</div>`:''}
+    <div class="pol-card-actions">
+      <button class="btn btn-surface btn-sm" onclick="openRichClient('${p.id}','rinnovo')">🔄 Rinnova</button>
+      <button class="btn btn-surface btn-sm" onclick="openRichClient('${p.id}','modifica')">🔧 Modifica</button>
+      <button class="btn btn-surface btn-sm" onclick="openRichClient('${p.id}','disdetta')">❌ Disdetta</button>
+      <button class="btn btn-primary btn-sm" onclick="showView('c-chat')">💬 Broker</button>
+    </div>
+  </div>`;}  ).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna polizza</div>';
+}
+
+// ============================================================
+// CLIENT RICHIESTE
+// ============================================================
+function renderCRich(){
+  const cId=CU.id;const rs=DB.richieste.filter(r=>r.cId===cId).sort((a,b)=>new Date(b.data)-new Date(a.data));
+  const el=document.getElementById('c-rich-list');if(!el)return;
+  el.innerHTML=rs.length?rs.map(r=>`<div class="richiesta-card">
+    <div class="richiesta-header">
+      <span style="font-size:11px;font-weight:700;color:var(--orange)">${rl(r.tipo)}</span>
+      ${rsb(r.stato)}
+      <span style="font-size:10px;color:var(--text3);margin-left:auto">${fd(r.data)}</span>
+    </div>
+    ${r.pId?`<div style="font-size:11px;color:var(--text2);margin-bottom:6px">${pn(r.pId)}</div>`:''}
+    <div style="font-size:12px;color:var(--text2);margin-bottom:${r.risp?'10':'0'}px">${r.desc}</div>
+    ${r.risp?`<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:7px;padding:9px 11px;font-size:11px;margin-top:7px">
+      <strong style="color:var(--green)">✅ Risposta broker:</strong><br>${r.risp}</div>`:''}
+  </div>`).join(''):`<div style="text-align:center;padding:50px;color:var(--text3)">Nessuna richiesta.<br>
+    <button class="btn btn-primary btn-sm" style="margin-top:14px" onclick="openModal('m-richiesta')">＋ Nuova</button></div>`;
+}
+
+// ============================================================
+// CLIENT CHAT
+// ============================================================
+function renderCChat(){
+  const cId=CU.id;const ms=(DB.messaggi[cId]||[]);
+  ms.forEach(m=>{if(m.da==='broker')m.letto=true;});saveDB();
+  const el=document.getElementById('client-msgs');if(!el)return;
+  el.innerHTML=ms.map(m=>{
+    if(m.tipo==='richiesta')return`<div class="msg-request"><div class="msg-request-type">📝 ${rl(m.tipo_r)} inviata</div>
+      <div style="font-size:12px">${m.tx}</div><div style="font-size:10px;color:var(--text3);margin-top:3px">${ts(m.ts)}</div></div>`;
+    const s=m.da===cId||m.da==='client';
+    return`<div class="msg ${s?'sent':'received'}">${m.tx}<div class="msg-time">${ts(m.ts)}${!s?' · Broker':''}</div></div>`;
+  }).join('');
+  el.scrollTop=el.scrollHeight;updateBadges();
+}
+function sendCMsg(){
+  const inp=document.getElementById('client-input');const tx=inp.value.trim();if(!tx)return;
+  const cId=CU.id;if(!DB.messaggi[cId])DB.messaggi[cId]=[];
+  DB.messaggi[cId].push({id:gid('m'),da:cId,tx,ts:new Date().toISOString(),letto:false});
+  saveDB();inp.value='';renderCChat();
+  setTimeout(()=>{
+    DB.messaggi[cId].push({id:gid('m'),da:'broker',tx:'Grazie per il messaggio! Ho ricevuto la sua richiesta e la contatterò a breve. 🙏',ts:new Date().toISOString(),letto:false});
+    saveDB();renderCChat();addN('msg','Nuovo messaggio dal broker');updateBadges();
+  },1600);
+}
+function cqi(t){const i=document.getElementById('client-input');i.value=t;i.focus();}
+
+// ============================================================
+// CLIENT SINISTRI
+// ============================================================
+function renderCSin(){
+  const sel=document.getElementById('sin-pol');if(!sel)return;
+  sel.innerHTML=DB.polizze.filter(p=>p.cId===CU.id).map(p=>`<option value="${p.id}">${p.ramo}·${p.num}</option>`).join('');
+}
+function segnalaSinistro(){
+  const desc=document.getElementById('sin-desc').value.trim();
+  if(!desc){showToast('Descrivi l\'accaduto','error');return;}
+  const id=gid('R');const tipo=document.getElementById('sin-tipo').value;
+  const data=document.getElementById('sin-data').value;const ctrl=document.getElementById('sin-ctrl').value;
+  const tx=`SINISTRO: ${tipo}${data?' · '+fd(data):''} — ${desc}${ctrl?' · Controparte: '+ctrl:''}`;
+  DB.richieste.push({id,cId:CU.id,tipo:'sinistro',pId:document.getElementById('sin-pol').value,desc:tx,urg:'urgente',stato:'aperta',data:tod(),risp:''});
+  const cId=CU.id;if(!DB.messaggi[cId])DB.messaggi[cId]=[];
+  DB.messaggi[cId].push({id:gid('m'),da:cId,tipo:'richiesta',tipo_r:'sinistro',rId:id,tx,ts:new Date().toISOString(),letto:false});
+  addN('richiesta',`🚨 Sinistro da ${cn(cId)}`);saveDB();
+  showToast('Sinistro segnalato!','success');
+  document.getElementById('sin-desc').value='';document.getElementById('sin-ctrl').value='';
+  setTimeout(()=>showView('c-richieste'),600);
+}
+
+// ============================================================
+// CLIENT DOCS
+// ============================================================
+function renderCDocs(){
+  const el=document.getElementById('c-docs-list');if(!el)return;
+  const ps=DB.polizze.filter(p=>p.cId===CU.id);
+  el.innerHTML=ps.length?ps.map(p=>`<div class="card" style="margin-bottom:12px">
+    <div class="card-header">
+      <div><div class="card-title">${p.ramo} — ${p.co}</div><div style="font-size:11px;color:var(--text2)">N°${p.num}</div></div>
+      ${spb(p)}
+    </div>
+    <div class="card-body">
+      <div class="info-row"><span class="label">Polizza (PDF)</span><button class="btn btn-surface btn-xs" onclick="fakeD('Polizza_${p.num}.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">Attestato assicurativo</span><button class="btn btn-surface btn-xs" onclick="fakeD('Attestato_${p.num}.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">Condizioni generali (CGA)</span><button class="btn btn-surface btn-xs" onclick="fakeD('CGA_2026.pdf')">📄 Scarica</button></div>
+      <div class="info-row"><span class="label">Ultima fattura</span><button class="btn btn-surface btn-xs" onclick="fakeD('Fattura_${p.num}.pdf')">📄 Scarica</button></div>
+    </div>
+  </div>`).join(''):'<div style="text-align:center;padding:50px;color:var(--text3)">Nessun documento</div>';
+}
+function fakeD(n){showToast(`📄 Download ${n} avviato...`,'success');}
+
+// ============================================================
+// DETAIL PANEL
+// ============================================================
+function openDetail(pId,cId){
+  let c,pols;
+  if(pId){const p=DB.polizze.find(x=>x.id===pId);if(!p)return;c=DB.clienti.find(x=>x.id===p.cId);pols=[p];}
+  else{c=DB.clienti.find(x=>x.id===cId);if(!c)return;pols=DB.polizze.filter(p=>p.cId===c.id);}
+  document.getElementById('detail-content').innerHTML=`
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+      <div class="user-avatar avatar-client" style="width:48px;height:48px;font-size:17px">${c.nome[0]}${c.cognome?c.cognome[0]:''}</div>
+      <div><div style="font-family:'Playfair Display',serif;font-size:20px">${c.nome} ${c.cognome}</div>
+        <span class="badge ${c.tipo==='Azienda'?'badge-orange':'badge-blue'}">${c.tipo}</span>
+        <span class="badge badge-gray">${c.id}</span></div>
+    </div>
+    <div style="display:flex;gap:7px;margin-bottom:18px">
+      <button class="btn btn-primary btn-xs" onclick="openChatWith('${c.id}');closeDetail()">💬 Msg</button>
+      <button class="btn btn-surface btn-xs" onclick="prepNotif('${c.id}')">📨 Notifica</button>
+      <button class="btn btn-surface btn-xs" onclick="openModal('m-polizza')">＋ Polizza</button>
+    </div>
+    <div class="detail-section"><div class="detail-section-title">Contatti</div>
+      <div class="info-row"><span class="label">📞</span><span class="value">${c.tel||'—'}</span></div>
+      <div class="info-row"><span class="label">✉️</span><span class="value">${c.email||'—'}</span></div>
+      <div class="info-row"><span class="label">📍</span><span class="value">${c.indirizzo||'—'}</span></div>
+    </div>
+    <div class="detail-section"><div class="detail-section-title">Polizze (${pols.length})</div>
+      ${pols.map(p=>{const g=gg(p.scad);return`<div class="polizza-mini">
+        <div class="polizza-mini-header"><span style="font-weight:600;font-size:12px">${p.ramo}</span>${spb(p)}</div>
+        <div class="info-row"><span class="label">Compagnia</span><span class="value">${p.co}</span></div>
+        <div class="info-row"><span class="label">N° Polizza</span><span class="value" style="color:var(--blue2)">${p.num}</span></div>
+        <div class="info-row"><span class="label">Premio</span><span class="value">${fc(p.pr)}/${p.fr}</span></div>
+        <div class="info-row"><span class="label">Scadenza</span><span class="value" style="color:var(--${g<0?'red':g<=30?'orange':'text'})">${fd(p.scad)} (${g<0?'SCADUTA':g+'gg'})</span></div>
+        ${p.note?`<div style="font-size:10px;color:var(--text3);margin-top:5px">${p.note}</div>`:''}
+      </div>`;}).join('')}
+    </div>
+    ${c.note?`<div class="detail-section"><div class="detail-section-title">Note interne</div><p style="font-size:12px;color:var(--text2)">${c.note}</p></div>`:''}`;
+  document.getElementById('detail-panel').classList.add('open');
+}
+function closeDetail(){document.getElementById('detail-panel').classList.remove('open');}
+
+// ============================================================
+// NOTIFICHE sistema
+// ============================================================
+function addN(tipo,tx){DB.notifiche.unshift({id:gid('n'),tipo,tx,ts:new Date().toISOString(),letto:false});
+  if(DB.notifiche.length>50)DB.notifiche=DB.notifiche.slice(0,50);saveDB();updateBadges();}
+function renderNotifList(){
+  const el=document.getElementById('notif-list');if(!el)return;
+  el.innerHTML=DB.notifiche.slice(0,20).map(n=>`<div class="notif-item ${n.letto?'':'unread'}" onclick="markN('${n.id}')">
+    <div class="notif-item-title">${n.tx}</div>
+    <div class="notif-item-time">${ts(n.ts)}</div>
+  </div>`).join('')||'<div style="text-align:center;padding:40px;color:var(--text3)">Nessuna notifica</div>';
+}
+function markN(id){const n=DB.notifiche.find(x=>x.id===id);if(n)n.letto=true;saveDB();updateBadges();}
+function toggleNotif(){document.getElementById('notif-panel').classList.toggle('open');}
+
+// ============================================================
+// MODALS
+// ============================================================
+function openModal(id){
+  if(id==='m-polizza'){const sel=document.getElementById('np-c');
+    sel.innerHTML='<option value="">— Seleziona —</option>'+DB.clienti.map(c=>`<option value="${c.id}">${c.nome} ${c.cognome}</option>`).join('');}
+  if(id==='m-richiesta'){const sel=document.getElementById('nr-p');
+    const ps=CU?.type==='client'?DB.polizze.filter(p=>p.cId===CU.id):DB.polizze;
+    sel.innerHTML='<option value="">— Nessuna —</option>'+ps.map(p=>`<option value="${p.id}">${p.ramo} N°${p.num}${CU?.type==='broker'?' — '+cn(p.cId):''}</option>`).join('');}
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+
+// ============================================================
+// SALVA
+// ============================================================
+function salvaCliente(){
+  const n=document.getElementById('nc-n').value.trim();if(!n){showToast('Inserisci il nome','error');return;}
+  DB.clienti.push({id:gid('C'),nome:n,cognome:document.getElementById('nc-cg').value.trim(),tipo:document.getElementById('nc-t').value,
+    tel:document.getElementById('nc-tel').value,email:document.getElementById('nc-em').value,
+    indirizzo:document.getElementById('nc-ind').value,note:document.getElementById('nc-no').value,pass:'demo1234'});
+  saveDB();closeModal('m-cliente');['nc-n','nc-cg','nc-tel','nc-em','nc-ind','nc-no'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  showToast(`Cliente ${n} aggiunto!`,'success');renderClienti();updateBadges();
+}
+function salvaPolizza(){
+  const cId=document.getElementById('np-c').value;const num=document.getElementById('np-n').value.trim();
+  const scad=document.getElementById('np-s').value;const pr=document.getElementById('np-p').value;
+  if(!cId||!num||!scad||!pr){showToast('Compila i campi obbligatori','error');return;}
+  const id=gid('P');
+  DB.polizze.push({id,cId,num,ramo:document.getElementById('np-r').value,co:document.getElementById('np-co').value,
+    ini:document.getElementById('np-i').value,scad,pr:parseFloat(pr),fr:document.getElementById('np-f').value,
+    note:document.getElementById('np-no').value,stato:'attiva'});
+  DB.fatture.push({id:gid('F'),pId:id,cId,imp:parseFloat(pr),scad,stato:'attesa',nota:'Premio '+document.getElementById('np-f').value.toLowerCase()});
+  saveDB();closeModal('m-polizza');showToast('Polizza aggiunta!','success');renderPolizze();updateBadges();
+}
+function inviaRichiesta(){
+  const desc=document.getElementById('nr-d').value.trim();if(!desc){showToast('Descrivi la richiesta','error');return;}
+  const tipo=document.getElementById('nr-t').value;const pId=document.getElementById('nr-p').value;
+  const id=gid('R');
+  DB.richieste.push({id,cId:CU.id,tipo,pId:pId||null,desc,urg:document.getElementById('nr-u').value,stato:'aperta',data:tod(),risp:''});
+  const cId=CU.id;if(!DB.messaggi[cId])DB.messaggi[cId]=[];
+  DB.messaggi[cId].push({id:gid('m'),da:cId,tipo:'richiesta',tipo_r:tipo,rId:id,tx:desc,ts:new Date().toISOString(),letto:false});
+  addN('richiesta',`Nuova richiesta (${rl(tipo)}) da ${cn(cId)}`);
+  saveDB();closeModal('m-richiesta');document.getElementById('nr-d').value='';
+  showToast('Richiesta inviata!','success');renderCRich();updateBadges();
+}
+function openRichClient(pId,tipo){
+  document.getElementById('nr-t').value=tipo;
+  const sel=document.getElementById('nr-p');
+  const ps=DB.polizze.filter(p=>p.cId===CU.id);
+  sel.innerHTML='<option value="">— Nessuna —</option>'+ps.map(p=>`<option value="${p.id}" ${p.id===pId?'selected':''}>${p.ramo} N°${p.num}</option>`).join('');
+  openModal('m-richiesta');
+}
+
+// ============================================================
+// ELIMINA
+// ============================================================
+function delC(id){if(!confirm('Eliminare questo cliente?'))return;
+  DB.clienti=DB.clienti.filter(c=>c.id!==id);DB.polizze=DB.polizze.filter(p=>p.cId!==id);
+  DB.fatture=DB.fatture.filter(f=>f.cId!==id);DB.richieste=DB.richieste.filter(r=>r.cId!==id);
+  delete DB.messaggi[id];saveDB();renderClienti();updateBadges();showToast('Eliminato','success');}
+function delP(id){if(!confirm('Eliminare questa polizza?'))return;
+  DB.polizze=DB.polizze.filter(p=>p.id!==id);DB.fatture=DB.fatture.filter(f=>f.pId!==id);
+  saveDB();renderPolizze();updateBadges();showToast('Eliminata','success');}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast');const ic={'success':'✅','error':'❌','info':'ℹ️','warning':'⚠️'};
+  document.getElementById('t-icon').textContent=ic[type]||'✅';document.getElementById('t-msg').textContent=msg;
+  t.className='toast show t-'+type;clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ============================================================
+// AUTO CHECK
+// ============================================================
+function autoCheck(){
+  if(CU?.type!=='broker')return;
+  DB.polizze.forEach(p=>{const g=gg(p.scad);
+    if([7,14,30].includes(g)){
+      const td=tod();const ok=DB.notifiche.some(n=>n.tx.includes(p.num)&&n.ts.startsWith(td));
+      if(!ok)addN('scadenza',`⏰ Polizza ${p.num} di ${cn(p.cId)} scade tra ${g} giorni`);
+    }
+  });
+}
+</script>
+</body>
+</html>
